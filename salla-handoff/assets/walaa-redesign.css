@@ -454,3 +454,28 @@ h1, h2, h3 { font-weight: 500; }
 @keyframes twinkle { 0%, 100% { transform: scale(.5) rotate(0); opacity: .3; } 50% { transform: scale(1.15) rotate(45deg); opacity: 1; } }
 @media (max-width: 860px) { .art-olive { width: 110px; inset: 10px -26px auto auto; } .art-lotus { width: 200px; } .ripple { width: 360px; margin: -180px 0 0 -180px; } }
 @media (prefers-reduced-motion: reduce) { .ripple, .art-lotus, .art-olive, .spark { animation: none; } .ripple { opacity: .15; transform: scale(1.4); } }
+
+/* reviews v3.2: flat pink field, three white cards (quote mark, text, avatar + name), no moving decoration */
+.v-art, .deco, .v-stage, .v-card, .voice-nav { display: none; }
+.voices { background: #F8DCE7; overflow: visible; }
+.v-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.v-item { position: relative; display: flex; flex-direction: column; gap: 18px; margin: 0; padding: 28px 28px 26px; border-radius: 18px; background: #fff; box-shadow: 0 18px 40px -30px rgba(80, 45, 78, .55); transition: transform .25s ease, box-shadow .25s ease; }
+.v-item:hover { transform: translateY(-4px); box-shadow: 0 24px 44px -28px rgba(80, 45, 78, .6); }
+.v-q { font-family: Georgia, serif; font-size: 54px; line-height: .7; height: 28px; color: #E7A9BE; }
+.v-item blockquote { flex: 1; font-family: var(--text); font-size: 16.5px; line-height: 2; font-weight: 400; color: var(--ink); }
+.v-item figcaption { display: flex; align-items: center; gap: 12px; }
+.v-avatar { flex-shrink: 0; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: #F8DCE7; color: var(--plum); font-family: var(--display); font-size: 18px; font-weight: 500; }
+.v-item figcaption strong { display: block; font-weight: 500; font-size: 15.5px; line-height: 1.5; }
+.v-item figcaption small { display: block; font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+.v-cta { justify-content: center; align-items: flex-start; background: var(--plum); }
+.v-cta .v-q { color: var(--apricot); }
+.v-cta blockquote { flex: 0; color: #fff; font-family: var(--display); font-size: 21px; font-weight: 500; line-height: 1.7; }
+.v-cta .btn { margin-top: 6px; }
+@media (max-width: 1020px) { .v-grid { grid-template-columns: 1fr 1fr; } .v-cta { grid-column: span 2; } }
+@media (max-width: 620px) { .v-grid { grid-template-columns: 1fr; } .v-cta { grid-column: auto; } .v-item { padding: 24px 22px; } }
+
+/* footer: logo above the name */
+.brand-foot { flex-direction: column; align-items: flex-start; gap: 10px; }
+.brand-foot svg { width: 56px; height: 56px; }
+.brand-foot .brand-text { display: flex; flex-direction: column; align-items: flex-start; font-size: 26px; }
+.brand-foot .brand-text small { text-align: start; margin-top: 4px; }

@@ -151,32 +151,11 @@ ${strip}
   </div>
 </div></section>
 
-<section class="sec sec-peach voices"><div class="v-art" aria-hidden="true">
-  <span class="ripple r1"></span><span class="ripple r2"></span><span class="ripple r3"></span><span class="ripple r4"></span>
-  <svg class="art-lotus" viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg>
-  <svg class="art-olive" viewBox="0 0 220 330"><path class="stem" d="M110 322C100 240 124 150 108 16"/><g class="leaves">
-    <g transform="translate(106 280) rotate(-155)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(108 250) rotate(-25)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
-    <g transform="translate(104 212) rotate(-160)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(108 182) rotate(-20)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
-    <g transform="translate(106 144) rotate(-162)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(110 112) rotate(-18)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
-    <g transform="translate(108 76) rotate(-165)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(110 46) rotate(-15)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
-    <g transform="translate(108 16) rotate(-80)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g></g>
-    <ellipse class="olive" cx="158" cy="206" rx="11" ry="15" transform="rotate(20 158 206)"/><ellipse class="olive" cx="64" cy="168" rx="11" ry="15" transform="rotate(-20 64 168)"/>
-  </svg>
-  <svg class="spark s1" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
-  <svg class="spark s2" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
-  <svg class="spark s3" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
-  <svg class="spark s4" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
-</div><div class="wrap">
+<section class="sec voices"><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2><p class="sec-text">كلمات حقيقية من تقييمات الزائرات في المتجر الحالي.</p></div></div>
-  <div class="v-stage">
-    <span class="v-mark" aria-hidden="true">”</span>
-    <div class="v-card" id="v-card" aria-live="polite">
-      <blockquote id="voice-quote"></blockquote>
-      <div class="v-meta"><span class="v-avatar" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27Z"/></svg></span><p id="voice-source"></p></div>
-      <span class="v-progress" aria-hidden="true"><i id="v-bar"></i></span>
-    </div>
+  <div class="v-grid">${W.testimonials.map(t => `<figure class="v-item"><span class="v-q" aria-hidden="true">”</span><blockquote>${t.quote}</blockquote><figcaption><span class="v-avatar" aria-hidden="true">ز</span><span><strong>زائرة</strong><small>${t.source.replace('من تقييم زائرة في ', 'تقييم في ')}</small></span></figcaption></figure>`).join('')}
+    <figure class="v-item v-cta"><span class="v-q" aria-hidden="true">”</span><blockquote>جرّبي جلسة واحدة، وقرّري بنفسك.</blockquote><a class="btn btn-light btn-sm" href="#catalog/recorded">ابدئي من الجلسات المسجلة</a></figure>
   </div>
-  <div class="voice-nav"><button type="button" id="voice-prev" aria-label="الشهادة السابقة">${icon('arrow-right')}</button><span class="v-dots" id="v-dots" aria-hidden="true"></span><button type="button" id="voice-next" aria-label="الشهادة التالية">${icon('arrow-left')}</button></div>
 </div></section>
 
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
@@ -225,39 +204,6 @@ function initCountdown() {
     flipTo($('#cd-d'), pad(d)); flipTo($('#cd-h'), pad(h)); flipTo($('#cd-m'), pad(m)); flipTo($('#cd-s'), pad(s));
   };
   tick(); cdTimer = setInterval(() => { if (!$('#cd-s')) return clearInterval(cdTimer); tick(); }, 1000);
-}
-
-let voiceIndex = 0, voiceTimer;
-const VOICE_MS = 7000;
-function initVoices() {
-  const q = $('#voice-quote'); if (!q) return;
-  clearInterval(voiceTimer);
-  const list = W.testimonials, card = $('#v-card'), dots = $('#v-dots');
-  dots.innerHTML = list.map((_, i) => `<i data-i="${i}"></i>`).join('');
-  const bar = () => { const b = $('#v-bar'); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = reduced() || list.length < 2 ? 'none' : `vbar ${VOICE_MS}ms linear forwards`; };
-  const draw = () => {
-    const t = list[voiceIndex];
-    q.textContent = t.quote;
-    $('#voice-source').textContent = t.source;
-    $$('i', dots).forEach((d, i) => d.classList.toggle('on', i === voiceIndex));
-    bar();
-  };
-  const go = (d, manual) => {
-    voiceIndex = (voiceIndex + d + list.length) % list.length;
-    if (reduced()) { draw(); }
-    else {
-      card.classList.add('leave');
-      setTimeout(() => { draw(); card.classList.remove('leave'); card.classList.add('enter'); setTimeout(() => card.classList.remove('enter'), 450); }, 280);
-    }
-    if (manual) restart();
-  };
-  const restart = () => { clearInterval(voiceTimer); if (list.length > 1 && !reduced()) voiceTimer = setInterval(() => { if (!$('#v-card')) return clearInterval(voiceTimer); go(1); }, VOICE_MS); };
-  $('#voice-prev').addEventListener('click', () => go(-1, true));
-  $('#voice-next').addEventListener('click', () => go(1, true));
-  dots.addEventListener('click', e => { const i = e.target.dataset.i; if (i !== undefined) { go(Number(i) - voiceIndex, true); } });
-  card.addEventListener('mouseenter', () => { clearInterval(voiceTimer); const b = $('#v-bar'); b.style.animationPlayState = 'paused'; });
-  card.addEventListener('mouseleave', () => { $('#v-bar').style.animationPlayState = 'running'; restart(); bar(); });
-  draw(); restart();
 }
 
 /* ---------- catalog ---------- */
@@ -377,7 +323,6 @@ function route() {
   icons(); setMenu(false);
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
-  if ($('#voice-quote')) initVoices();
   if ($('#pick-grid')) drawPicks('all');
   initCountdown();
   if (hash === 'choose') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
