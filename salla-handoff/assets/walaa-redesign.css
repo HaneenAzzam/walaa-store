@@ -641,3 +641,20 @@ h1, h2, h3 { font-weight: 500; }
   .is-home .header:not(.scrolled) { background: rgba(255, 251, 248, .96); }
   .hero .hero-script { font-size: clamp(30px, 8.4vw, 38px); }
 }
+
+/* =====================================================================
+   v3.7 hero text panel: one translucent card holds headline, sentence and buttons,
+   aligned to a single right edge with even padding, so the lettering stands clear of the photo.
+   ===================================================================== */
+.hero::before { display: none; }
+.hero-inner { align-items: center; justify-content: flex-start; }
+.hero-copy { width: min(470px, 100%); max-width: 470px; padding: 38px 40px 40px; border-radius: 28px; background: rgba(255, 251, 248, .8); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 26px 56px -34px rgba(58, 31, 56, .5); }
+.hero .hero-script { font-size: clamp(28px, 3vw, 40px); line-height: 1.6; }
+.hero-lead { max-width: none; margin: 14px 0 26px; font-size: 16.5px; line-height: 1.95; color: #4A3848; font-weight: 400; }
+.hero-actions { flex-wrap: nowrap; gap: 10px; }
+.hero-actions .btn { flex: 1; min-width: 0; padding-inline: 16px; }
+@media (max-width: 760px) {
+  .hero-copy { width: 100%; max-width: none; padding: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; }
+  .hero .hero-script { font-size: clamp(30px, 8.4vw, 38px); }
+  .hero-lead { font-size: 16px; color: #3A1F38; }
+}
