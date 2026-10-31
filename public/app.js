@@ -134,7 +134,7 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
     <div class="count-main">
       <h2>اللقاء القادم: <span class="hl" id="cd-name"></span></h2>
       <p id="cd-date"></p>
-      <div class="cd" role="timer" aria-live="off"><div><b id="cd-d">0</b><span>يوم</span></div><i>:</i><div><b id="cd-h">0</b><span>ساعة</span></div><i>:</i><div><b id="cd-m">0</b><span>دقيقة</span></div><i>:</i><div><b id="cd-s">0</b><span>ثانية</span></div></div>
+      <div class="cd" role="timer" aria-label="الوقت المتبقي للقاء">${[['d', 'يوم'], ['h', 'ساعة'], ['m', 'دقيقة'], ['s', 'ثانية']].map(([k, l]) => `<div class="cd-unit"><div class="flip" id="cd-${k}"><span class="fl up">0</span><span class="fl down">0</span><span class="fl fold-top">0</span><span class="fl fold-bot">0</span></div><span class="cd-label">${l}</span></div>`).join('<i aria-hidden="true">:</i>')}</div>
       <a class="btn btn-solid" id="cd-link" href="#catalog/group">التفاصيل والحجز</a>
     </div>
     <img class="count-side count-r" src="${img('cov-arch')}" alt="" loading="lazy" width="300" height="400">
@@ -151,10 +151,17 @@ ${strip}
   </div>
 </div></section>
 
-<section class="sec sec-peach voices"><div class="wrap">
-  <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2></div></div>
-  <div class="voice" aria-live="polite"><blockquote id="voice-quote"></blockquote><p id="voice-source"></p></div>
-  <div class="voice-nav"><button type="button" id="voice-prev" aria-label="الشهادة السابقة">${icon('arrow-right')}</button><span id="voice-count" aria-hidden="true"></span><button type="button" id="voice-next" aria-label="الشهادة التالية">${icon('arrow-left')}</button></div>
+<section class="sec sec-peach voices"><span class="deco deco-a" aria-hidden="true"></span><span class="deco deco-b" aria-hidden="true"></span><span class="deco deco-c" aria-hidden="true"></span><div class="wrap">
+  <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2><p class="sec-text">كلمات حقيقية من تقييمات الزائرات في المتجر الحالي.</p></div></div>
+  <div class="v-stage">
+    <span class="v-mark" aria-hidden="true">”</span>
+    <div class="v-card" id="v-card" aria-live="polite">
+      <blockquote id="voice-quote"></blockquote>
+      <div class="v-meta"><span class="v-avatar" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27Z"/></svg></span><p id="voice-source"></p></div>
+      <span class="v-progress" aria-hidden="true"><i id="v-bar"></i></span>
+    </div>
+  </div>
+  <div class="voice-nav"><button type="button" id="voice-prev" aria-label="الشهادة السابقة">${icon('arrow-right')}</button><span class="v-dots" id="v-dots" aria-hidden="true"></span><button type="button" id="voice-next" aria-label="الشهادة التالية">${icon('arrow-left')}</button></div>
 </div></section>
 
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
@@ -174,7 +181,20 @@ function drawPicks(tab) {
   $$('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
 }
 
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cdTimer;
+function flipTo(el, v) {
+  if (!el || el.dataset.v === v) return;
+  const first = el.dataset.v === undefined, old = el.dataset.v ?? v;
+  el.dataset.v = v;
+  const [up, down, ft, fb] = el.children;
+  up.textContent = v;
+  if (first || reduced()) { down.textContent = ft.textContent = fb.textContent = v; return; }
+  ft.textContent = old; down.textContent = old; fb.textContent = v;
+  el.classList.remove('go'); void el.offsetWidth; el.classList.add('go');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { down.textContent = v; el.classList.remove('go'); }, 640);
+}
 function initCountdown() {
   clearInterval(cdTimer);
   const name = $('#cd-name'); if (!name) return;
@@ -183,27 +203,46 @@ function initCountdown() {
   name.textContent = next.p.name;
   $('#cd-date').textContent = `${next.p.date} · ${next.p.desc}. الموعد مرجعي، يُؤكَّد عند الحجز.`;
   $('#cd-link').href = `#product/${next.p.id}`;
+  const pad = n => String(n).padStart(2, '0');
   const tick = () => {
     let s = Math.max(0, Math.floor((next.at - new Date()) / 1000));
     const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
-    $('#cd-d').textContent = d; $('#cd-h').textContent = String(h).padStart(2, '0'); $('#cd-m').textContent = String(m).padStart(2, '0'); $('#cd-s').textContent = String(s).padStart(2, '0');
+    flipTo($('#cd-d'), pad(d)); flipTo($('#cd-h'), pad(h)); flipTo($('#cd-m'), pad(m)); flipTo($('#cd-s'), pad(s));
   };
   tick(); cdTimer = setInterval(() => { if (!$('#cd-s')) return clearInterval(cdTimer); tick(); }, 1000);
 }
 
-let voiceIndex = 0;
+let voiceIndex = 0, voiceTimer;
+const VOICE_MS = 7000;
 function initVoices() {
   const q = $('#voice-quote'); if (!q) return;
+  clearInterval(voiceTimer);
+  const list = W.testimonials, card = $('#v-card'), dots = $('#v-dots');
+  dots.innerHTML = list.map((_, i) => `<i data-i="${i}"></i>`).join('');
+  const bar = () => { const b = $('#v-bar'); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = reduced() || list.length < 2 ? 'none' : `vbar ${VOICE_MS}ms linear forwards`; };
   const draw = () => {
-    const t = W.testimonials[voiceIndex];
-    q.textContent = `«${t.quote}»`;
+    const t = list[voiceIndex];
+    q.textContent = t.quote;
     $('#voice-source').textContent = t.source;
-    $('#voice-count').textContent = `${voiceIndex + 1} / ${W.testimonials.length}`;
+    $$('i', dots).forEach((d, i) => d.classList.toggle('on', i === voiceIndex));
+    bar();
   };
-  const step = d => { voiceIndex = (voiceIndex + d + W.testimonials.length) % W.testimonials.length; draw(); };
-  $('#voice-prev').addEventListener('click', () => step(-1));
-  $('#voice-next').addEventListener('click', () => step(1));
-  draw();
+  const go = (d, manual) => {
+    voiceIndex = (voiceIndex + d + list.length) % list.length;
+    if (reduced()) { draw(); }
+    else {
+      card.classList.add('leave');
+      setTimeout(() => { draw(); card.classList.remove('leave'); card.classList.add('enter'); setTimeout(() => card.classList.remove('enter'), 450); }, 280);
+    }
+    if (manual) restart();
+  };
+  const restart = () => { clearInterval(voiceTimer); if (list.length > 1 && !reduced()) voiceTimer = setInterval(() => { if (!$('#v-card')) return clearInterval(voiceTimer); go(1); }, VOICE_MS); };
+  $('#voice-prev').addEventListener('click', () => go(-1, true));
+  $('#voice-next').addEventListener('click', () => go(1, true));
+  dots.addEventListener('click', e => { const i = e.target.dataset.i; if (i !== undefined) { go(Number(i) - voiceIndex, true); } });
+  card.addEventListener('mouseenter', () => { clearInterval(voiceTimer); const b = $('#v-bar'); b.style.animationPlayState = 'paused'; });
+  card.addEventListener('mouseleave', () => { $('#v-bar').style.animationPlayState = 'running'; restart(); bar(); });
+  draw(); restart();
 }
 
 /* ---------- catalog ---------- */
