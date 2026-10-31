@@ -434,3 +434,23 @@ h1, h2, h3 { font-weight: 500; }
 @media (max-width: 860px) { .cd .flip { font-size: 36px; } }
 .main-nav a { white-space: nowrap; }
 @media (max-width: 1020px) { .main-nav { display: none; } .menu-toggle { display: inline-flex; } }
+
+/* reviews artwork: sound ripples, lotus, swaying olive branch, twinkling sparks (replaces the plain circles) */
+.v-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.ripple { position: absolute; top: 55%; left: 50%; width: 520px; aspect-ratio: 1; margin: -260px 0 0 -260px; border-radius: 50%; border: 2px solid rgba(80, 45, 78, .4); opacity: 0; animation: ripple 8s ease-out infinite; }
+.r2 { animation-delay: 2s; } .r3 { animation-delay: 4s; } .r4 { animation-delay: 6s; }
+@keyframes ripple { 0% { transform: scale(.55); opacity: .55; } 100% { transform: scale(2.7); opacity: 0; } }
+.art-lotus { position: absolute; width: 300px; inset: auto auto -50px -40px; fill: none; stroke: var(--plum); stroke-width: .9; opacity: .2; transform-origin: 50% 80%; animation: breathe 7s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.07) rotate(-3deg); } }
+.art-olive { position: absolute; width: 170px; inset: 30px -22px auto auto; transform-origin: 50% 100%; animation: sway 6.5s ease-in-out infinite; }
+.art-olive .stem { fill: none; stroke: #7B8A5C; stroke-width: 3; stroke-linecap: round; }
+.art-olive .leaves { fill: #93A272; opacity: .85; }
+.art-olive .leaves g:nth-child(odd) { fill: #7B8A5C; }
+.art-olive .olive { fill: var(--plum); opacity: .75; }
+@keyframes sway { 50% { transform: rotate(5deg); } }
+.spark { position: absolute; width: 30px; fill: var(--coral); animation: twinkle 3.2s ease-in-out infinite; }
+.s1 { top: 18%; left: 22%; } .s2 { top: 62%; left: 10%; width: 20px; fill: var(--plum); animation-delay: -1s; }
+.s3 { top: 24%; right: 24%; width: 22px; fill: var(--plum); animation-delay: -2s; } .s4 { bottom: 14%; right: 30%; fill: var(--apricot); width: 26px; animation-delay: -.5s; }
+@keyframes twinkle { 0%, 100% { transform: scale(.5) rotate(0); opacity: .3; } 50% { transform: scale(1.15) rotate(45deg); opacity: 1; } }
+@media (max-width: 860px) { .art-olive { width: 110px; inset: 10px -26px auto auto; } .art-lotus { width: 200px; } .ripple { width: 360px; margin: -180px 0 0 -180px; } }
+@media (prefers-reduced-motion: reduce) { .ripple, .art-lotus, .art-olive, .spark { animation: none; } .ripple { opacity: .15; transform: scale(1.4); } }

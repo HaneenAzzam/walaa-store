@@ -151,7 +151,22 @@ ${strip}
   </div>
 </div></section>
 
-<section class="sec sec-peach voices"><span class="deco deco-a" aria-hidden="true"></span><span class="deco deco-b" aria-hidden="true"></span><span class="deco deco-c" aria-hidden="true"></span><div class="wrap">
+<section class="sec sec-peach voices"><div class="v-art" aria-hidden="true">
+  <span class="ripple r1"></span><span class="ripple r2"></span><span class="ripple r3"></span><span class="ripple r4"></span>
+  <svg class="art-lotus" viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg>
+  <svg class="art-olive" viewBox="0 0 220 330"><path class="stem" d="M110 322C100 240 124 150 108 16"/><g class="leaves">
+    <g transform="translate(106 280) rotate(-155)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(108 250) rotate(-25)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
+    <g transform="translate(104 212) rotate(-160)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(108 182) rotate(-20)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
+    <g transform="translate(106 144) rotate(-162)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(110 112) rotate(-18)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
+    <g transform="translate(108 76) rotate(-165)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g><g transform="translate(110 46) rotate(-15)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g>
+    <g transform="translate(108 16) rotate(-80)"><path d="M0 0C20-15 46-15 66 0C46 15 20 15 0 0Z"/></g></g>
+    <ellipse class="olive" cx="158" cy="206" rx="11" ry="15" transform="rotate(20 158 206)"/><ellipse class="olive" cx="64" cy="168" rx="11" ry="15" transform="rotate(-20 64 168)"/>
+  </svg>
+  <svg class="spark s1" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
+  <svg class="spark s2" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
+  <svg class="spark s3" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
+  <svg class="spark s4" viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>
+</div><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2><p class="sec-text">كلمات حقيقية من تقييمات الزائرات في المتجر الحالي.</p></div></div>
   <div class="v-stage">
     <span class="v-mark" aria-hidden="true">”</span>
