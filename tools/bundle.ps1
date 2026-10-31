@@ -8,7 +8,7 @@ $enc = New-Object System.Text.UTF8Encoding($false)
 $read = { param($n) [IO.File]::ReadAllText((Join-Path $dist $n), $enc) }
 
 $html = & $read 'index.html'
-$css = (& $read 'theme.css') + "`n" + (& $read 'redesign.css')
+$css = (& $read 'theme.css') + "`n" + (& $read 'redesign.css') + "`n" + (& $read 'kit.css')
 $data = & $read 'data.js'
 $app = & $read 'app.js'
 
@@ -19,7 +19,7 @@ $pairs = Get-ChildItem (Join-Path $dist 'assets') -Include *.jpg,*.webp -Recurse
 }
 $assetMap = 'window.ASSET_MAP={' + ($pairs -join ',') + '};'
 
-$html = $html.Replace('<link rel="stylesheet" href="redesign.css">', '').Replace('<link rel="stylesheet" href="theme.css">', "<style>`n$css`n</style>")
+$html = $html.Replace('<link rel="stylesheet" href="redesign.css">', '').Replace('<link rel="stylesheet" href="kit.css">', '').Replace('<link rel="stylesheet" href="theme.css">', "<style>`n$css`n</style>")
 $html = $html.Replace('<script src="data.js"></script>', "<script>`n$assetMap`n$data`n</script>")
 $html = $html.Replace('<script src="app.js" defer></script>', '')
 $html = $html.Replace('</body>', "<script>`n$app`n</script>`n</body>")

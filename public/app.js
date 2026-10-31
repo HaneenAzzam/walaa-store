@@ -88,6 +88,12 @@ function home() {
     <div class="hero-actions"><a class="btn btn-solid" href="#choose">اكتشفي مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div>
   </div></div>
 </section>
+<section class="feat" aria-label="نظرة على المتجر"><div class="wrap"><ul class="feat-grid">
+  <li><a href="#catalog/recorded"><b>${rec.length}</b><span>جلسة مسجلة</span></a></li>
+  <li><a href="#catalog/group"><b>${grp.length}</b><span>لقاءات قادمة</span></a></li>
+  <li><a href="#catalog/private"><b>${prv.length}</b><span>جلسات خاصة</span></a></li>
+  <li><a href="#faq">${icon('shield')}<span>إتمام الطلب عبر سلة</span></a></li>
+</ul></div></section>
 ${strip}
 
 <section class="sec" id="choose"><div class="wrap">
@@ -387,6 +393,7 @@ document.addEventListener('click', e => {
   const add = t.closest('[data-add]'); if (add) addCart(add.dataset.add);
   const tab = t.closest('[data-tab]'); if (tab) drawPicks(tab.dataset.tab);
   if (t.closest('[data-open-cart]')) openCart();
+  if (t.closest('[data-search]')) openSearch();
   const hint = t.closest('[data-hint]'); if (hint) { $('#search-input').value = hint.dataset.hint; searchResults(); }
   const close = t.closest('[data-close]'); if (close) $('#' + close.dataset.close).close();
   const rem = t.closest('[data-remove]'); if (rem) { cart = cart.filter(x => x.id !== rem.dataset.remove); saveCart(); drawCart(); }
