@@ -1,0 +1,15 @@
+{
+  "name": "walaa-fadel-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "واجهة متجر ولاء فاضل: موقع ثابت بـ HTML وCSS وJavaScript، عربي RTL، دون خطوة بناء.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "echo \"No build step: the site in public/ is ready to deploy as is.\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

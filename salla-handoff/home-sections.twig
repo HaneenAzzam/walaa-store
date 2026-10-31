@@ -1,0 +1,155 @@
+{# Walaa Fadel home page, design v3 (rounded cards, circle categories, plum strips, countdown).
+   For a Salla theme started from Theme Raed: paste into src/views/pages/index.twig, put the images from
+   assets/ in src/assets/images/ and walaa-redesign.css in src/assets/styles/ (import it after the theme styles).
+   Add the fonts Readex Pro + IBM Plex Sans Arabic in master.twig.
+   NOT yet run on Salla: check with `salla theme preview`. Product cards come from Salla's own
+   salla-products-list so cart and checkout keep working; the CSS only restyles them.
+   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL (links),
+   and COUNTDOWN-DATE (next gathering, format 2026-11-05T00:00:00). #}
+
+{% set strip %}
+<div class="strip" aria-hidden="true"><div class="strip-track">
+  {% for i in 1..2 %}
+    {% for t in ['الجلسات المسجلة','اللقاءات الحضورية','الجلسات الخاصة','المفكرات والتدوين','التوكيدات','ساوند هيلينغ','تأمل وصوت'] %}
+      <span>{{ t }}</span><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27Z"/></svg>
+    {% endfor %}
+  {% endfor %}
+</div></div>
+{% endset %}
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>مساحة تتقرّبي فيها <span class="hl">من نفسك أكثر</span></h1>
+      <p class="hero-lead">من الصوت والتأمل إلى الكتابة واكتشاف الذات، اختاري المساحة الأقرب لكِ وابدئي بوقت صغير لنفسك.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#choose">اكتشفي مساحتك</a>
+        <a class="btn btn-ghost" href="{{ links.products ?? '/products' }}">كل التجارب</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-photo"><img src="{{ 'hero.jpg' | asset }}" alt="وعاء صوتي نحاسي على قماش طبيعي" fetchpriority="high"></div>
+      <span class="chip-float chip-a">تستمعين في وقتك</span>
+      <span class="chip-float chip-b">إتمام الطلب عبر سلة</span>
+    </div>
+  </div>
+</section>
+{{ strip|raw }}
+
+<section class="sec" id="choose"><div class="wrap">
+  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">كل يوم يحمل احتياجًا مختلفًا. اختاري المساحة الأقرب لكِ.</p></div></div>
+  <div class="circles">
+    {% for c in [
+      {t:'وقت لنفسي', u:'CATEGORY-1-URL', i:'entry-olive.jpg'},
+      {t:'أعيش تجربة', u:'CATEGORY-2-URL', i:'entry-bowl.jpg'},
+      {t:'أكتب وأكتشف', u:'CATEGORY-3-URL', i:'entry-journal.jpg'},
+      {t:'مساحة خاصة', u:'CATEGORY-4-URL', i:'entry-arch.jpg'},
+      {t:'التوكيدات', u:'CATEGORY-5-URL', i:'cov-iris.jpg'}
+    ] %}
+      <a class="circle" href="{{ c.u }}"><span class="circle-img"><img src="{{ c.i | asset }}" alt="" loading="lazy"></span><strong>{{ c.t }}</strong></a>
+    {% endfor %}
+  </div>
+</div></section>
+
+<section class="sec sec-tight"><div class="wrap promos">
+  <article class="promo promo-peach"><div class="promo-copy"><h3>جلسات مسجلة <span class="hl">لوقتك</span></h3><p>جلسات صوت وتأمل، استمعي لها متى ما ناسبك.</p><a class="btn btn-solid btn-sm" href="CATEGORY-1-URL">تصفّحي الجلسات</a></div><img src="{{ 'cov-olive.jpg' | asset }}" alt="" loading="lazy"></article>
+  <article class="promo promo-plum"><div class="promo-copy"><h3>نلتقي ونتشارك <span class="hl">التجربة</span></h3><p>رحلات صوتية وتأمل جماعية بمواعيد محددة.</p><a class="btn btn-light btn-sm" href="CATEGORY-2-URL">اللقاءات الحضورية</a></div><img src="{{ 'event-side.jpg' | asset }}" alt="" loading="lazy"></article>
+</div></section>
+
+<section class="sec"><div class="wrap about-grid">
+  <div class="collage">
+    <img class="c1" src="{{ 'about-main.jpg' | asset }}" alt="وعاء صوتي نحاسي وأغصان مجففة" loading="lazy">
+    <img class="c2" src="{{ 'writing.jpg' | asset }}" alt="" loading="lazy">
+    <img class="c3" src="{{ 'research.jpg' | asset }}" alt="" loading="lazy">
+  </div>
+  <div class="about-copy">
+    <h2>رحلة نحو <span class="hl">راحة أعمق</span> مع نفسك</h2>
+    <p class="about-lead">أهلًا، أنا ولاء. بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات.</p>
+    <p>هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.</p>
+    <a class="btn btn-ghost" href="ABOUT-PAGE-URL">تعرّفي على ولاء</a>
+  </div>
+</div></section>
+
+{# Tabs: three real Salla lists, one visible at a time (script at the bottom) #}
+<section class="sec sec-lilac"><div class="wrap">
+  <div class="sec-head"><div><h2>الأكثر <span class="hl">اختيارًا</span></h2></div><a class="more" href="{{ links.products ?? '/products' }}">كل التجارب</a></div>
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab" role="tab" data-pane="p1" aria-selected="true">الجلسات المسجلة</button>
+    <button type="button" class="tab" role="tab" data-pane="p2" aria-selected="false">اللقاءات</button>
+    <button type="button" class="tab" role="tab" data-pane="p3" aria-selected="false">الجلسات الخاصة</button>
+  </div>
+  <div id="p1" class="pane"><salla-products-list source="categories" source-value="[CATEGORY-ID]" limit="8" class="products"></salla-products-list></div>
+  <div id="p2" class="pane" hidden><salla-products-list source="categories" source-value="[CATEGORY-ID]" limit="8" class="products"></salla-products-list></div>
+  <div id="p3" class="pane" hidden><salla-products-list source="categories" source-value="[CATEGORY-ID]" limit="8" class="products"></salla-products-list></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="count-banner">
+    <img class="count-side count-l" src="{{ 'cov-bowl.jpg' | asset }}" alt="" loading="lazy">
+    <div class="count-main">
+      <h2>اللقاء القادم: <span class="hl">اسم اللقاء</span></h2>
+      <p>التاريخ والوصف. الموعد يُؤكَّد عند الحجز.</p>
+      <div class="cd" role="timer" data-date="COUNTDOWN-DATE">
+        <div><b data-u="d">0</b><span>يوم</span></div><i>:</i><div><b data-u="h">00</b><span>ساعة</span></div><i>:</i><div><b data-u="m">00</b><span>دقيقة</span></div><i>:</i><div><b data-u="s">00</b><span>ثانية</span></div>
+      </div>
+      <a class="btn btn-solid" href="CATEGORY-2-URL">التفاصيل والحجز</a>
+    </div>
+    <img class="count-side count-r" src="{{ 'cov-arch.jpg' | asset }}" alt="" loading="lazy">
+  </div>
+</div></section>
+
+{{ strip|raw }}
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head"><div><h2>جلسات خاصة <span class="hl">لكِ وحدك</span></h2><p class="sec-text">تجارب فردية، وقتها لكِ. اقرئي تفاصيل كل جلسة قبل الاختيار.</p></div><a class="more" href="CATEGORY-4-URL">كل الجلسات الخاصة</a></div>
+  <div class="private-grid">
+    <a class="tall" href="CATEGORY-4-URL"><img src="{{ 'private.jpg' | asset }}" alt="" loading="lazy"><span class="tall-cap"><strong>جلسة فردية</strong></span></a>
+    <salla-products-list source="categories" source-value="[CATEGORY-ID]" limit="4" class="products products-2"></salla-products-list>
+  </div>
+</div></section>
+
+<section class="sec sec-peach voices"><div class="wrap">
+  <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2></div></div>
+  {% component 'home.testimonials' %}
+</div></section>
+
+<section class="sec"><div class="wrap faq-layout">
+  <div class="faq-col">
+    <h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>
+    <div class="faq-list">
+      <details><summary>كيف أختار التجربة المناسبة لي؟</summary><p>ابدئي من «إيش تحتاجي اليوم؟». اختاري جلسة مسجلة لمحتوى تستخدمينه في وقتك، أو لقاءً حضوريًا للتجربة الجماعية.</p></details>
+      <details><summary>كيف أصل إلى الجلسات المسجلة بعد الشراء؟</summary><p>تصلك طريقة الوصول بعد إتمام الطلب، وتختلف من منتج لآخر؛ اقرئي تفاصيل كل جلسة.</p></details>
+      <details><summary>هل هذه الجلسات بديل عن العلاج الطبي أو النفسي؟</summary><p>لا، هذه الجلسات ليست بديلًا للعلاج الطبي أو النفسي.</p></details>
+      {# copy the remaining questions from public/data.js → faqs #}
+    </div>
+  </div>
+  <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا.</p><a class="btn btn-light" href="FAQ-PAGE-URL">كل الأسئلة</a></aside>
+</div></section>
+
+<section class="sec sec-tight"><div class="wrap"><div class="closing">
+  <h2>خذي وقتك… واختاري المساحة الأقرب لكِ.</h2>
+  <a class="btn btn-light" href="{{ links.products ?? '/products' }}">اكتشفي جميع التجارب</a>
+</div></div></section>
+
+<script>
+  // tabs
+  document.querySelectorAll('.tab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.setAttribute('aria-selected', x === b); });
+      document.querySelectorAll('.pane').forEach(function (p) { p.hidden = p.id !== b.dataset.pane; });
+    });
+  });
+  // countdown to the date in data-date (start of that day; no time of day is assumed)
+  (function () {
+    var cd = document.querySelector('.cd'); if (!cd) return;
+    var at = new Date(cd.dataset.date); if (isNaN(at)) { cd.closest('.sec').hidden = true; return; }
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+      var s = Math.max(0, Math.floor((at - new Date()) / 1000));
+      var d = Math.floor(s / 86400); s -= d * 86400; var h = Math.floor(s / 3600); s -= h * 3600; var m = Math.floor(s / 60); s -= m * 60;
+      cd.querySelector('[data-u=d]').textContent = d; cd.querySelector('[data-u=h]').textContent = pad(h);
+      cd.querySelector('[data-u=m]').textContent = pad(m); cd.querySelector('[data-u=s]').textContent = pad(s);
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+</script>

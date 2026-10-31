@@ -1,0 +1,26 @@
+# Dependencies and caches (none are needed today, kept for future tooling)
+node_modules/
+.npm/
+.cache/
+
+# Generated single-file preview (rebuild with tools/bundle.ps1)
+walaa-store-preview.html
+
+# Hosting tool folders
+.netlify/
+.vercel/
+
+# Editor and OS files
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local secrets, never commit
+.env
+.env.*
+
+# Old packaged copy of public/
+public.zip
