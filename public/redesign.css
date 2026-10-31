@@ -618,3 +618,26 @@ h1, h2, h3 { font-weight: 500; }
   .hero { background: var(--bg); }
   .hero-inner { padding-block: 24px 28px; min-height: 0; align-items: flex-start; }
 }
+
+/* =====================================================================
+   v3.6 header: logo at the right, links centred, actions at the left.
+   Hero headline in the store typeface (DIN Next) instead of Ruqaa.
+   ===================================================================== */
+.header-inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px; }
+.header-inner .brand { grid-column: auto; grid-row: auto; justify-content: flex-start; }
+.header-inner .main-nav { display: flex; justify-content: center; gap: 30px; flex: none; }
+.header-inner .header-actions { justify-self: end; }
+
+/* soft light veil so the links stay readable over the photograph */
+.is-home .header:not(.scrolled) { background: linear-gradient(180deg, rgba(255, 251, 248, .9) 0%, rgba(255, 251, 248, .55) 70%, rgba(255, 251, 248, 0) 100%); }
+
+.hero .hero-script { font-family: var(--display); font-weight: 500; font-size: clamp(30px, 3.4vw, 48px); line-height: 1.55; }
+
+@media (max-width: 1020px) {
+  .header-inner { grid-template-columns: auto 1fr auto; }
+  .header-inner .main-nav { display: none; }
+}
+@media (max-width: 760px) {
+  .is-home .header:not(.scrolled) { background: rgba(255, 251, 248, .96); }
+  .hero .hero-script { font-size: clamp(30px, 8.4vw, 38px); }
+}
