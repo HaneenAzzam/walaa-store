@@ -17,7 +17,7 @@ const ICONS = {
   plus: '<path d="M12 5v14M5 12h14"/>'
 };
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
-const img = name => (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.jpg`;
+const img = name => (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.${name === 'hero-hand' ? 'webp' : 'jpg'}`;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmt = v => new Intl.NumberFormat('ar-SA', { maximumFractionDigits: 2, numberingSystem: 'latn' }).format(v);
 const money = v => v === null ? '<span class="price-note">السعر في المتجر</span>' : `${fmt(v)}<span class="currency">ر.س</span>`;

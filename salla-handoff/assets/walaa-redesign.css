@@ -584,3 +584,37 @@ h1, h2, h3 { font-weight: 500; }
 .hero .hero-script { color: #fff; }
 .hero .hero-script span { color: #FFD9B8; }
 @media (max-width: 760px) { .hero .hero-script { color: #3A1F38; } .hero .hero-script span { color: var(--plum); } }
+
+/* =====================================================================
+   v3.5 hero: the supplied bright photograph (hand with the mallet over a brass bowl).
+   Dark plum lettering on the light side at the right, light header, soft light scrim.
+   ===================================================================== */
+.hero { background: #EDE7E1; min-height: clamp(600px, 86vh, 800px); }
+.hero-img { object-position: 38% 50%; }
+.hero::before { background: linear-gradient(270deg, rgba(250, 245, 240, .78) 0%, rgba(250, 245, 240, .55) 34%, rgba(250, 245, 240, 0) 62%); }
+.hero-inner { align-items: center; padding-block: calc(var(--header-h) + 32px) 56px; }
+.hero-copy { max-width: 440px; }
+.hero .hero-script { color: #3A1F38; text-shadow: none; font-size: clamp(34px, 3.9vw, 54px); }
+.hero .hero-script span { color: var(--plum); }
+.hero-lead { color: #3A1F38; text-shadow: none; font-weight: 500; max-width: 400px; }
+.hero .btn-solid { background: var(--plum); border-color: var(--plum); color: #fff; }
+.hero .btn-solid:hover { background: var(--plum-dark); border-color: var(--plum-dark); color: #fff; }
+.hero .btn-ghost { background: rgba(255, 255, 255, .6); border-color: var(--plum); color: var(--plum); }
+.hero .btn-ghost:hover { background: var(--plum); color: #fff; }
+
+.is-home .header:not(.scrolled) { --ink: #2A1A29; }
+.is-home .header:not(.scrolled) .brand-text small { color: var(--ink-2); }
+.is-home .header:not(.scrolled) .brand svg { stroke: var(--accent-soft); }
+.is-home .header:not(.scrolled) .icon-btn:hover { background: rgba(255, 255, 255, .6); }
+.is-home .header:not(.scrolled) .main-nav a::after { background: var(--coral); }
+
+@media (max-width: 1100px) { .hero-img { object-position: 30% 50%; } }
+@media (max-width: 760px) {
+  .hero-img { aspect-ratio: 4 / 3.4; object-position: 36% 50%; }
+}
+
+/* v3.5 mobile: text block sits on the page ground with tight spacing, photograph full width below */
+@media (max-width: 760px) {
+  .hero { background: var(--bg); }
+  .hero-inner { padding-block: 24px 28px; min-height: 0; align-items: flex-start; }
+}
