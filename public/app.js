@@ -81,18 +81,12 @@ function home() {
   const tabs = [['all', 'الكل'], ['recorded', 'الجلسات المسجلة'], ['group', 'اللقاءات'], ['private', 'الجلسات الخاصة']];
   return `
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <h1>مساحة تتقرّبي فيها <span class="hl">من نفسك أكثر</span></h1>
-      <p class="hero-lead">من الصوت والتأمل إلى الكتابة واكتشاف الذات، اختاري المساحة الأقرب لكِ وابدئي بوقت صغير لنفسك.</p>
-      <div class="hero-actions"><a class="btn btn-solid" href="#choose">اكتشفي مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div>
-    </div>
-    <div class="hero-art">
-      <div class="hero-photo"><img src="${img('hero')}" alt="وعاء صوتي نحاسي وأداة الطرق على قماش طبيعي في ضوء الصباح" width="1536" height="1024" fetchpriority="high"></div>
-      <span class="chip-float chip-a">${icon('check')} تستمعين في وقتك</span>
-      <span class="chip-float chip-b">${icon('shield')} إتمام الطلب عبر سلة</span>
-    </div>
-  </div>
+  <img class="hero-img" src="${img('hero')}" alt="وعاء صوتي نحاسي وأداة الطرق على قماش طبيعي في ضوء الصباح" width="1536" height="1024" fetchpriority="high">
+  <div class="wrap hero-inner"><div class="hero-copy">
+    <h1 class="hero-script">مساحة تتقرّبي فيها <span>من نفسك أكثر</span></h1>
+    <p class="hero-lead">من الصوت والتأمل إلى الكتابة واكتشاف الذات، اختاري المساحة الأقرب لكِ وابدئي بوقت صغير لنفسك.</p>
+    <div class="hero-actions"><a class="btn btn-solid" href="#choose">اكتشفي مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div>
+  </div></div>
 </section>
 ${strip}
 
@@ -319,6 +313,8 @@ function route() {
   document.title = title;
   document.body.classList.toggle('has-buybar', hash.startsWith('product/') && !!byId(hash.split('/')[1]));
   $('#main').innerHTML = html;
+  document.body.classList.toggle('is-home', !!$('.hero'));
+  announce();
   $$('.main-nav a').forEach(a => { const on = a.dataset.nav === nav; on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
   icons(); setMenu(false);
   $$('dialog[open]').forEach(d => d.close());
@@ -327,6 +323,13 @@ function route() {
   initCountdown();
   if (hash === 'choose') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
   $('#main').focus({ preventScroll: true });
+}
+function announce() {
+  const bar = $('#announce'), n = upcoming()[0];
+  if (!bar || !n) { if (bar) bar.hidden = true; return; }
+  $('#announce-text').textContent = `لقاء «${n.name}» · ${n.date} · احجزي مكانك`;
+  $('#announce-link').href = `#product/${n.id}`;
+  bar.hidden = false;
 }
 function icons() { $$('[data-icon]').forEach(el => { el.outerHTML = icon(el.dataset.icon); }); }
 function setMenu(open) { $('#mobile-nav').hidden = !open; $('#menu-toggle').setAttribute('aria-expanded', String(open)); }
@@ -409,6 +412,7 @@ $('.skip').addEventListener('click', e => { e.preventDefault(); $('#main').focus
 window.addEventListener('scroll', () => $('#header').classList.toggle('scrolled', window.scrollY > 8), { passive: true });
 window.addEventListener('hashchange', route);
 
+$('#header').classList.toggle('scrolled', window.scrollY > 8);
 $('#year').textContent = new Date().getFullYear();
 saveCart(); icons(); route();
 })();
