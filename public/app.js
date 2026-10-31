@@ -81,7 +81,7 @@ function home() {
   const tabs = [['all', 'الكل'], ['recorded', 'الجلسات المسجلة'], ['group', 'اللقاءات'], ['private', 'الجلسات الخاصة']];
   return `
 <section class="hero">
-  <img class="hero-img" src="${img('hero')}" alt="وعاء صوتي نحاسي وأداة الطرق على قماش طبيعي في ضوء الصباح" width="1536" height="1024" fetchpriority="high">
+  <img class="hero-img" src="${img('hero-hand')}" alt="يد تمسك مطرقة خشبية فوق وعاء صوتي نحاسي في ضوء دافئ" width="1536" height="1024" fetchpriority="high">
   <div class="wrap hero-inner"><div class="hero-copy">
     <h1 class="hero-script">مساحة تتقرّبي فيها <span>من نفسك أكثر</span></h1>
     <p class="hero-lead">من الصوت والتأمل إلى الكتابة واكتشاف الذات، اختاري المساحة الأقرب لكِ وابدئي بوقت صغير لنفسك.</p>

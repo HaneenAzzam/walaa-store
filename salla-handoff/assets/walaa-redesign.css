@@ -543,3 +543,44 @@ h1, h2, h3 { font-weight: 500; }
   .brand { grid-column: 1; grid-row: 1; justify-content: flex-start; }
   .header-end { grid-column: 2; grid-row: 1; justify-content: flex-end; }
 }
+
+/* =====================================================================
+   v3.4 hero: photograph of a hand striking the singing bowl (Pexels, free licence),
+   white lettering on the calm floor at the right, light header over the photo.
+   ===================================================================== */
+.hero { min-height: clamp(600px, 88vh, 820px); background: #3b3130; }
+.hero-img { object-position: 50% 57%; }
+.hero::before { background: linear-gradient(270deg, rgba(28, 20, 20, .62) 0%, rgba(28, 20, 20, .38) 36%, rgba(28, 20, 20, 0) 62%), linear-gradient(180deg, rgba(28, 20, 20, .45) 0%, rgba(28, 20, 20, 0) 26%); }
+.hero-script { color: #fff; text-shadow: 0 2px 22px rgba(0, 0, 0, .35); }
+.hero-script span { color: #FFD9B8; }
+.hero-lead { color: #fff; font-weight: 400; text-shadow: 0 1px 14px rgba(0, 0, 0, .4); }
+.hero .btn-solid { background: #fff; border-color: #fff; color: var(--plum); }
+.hero .btn-solid:hover { background: var(--apricot); border-color: var(--apricot); color: var(--plum-dark); }
+.hero .btn-ghost { background: transparent; border-color: rgba(255, 255, 255, .85); color: #fff; }
+.hero .btn-ghost:hover { background: #fff; color: var(--plum); }
+
+/* header floats in white over the photo, turns back to ink once it has a ground */
+.is-home .header:not(.scrolled) { --ink: #fff; }
+.is-home .header:not(.scrolled) .brand-text small { color: rgba(255, 255, 255, .82); }
+.is-home .header:not(.scrolled) .brand svg { stroke: #FFD9B8; }
+.is-home .header:not(.scrolled) .icon-btn:hover { background: rgba(255, 255, 255, .16); }
+.is-home .header:not(.scrolled) .main-nav a::after { background: #FFD9B8; }
+
+@media (max-width: 760px) {
+  .hero { background: var(--bg); min-height: 0; }
+  .hero::before { display: none; }
+  .hero-img { aspect-ratio: 4 / 4.3; object-position: 50% 58%; }
+  .hero-script { color: #3A1F38; text-shadow: none; }
+  .hero-script span { color: var(--plum); }
+  .hero-lead { color: #4A3848; text-shadow: none; }
+  .hero .btn-solid { background: var(--plum); border-color: var(--plum); color: #fff; }
+  .hero .btn-ghost { border-color: var(--plum); color: var(--plum); }
+  .is-home .header:not(.scrolled) { --ink: #2A1A29; }
+  .is-home .header:not(.scrolled) .brand-text small { color: var(--ink-2); }
+  .is-home .header:not(.scrolled) .brand svg { stroke: var(--accent-soft); }
+}
+
+/* v3.4 specificity fix: lettering colours beat the older .hero h1 rule */
+.hero .hero-script { color: #fff; }
+.hero .hero-script span { color: #FFD9B8; }
+@media (max-width: 760px) { .hero .hero-script { color: #3A1F38; } .hero .hero-script span { color: var(--plum); } }
