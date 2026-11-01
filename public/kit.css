@@ -96,7 +96,7 @@ body { font-size: 16px; line-height: 1.75; background: var(--bg); }
 .hero { min-height: clamp(560px, 80vh, 740px); }
 .hero-copy { border-radius: var(--r-2xl); box-shadow: none; border: 1px solid rgba(255, 255, 255, .7); padding: 36px 36px 36px; }
 .hero-actions { gap: 8px; }
-.feat { padding-block: 16px 40px; }
+.feat { padding-block: 40px; }
 .feat-grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-sm); margin: 0; padding: 0; }
 .feat-grid a { display: flex; align-items: center; gap: 10px; height: 58px; padding: 0 16px; border: 1px solid var(--edge); border-radius: var(--r-lg); background: #fff; font-size: 14px; color: var(--ink-2); transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease); }
 .feat-grid a:hover { border-color: var(--edge-hover); color: var(--ink); }
