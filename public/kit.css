@@ -266,3 +266,13 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 
 /* phone: the header does not float over the hero (text sits on the page ground) */
 @media (max-width: 760px) { .is-home .header { margin-bottom: 0; background: rgba(255, 255, 255, .92); } }
+
+/* header: solid white from the first second, never transparent, never changes colour; the hero starts below it */
+.header, .is-home .header, .is-home .header:not(.scrolled), .header.scrolled { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid var(--edge-header); }
+.is-home .header { margin-bottom: 0; }
+.is-home .header:not(.scrolled) { --ink: #2A1A29; }
+.is-home .header:not(.scrolled) .brand-text small { color: var(--ink-2); }
+.is-home .header:not(.scrolled) .brand svg { stroke: var(--accent-soft); }
+.is-home .header:not(.scrolled) .main-nav a { color: #4B5563; }
+.hero-inner { padding-block: 40px 56px; }
+@media (max-width: 760px) { .is-home .header, .is-home .header:not(.scrolled) { background: #fff; } .hero-inner { padding-block: 24px 28px; } }
