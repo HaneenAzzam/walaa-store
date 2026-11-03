@@ -68,17 +68,11 @@ const aboutMedia = () => `<div class="about-media"><div class="about-frame"><img
 
 /* ---------- home ---------- */
 function home() {
-  const rec = inCat('recorded'), grp = upcoming(), prv = inCat('private');
-  const minRec = Math.min(...rec.filter(p => p.price !== null).map(p => p.price));
+  const rec = inCat('recorded'), prv = inCat('private'), grp = upcoming();
+  const trial = Object.assign({ button: 'ابدئي بتجربة مجانية', url: W.storeUrl }, W.freeTrial || {});
   const counts = { recorded: rec.length, group: events().length, private: prv.length, journal: 0, affirmation: 0 };
-  const circles = [
-    ['وقت لنفسي', 'recorded', 'entry-olive'], ['أعيش تجربة', 'group', 'entry-bowl'], ['أكتب وأكتشف', 'journal', 'entry-journal'],
-    ['مساحة خاصة', 'private', 'entry-arch'], ['التوكيدات', 'affirmation', 'cov-iris']
-  ].map(([t, to, art]) => `<a class="circle" href="#catalog/${to}"><span class="circle-img"><img src="${img(art)}" alt="" loading="lazy" width="300" height="300"></span><strong>${t}</strong><small>${counts[to] ? `${counts[to]} تجربة` : 'قريبًا'}</small></a>`).join('');
-  const marquee = ['الجلسات المسجلة', 'اللقاءات الحضورية', 'الجلسات الخاصة', 'المفكرات والتدوين', 'التوكيدات', 'ساوند هيلينغ', 'تأمل وصوت']
-    .map(t => `<span>${t}</span><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27Z"/></svg>`).join('');
-  const strip = `<div class="strip" aria-hidden="true"><div class="strip-track">${marquee}${marquee}</div></div>`;
-  const trial = Object.assign({ text: 'جرّبي أول خطوة معنا بلا تكلفة، ثم قرّري ما يناسبك.', button: 'ابدئي التجربة المجانية', url: W.storeUrl }, W.freeTrial || {});
+  /* four boxes: the four ways in from data.js (entries) */
+  const boxes = W.entries.map(e => `<a class="need-box" href="#catalog/${e.to}"><span class="need-media"><img src="${img(e.art)}" alt="" loading="lazy" decoding="async" width="502" height="627"></span><strong>${e.title}</strong><span class="need-text">${e.text}</span><small>${counts[e.to] ? `${counts[e.to]} تجربة` : 'قريبًا'}</small></a>`).join('');
   return `
 <section class="hero">
   <img class="hero-img" src="${img('hero-hand')}" alt="يد تمسك مطرقة خشبية فوق وعاء صوتي نحاسي في ضوء دافئ" width="1536" height="1024" fetchpriority="high">
@@ -88,18 +82,13 @@ function home() {
     <div class="hero-actions"><a class="btn btn-solid" href="#choose">اكتشفي مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div>
   </div></div>
 </section>
-<section class="feat" aria-label="نظرة على المتجر"><div class="wrap"><ul class="feat-grid">
-  <li><a href="#catalog/recorded"><b>${rec.length}</b><span>جلسة مسجلة</span></a></li>
-  <li><a href="#catalog/group"><b>${grp.length}</b><span>لقاءات قادمة</span></a></li>
-  <li><a href="#catalog/private"><b>${prv.length}</b><span>جلسات خاصة</span></a></li>
-  <li><a href="#faq">${icon('shield')}<span>إتمام الطلب عبر سلة</span></a></li>
-</ul></div></section>
-${strip}
 
-<section class="sec" id="choose"><div class="wrap">
-  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">كل يوم يحمل احتياجًا مختلفًا. اختاري المساحة الأقرب لكِ.</p></div></div>
-  <div class="circles">${circles}</div>
-</div></section>
+<section class="sec" id="intro"><div class="wrap"><div class="intro">
+  <p class="intro-label">أهلًا أنا ولاء فاضل</p>
+  <h2>وهنا مساحة تقتربي فيها من نفسك أكثر</h2>
+  <p>من الصوت والتأمل الذاتي إلى الكتابة والكوتشينغ، أقدم لك تجارب وأدوات مختلفة تساعدك تفهمي نفسك وتخصصي وقتًا لك بالطريقة اللي تناسبك.</p>
+  <a class="btn btn-solid" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ${icon('arrow-left')}</a>
+</div></div></section>
 
 <section class="sec"><div class="wrap about-grid">
   <div class="collage">
@@ -117,54 +106,15 @@ ${strip}
   </div>
 </div></section>
 
-<section class="sec sec-lilac" id="recorded-home"><div class="wrap">
-  ${sectionHead('', 'وقت لنفسي', 'جلسات صوت وتأمل مسجلة، استمعي لها متى ما ناسبك.', ['#catalog/recorded', 'كل الجلسات المسجلة'])}
-  <div class="products">${W.homePicks.recorded.map(byId).filter(Boolean).slice(0, 4).map(p => card(p)).join('')}</div>
+<section class="sec" id="choose"><div class="wrap">
+  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">كل يوم يحمل احتياجًا مختلفًا. اختاري المساحة الأقرب لكِ.</p></div></div>
+  <div class="need-grid">${boxes}</div>
 </div></section>
 
-${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
-  ${sectionHead('', 'عيشي تجربة معنا', 'لقاءات حضورية بمواعيد محددة. المواعيد مرجعية، ويُؤكَّد التوافر عند الحجز.', ['#catalog/group', 'كل اللقاءات'])}
-  <div class="count-banner">
-    <img class="count-side count-l" src="${img('cov-bowl')}" alt="" loading="lazy" width="300" height="400">
-    <div class="count-main">
-      <h2>اللقاء القادم: <span class="hl" id="cd-name"></span></h2>
-      <p id="cd-date"></p>
-      <div class="cd" role="timer" aria-label="الوقت المتبقي للقاء">${[['d', 'يوم'], ['h', 'ساعة'], ['m', 'دقيقة'], ['s', 'ثانية']].map(([k, l]) => `<div class="cd-unit"><div class="flip" id="cd-${k}"><span class="fl up">0</span><span class="fl down">0</span><span class="fl fold-top">0</span><span class="fl fold-bot">0</span></div><span class="cd-label">${l}</span></div>`).join('<i aria-hidden="true">:</i>')}</div>
-      <a class="btn btn-solid" id="cd-link" href="#catalog/group">التفاصيل والحجز</a>
-    </div>
-    <img class="count-side count-r" src="${img('cov-arch')}" alt="" loading="lazy" width="300" height="400">
-  </div>
-  ${grp.length > 1 ? `<div class="events-list">${grp.slice(1).map(p => eventRow(p)).join('')}</div>` : ''}
-</div></section>` : ''}
-
-<section class="sec sec-lilac" id="private-home"><div class="wrap">
-  ${sectionHead('', 'مساحة خاصة لك', 'جلسات فردية. اقرئي تفاصيل كل جلسة وطريقة تنسيق موعدها قبل الاختيار.', ['#catalog/private', 'كل الجلسات الخاصة'])}
-  <div class="products">${prv.map(p => card(p)).join('')}</div>
-</div></section>
-
-<section class="sec" id="journal-home"><div class="wrap">
-  <div class="write-grid">
-    <figure class="write-media"><img src="${img('writing')}" alt="مفكرة مفتوحة وغصن مجفف على قماش وردي" loading="lazy" decoding="async" width="627" height="470"></figure>
-    <div class="write-copy">
-      <h2>اكتبي واكتشفي</h2>
-      <p>مفكرات وتمارين تدوين تفتح لكِ مساحة للتأمل في نفسك.</p>
-      <a class="btn btn-ghost" href="#catalog/journal">اكتشفي المفكرات والتدوين</a>
-      ${inCat('journal').length ? '' : '<p class="fine">المنتجات قيد التجهيز، وستظهر هنا قريبًا.</p>'}
-    </div>
-  </div>
-  ${inCat('journal').length ? `<div class="products journal-products">${inCat('journal').slice(0, 4).map(p => card(p)).join('')}</div>` : ''}
-</div></section>
-
-<section class="sec" id="trial"><div class="wrap"><div class="trial">
-  <div class="trial-copy"><h2>ابدئي بتجربة مجانية</h2><p>${trial.text}</p></div>
-  <a class="btn btn-light" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ↗</a>
+<section class="sec" id="numbers"><div class="wrap"><div class="numbers">
+  <div class="num num-a"><b dir="ltr">5000+</b><span>عميل</span></div>
+  <div class="num num-b"><b dir="ltr">100+</b><span>جلسة حضورية</span></div>
 </div></div></section>
-
-<section class="sec voices"><div class="wrap">
-  <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2><p class="sec-text">كلمات حقيقية من تقييمات الزائرات في المتجر الحالي.</p></div></div>
-  <div class="v-grid">${W.testimonials.map(t => `<figure class="v-item"><span class="v-q" aria-hidden="true">”</span><blockquote>${t.quote}</blockquote><figcaption><span class="v-avatar" aria-hidden="true">ز</span><span><strong>زائرة</strong><small>${t.source.replace('من تقييم زائرة في ', 'تقييم في ')}</small></span></figcaption></figure>`).join('')}
-  </div>
-</div></section>
 
 <section class="sec" id="curious"><div class="wrap"><div class="curious">
   <div class="curious-copy">
