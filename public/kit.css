@@ -339,3 +339,15 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .footer-note, .footer-brand p { color: #646262; }
 .footer-bottom { color: #646262; border-top-color: #eeeeee; }
 .footer-wordmark { color: #323232; }
+
+/* "فضولك له مساحة": a calm banner pointing to the research search (external link) */
+.curious { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px 48px; border: 1px solid #eeeeee; border-radius: 24px; background: rgba(245, 210, 243, .4); }
+.curious-copy { max-width: 700px; }
+.curious-label { margin: 0 0 6px; font-size: 14px; font-weight: 500; color: #502d4e; }
+.curious h2 { font-size: clamp(26px, 2.6vw, 34px); font-weight: 600; color: #323232; }
+.curious-copy p:not(.curious-label) { margin-top: 10px; font-size: 17px; line-height: 1.9; color: #646262; }
+.curious .btn { flex-shrink: 0; }
+@media (max-width: 760px) {
+  .curious { flex-direction: column; align-items: stretch; gap: 20px; padding: 28px 20px; }
+  .curious .btn { width: 100%; }
+}

@@ -144,6 +144,15 @@ ${strip}
   </div>
 </div></section>
 
+<section class="sec" id="curious"><div class="wrap"><div class="curious">
+  <div class="curious-copy">
+    <p class="curious-label">للي تحب تعرف أكثر</p>
+    <h2>فضولك له مساحة</h2>
+    <p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p>
+  </div>
+  <a class="btn btn-ghost" href="https://pubmed.ncbi.nlm.nih.gov/?term=sound+meditation+stress" target="_blank" rel="noopener" aria-label="شوفي الأبحاث على موقع PubMed، يفتح في تبويب جديد">شوفي الأبحاث ↗</a>
+</div></div></section>
+
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
   <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML(W.faqs.slice(0, 4))}</div>
   <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا عبر المتجر الأصلي.</p><a class="btn btn-light" href="#faq">كل الأسئلة</a></aside>
