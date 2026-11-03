@@ -305,7 +305,7 @@ function faqPage() {
 function route() {
   const hash = decodeURIComponent(location.hash.slice(1));
   let html, title = 'ولاء فاضل — مساحة أقرب لنفسك', nav = '';
-  if (!hash || hash === 'choose') html = home();
+  if (!hash || hash === 'choose' || hash === 'journal') html = home();
   else if (hash.startsWith('catalog/')) { html = catalogPage(hash.split('/')[1]); title = `${W.categories[state.cat]} | ولاء فاضل`; nav = `catalog/${state.cat}`; }
   else if (hash.startsWith('product/')) {
     const p = byId(hash.split('/')[1]);
@@ -325,7 +325,7 @@ function route() {
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
   initCountdown();
-  if (hash === 'choose') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
+  if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#journal-home').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
   $('#main').focus({ preventScroll: true });
 }
 function announce() {
