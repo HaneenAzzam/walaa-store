@@ -1063,3 +1063,18 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .num-a { background: rgba(245, 210, 243, .4); }
 .num-b { background: #eeeeee; }
 @media (max-width: 519px) { .numbers { grid-template-columns: 1fr; } .num { padding: 28px 16px; } }
+
+/* ---- numbers, richer: icon chip, big counter, lotus watermark ---- */
+.numbers { gap: 20px; }
+.num { position: relative; overflow: hidden; min-height: 240px; padding: 44px 24px; gap: 6px; border: 1px solid rgba(207, 172, 205, .35); border-radius: 28px; transition: transform .2s ease, border-color .2s ease; }
+.num:hover { transform: translateY(-3px); border-color: #cfaccd; }
+.num-a { background: rgba(245, 210, 243, .45); }
+.num-b { background: rgba(207, 172, 205, .32); }
+.num-icon { display: grid; place-items: center; width: 58px; height: 58px; margin-bottom: 10px; border-radius: 50%; background: #ffffff; color: #502d4e; }
+.num-icon .icon { width: 28px; height: 28px; stroke-width: 1.5; }
+.num b { font-size: clamp(48px, 5.4vw, 72px); letter-spacing: -.01em; }
+.num-label { font-size: 20px; font-weight: 500; color: #323232; }
+.num-mark { position: absolute; inset-inline-end: -26px; inset-block-end: -30px; width: 190px; fill: none; stroke: #502d4e; stroke-width: 1.1; opacity: .12; pointer-events: none; }
+.num-b .num-mark { inset-inline-end: auto; inset-inline-start: -26px; }
+@media (max-width: 519px) { .num { min-height: 200px; padding: 32px 16px; } .num-mark { width: 150px; } }
+@media (prefers-reduced-motion: reduce) { .num { transition: none; } .num:hover { transform: none; } }

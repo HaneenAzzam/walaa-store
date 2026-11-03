@@ -13,6 +13,8 @@ const ICONS = {
   'arrow-left': '<path d="M20 12H4m6-6-6 6 6 6"/>',
   'arrow-right': '<path d="M4 12h16m-6-6 6 6-6 6"/>',
   check: '<path d="m5 12 4 4L20 5"/>',
+  users: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/>',
+  calendar: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="m9 15 2 2 4-4"/>',
   shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>',
   plus: '<path d="M12 5v14M5 12h14"/>'
 };
@@ -111,10 +113,13 @@ function home() {
   <div class="need-grid">${boxes}</div>
 </div></section>
 
-<section class="sec" id="numbers"><div class="wrap"><div class="numbers">
-  <div class="num num-a"><b dir="ltr">5000+</b><span>عميل</span></div>
-  <div class="num num-b"><b dir="ltr">100+</b><span>جلسة حضورية</span></div>
-</div></div></section>
+<section class="sec" id="numbers"><div class="wrap">
+  <div class="sec-head center"><div><h2>ولاء <span class="hl">بالأرقام</span></h2></div></div>
+  <div class="numbers">
+    <div class="num num-a"><svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg><span class="num-icon">${icon('users')}</span><b dir="ltr" data-to="5000">5000+</b><span class="num-label">عميل</span></div>
+    <div class="num num-b"><svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg><span class="num-icon">${icon('calendar')}</span><b dir="ltr" data-to="100">100+</b><span class="num-label">جلسة حضورية</span></div>
+  </div>
+</div></section>
 
 <section class="sec" id="curious"><div class="wrap"><div class="curious">
   <div class="curious-copy">
@@ -132,6 +137,16 @@ function home() {
 }
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+function initNumbers() {
+  const els = $('.num b[data-to]'); if (!els.length || reduced() || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return; io.unobserve(en.target);
+    const el = en.target, to = Number(el.dataset.to), t0 = performance.now(), ms = 1400;
+    const step = now => { const p = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(to * e) + '+'; if (p < 1) requestAnimationFrame(step); };
+    el.textContent = '0+'; requestAnimationFrame(step);
+  }), { threshold: .4 });
+  els.forEach(el => io.observe(el));
+}
 let cdTimer;
 function flipTo(el, v) {
   if (!el || el.dataset.v === v) return;
@@ -271,7 +286,7 @@ function route() {
   document.body.classList.toggle('is-home', !!$('.hero'));
   announce();
   $$('.main-nav a').forEach(a => { const on = a.dataset.nav === nav; on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
-  icons(); setMenu(false);
+  icons(); setMenu(false); initNumbers();
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
   initCountdown();
