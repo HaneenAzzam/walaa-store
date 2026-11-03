@@ -8,6 +8,7 @@ $enc = New-Object System.Text.UTF8Encoding($false)
 $read = { param($n) [IO.File]::ReadAllText((Join-Path $dist $n), $enc) }
 
 $html = & $read 'index.html'
+$html = $html -replace '\?v=[0-9a-z]+"', '"'
 $css = (& $read 'theme.css') + "`n" + (& $read 'redesign.css') + "`n" + (& $read 'kit.css')
 $data = & $read 'data.js'
 $app = & $read 'app.js'
