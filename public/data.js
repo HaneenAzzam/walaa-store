@@ -3,6 +3,10 @@
 window.WALAA = {
   storeUrl: 'https://walaafadel.com/',
 
+  /* "ابدئي بتجربة مجانية" on the home page. Fill in the real text, button label and link of the free experience.
+     Until then the section shows a neutral sentence and points to the store. */
+  freeTrial: {},
+
   categories: {
     all: 'كل التجارب',
     recorded: 'الجلسات المسجلة',

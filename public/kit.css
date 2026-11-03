@@ -351,3 +351,12 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
   .curious { flex-direction: column; align-items: stretch; gap: 20px; padding: 28px 20px; }
   .curious .btn { width: 100%; }
 }
+
+/* home order (client): events block gets its upcoming list under the flip-calendar banner; free-experience band */
+.count-banner + .events-list { margin-top: 24px; }
+.trial { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px 48px; border-radius: 24px; background: #cfaccd; color: #502d4e; }
+.trial-copy { max-width: 700px; }
+.trial h2 { font-size: clamp(26px, 2.6vw, 34px); font-weight: 600; color: #502d4e; }
+.trial p { margin-top: 10px; font-size: 17px; line-height: 1.9; color: #323232; }
+.trial .btn { flex-shrink: 0; }
+@media (max-width: 760px) { .trial { flex-direction: column; align-items: stretch; gap: 20px; padding: 28px 20px; } .trial .btn { width: 100%; } }

@@ -78,7 +78,7 @@ function home() {
   const marquee = ['الجلسات المسجلة', 'اللقاءات الحضورية', 'الجلسات الخاصة', 'المفكرات والتدوين', 'التوكيدات', 'ساوند هيلينغ', 'تأمل وصوت']
     .map(t => `<span>${t}</span><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27Z"/></svg>`).join('');
   const strip = `<div class="strip" aria-hidden="true"><div class="strip-track">${marquee}${marquee}</div></div>`;
-  const tabs = [['all', 'الكل'], ['recorded', 'الجلسات المسجلة'], ['group', 'اللقاءات'], ['private', 'الجلسات الخاصة']];
+  const trial = Object.assign({ text: 'جرّبي أول خطوة معنا بلا تكلفة، ثم قرّري ما يناسبك.', button: 'ابدئي التجربة المجانية', url: W.storeUrl }, W.freeTrial || {});
   return `
 <section class="hero">
   <img class="hero-img" src="${img('hero-hand')}" alt="يد تمسك مطرقة خشبية فوق وعاء صوتي نحاسي في ضوء دافئ" width="1536" height="1024" fetchpriority="high">
@@ -101,11 +101,6 @@ ${strip}
   <div class="circles">${circles}</div>
 </div></section>
 
-<section class="sec sec-tight"><div class="wrap promos">
-  <article class="promo promo-peach"><div class="promo-copy"><span class="badge">من ${fmt(minRec)} ر.س</span><h3>جلسات مسجلة <span class="hl">لوقتك</span></h3><p>${rec.length} جلسة صوت وتأمل، استمعي لها متى ما ناسبك.</p><a class="btn btn-solid btn-sm" href="#catalog/recorded">تصفّحي الجلسات</a></div><img src="${img('cov-olive')}" alt="" loading="lazy" width="400" height="400"></article>
-  <article class="promo promo-plum"><div class="promo-copy"><span class="badge badge-light">${grp.length} لقاءات قادمة</span><h3>نلتقي ونتشارك <span class="hl">التجربة</span></h3><p>رحلات صوتية وتأمل جماعية بمواعيد محددة.</p><a class="btn btn-light btn-sm" href="#catalog/group">اللقاءات الحضورية</a></div><img src="${img('event-side')}" alt="" loading="lazy" width="400" height="400"></article>
-</div></section>
-
 <section class="sec"><div class="wrap about-grid">
   <div class="collage">
     <img class="c1" src="${img('about-main')}" alt="وعاء صوتي نحاسي وأغصان مجففة على قماش طبيعي" loading="lazy" width="500" height="500">
@@ -114,7 +109,7 @@ ${strip}
     <span class="seal" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg></span>
   </div>
   <div class="about-copy">
-    <h2>رحلة نحو <span class="hl">راحة أعمق</span> مع نفسك</h2>
+    <h2>تعرفي على ولاء</h2>
     <p class="about-lead">أهلًا، أنا ولاء. بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات.</p>
     <p>هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.</p>
     <dl class="stats"><div><dd>${products.length}</dd><dt>تجربة</dt></div><div><dd>${rec.length}</dd><dt>جلسة مسجلة</dt></div><div><dd>${grp.length}</dd><dt>لقاءات قادمة</dt></div></dl>
@@ -122,7 +117,13 @@ ${strip}
   </div>
 </div></section>
 
+<section class="sec sec-lilac" id="recorded-home"><div class="wrap">
+  ${sectionHead('', 'وقت لنفسي', 'جلسات صوت وتأمل مسجلة، استمعي لها متى ما ناسبك.', ['#catalog/recorded', 'كل الجلسات المسجلة'])}
+  <div class="products">${W.homePicks.recorded.map(byId).filter(Boolean).slice(0, 4).map(p => card(p)).join('')}</div>
+</div></section>
+
 ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
+  ${sectionHead('', 'عيشي تجربة معنا', 'لقاءات حضورية بمواعيد محددة. المواعيد مرجعية، ويُؤكَّد التوافر عند الحجز.', ['#catalog/group', 'كل اللقاءات'])}
   <div class="count-banner">
     <img class="count-side count-l" src="${img('cov-bowl')}" alt="" loading="lazy" width="300" height="400">
     <div class="count-main">
@@ -133,14 +134,22 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
     </div>
     <img class="count-side count-r" src="${img('cov-arch')}" alt="" loading="lazy" width="300" height="400">
   </div>
+  ${grp.length > 1 ? `<div class="events-list">${grp.slice(1).map(p => eventRow(p)).join('')}</div>` : ''}
 </div></section>` : ''}
 
-${strip}
+<section class="sec sec-lilac" id="private-home"><div class="wrap">
+  ${sectionHead('', 'مساحة خاصة لك', 'جلسات فردية. اقرئي تفاصيل كل جلسة وطريقة تنسيق موعدها قبل الاختيار.', ['#catalog/private', 'كل الجلسات الخاصة'])}
+  <div class="products">${prv.map(p => card(p)).join('')}</div>
+</div></section>
+
+<section class="sec" id="trial"><div class="wrap"><div class="trial">
+  <div class="trial-copy"><h2>ابدئي بتجربة مجانية</h2><p>${trial.text}</p></div>
+  <a class="btn btn-light" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ↗</a>
+</div></div></section>
 
 <section class="sec voices"><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2><p class="sec-text">كلمات حقيقية من تقييمات الزائرات في المتجر الحالي.</p></div></div>
   <div class="v-grid">${W.testimonials.map(t => `<figure class="v-item"><span class="v-q" aria-hidden="true">”</span><blockquote>${t.quote}</blockquote><figcaption><span class="v-avatar" aria-hidden="true">ز</span><span><strong>زائرة</strong><small>${t.source.replace('من تقييم زائرة في ', 'تقييم في ')}</small></span></figcaption></figure>`).join('')}
-    <figure class="v-item v-cta"><span class="v-q" aria-hidden="true">”</span><blockquote>جرّبي جلسة واحدة، وقرّري بنفسك.</blockquote><a class="btn btn-light btn-sm" href="#catalog/recorded">ابدئي من الجلسات المسجلة</a></figure>
   </div>
 </div></section>
 
@@ -156,9 +165,7 @@ ${strip}
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
   <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML(W.faqs.slice(0, 4))}</div>
   <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا عبر المتجر الأصلي.</p><a class="btn btn-light" href="#faq">كل الأسئلة</a></aside>
-</div></section>
-
-<section class="sec sec-tight"><div class="wrap"><div class="closing"><h2>خذي وقتك… واختاري المساحة الأقرب لكِ.</h2><a class="btn btn-light" href="#catalog/all">اكتشفي جميع التجارب</a></div></div></section>`;
+</div></section>`;
 }
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
