@@ -22,8 +22,8 @@
   /* flat card edges */
   --edge: rgba(0, 0, 0, .06);
   --edge-hover: rgba(0, 0, 0, .14);
-  --edge-input: #E2E8F0;
-  --edge-header: #F1F1F3;
+  --edge-input: #eeeeee;
+  --edge-header: #eeeeee;
   /* motion */
   --ease: cubic-bezier(.4, 0, .2, 1);
   --ease-out: cubic-bezier(0, 0, .2, 1);
@@ -60,9 +60,9 @@ body { font-size: 16px; line-height: 1.75; background: var(--bg); }
 .btn-solid { background: var(--plum); border-color: var(--plum); color: #fff; }
 .btn-solid:hover { background: var(--plum-dark); border-color: var(--plum-dark); }
 .btn-ghost { background: #fff; border-color: var(--edge-input); color: var(--ink); }
-.btn-ghost:hover { background: #F8FAFC; border-color: var(--plum); color: var(--plum); }
+.btn-ghost:hover { background: #ffffff; border-color: var(--plum); color: var(--plum); }
 .btn-light { background: #fff; border-color: #fff; color: var(--plum); }
-.btn-light:hover { background: #F1F5F9; border-color: #F1F5F9; color: var(--plum-dark); }
+.btn-light:hover { background: #eeeeee; border-color: #eeeeee; color: var(--plum-dark); }
 .more { padding: 0; height: auto; border: 0; border-radius: 0; background: none; color: var(--ink-2); font-size: 14px; font-weight: 500; gap: 8px; }
 .more:hover { background: none; color: var(--ink); gap: 12px; }
 .more .icon { transition: transform var(--dur) var(--ease); }
@@ -75,13 +75,13 @@ body { font-size: 16px; line-height: 1.75; background: var(--bg); }
 .header-inner { height: var(--header-h); gap: 16px; }
 .wrap.header-inner { width: min(var(--container), calc(100% - var(--gutter) * 2)); }
 .header-inner .main-nav { gap: 2px; }
-.main-nav a { height: 36px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: var(--r-md); font-size: 14px; font-weight: 500; color: #4B5563; transition: color .1s var(--ease), background-color .1s var(--ease); }
+.main-nav a { height: 36px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: var(--r-md); font-size: 14px; font-weight: 500; color: #323232; transition: color .1s var(--ease), background-color .1s var(--ease); }
 .main-nav a::after { display: none; }
 .main-nav a:hover { color: var(--plum); background: rgba(0, 0, 0, .05); }
 .main-nav a[aria-current] { color: var(--plum); background: var(--ivory); }
 .is-home .header:not(.scrolled) .main-nav a { color: var(--ink); }
-.header-search { display: none; align-items: center; gap: 10px; width: 250px; height: 40px; padding: 0 14px; border: 1px solid #E5E7EB; border-radius: var(--r-lg); background: rgba(243, 244, 246, .6); color: #6B7280; font-size: 14px; text-align: start; transition: background-color var(--dur) var(--ease); }
-.header-search:hover { background: #F3F4F6; }
+.header-search { display: none; align-items: center; gap: 10px; width: 250px; height: 40px; padding: 0 14px; border: 1px solid #eeeeee; border-radius: var(--r-lg); background: rgba(238, 238, 238, .6); color: #646262; font-size: 14px; text-align: start; transition: background-color var(--dur) var(--ease); }
+.header-search:hover { background: #eeeeee; }
 .header-search .icon { width: 18px; height: 18px; }
 .header-actions { gap: 8px; }
 .all-link { height: 36px; margin: 0; padding: 0 14px; border-radius: var(--r-md); font-size: 14px; font-weight: 500; transition: background-color var(--dur) var(--ease), transform var(--dur) var(--ease); }
@@ -195,7 +195,7 @@ body { font-size: 16px; line-height: 1.75; background: var(--bg); }
 /* ---------- footer: 64px padding, 48px column gap, quiet 14px links ---------- */
 .footer { padding-top: 64px; margin-top: 0; }
 .footer-grid { gap: var(--gap-split); grid-template-columns: 1.6fr 1fr 1fr 1.4fr; }
-.footer a { font-size: 14px; line-height: 20px; padding-block: 6px; color: #A8A3B5; transition: color var(--dur) var(--ease); }
+.footer a { font-size: 14px; line-height: 20px; padding-block: 6px; color: #646262; transition: color var(--dur) var(--ease); }
 .footer a:hover { color: #fff; }
 .footer .brand-foot { color: #fff; padding: 0; }
 .footer h2 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
@@ -270,9 +270,72 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 /* header: solid white from the first second, never transparent, never changes colour; the hero starts below it */
 .header, .is-home .header, .is-home .header:not(.scrolled), .header.scrolled { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid var(--edge-header); }
 .is-home .header { margin-bottom: 0; }
-.is-home .header:not(.scrolled) { --ink: #2A1A29; }
+.is-home .header:not(.scrolled) { --ink: #323232; }
 .is-home .header:not(.scrolled) .brand-text small { color: var(--ink-2); }
 .is-home .header:not(.scrolled) .brand svg { stroke: var(--accent-soft); }
-.is-home .header:not(.scrolled) .main-nav a { color: #4B5563; }
+.is-home .header:not(.scrolled) .main-nav a { color: #323232; }
 .hero-inner { padding-block: 40px 56px; }
 @media (max-width: 760px) { .is-home .header, .is-home .header:not(.scrolled) { background: #fff; } .hero-inner { padding-block: 24px 28px; } }
+
+/* =====================================================================
+   BRAND PALETTE: the colours of walaafadel.com (the live Salla theme).
+   #cfaccd primary · #a986a7 primary dark · #f5d2f3 primary light · #502d4e text on primary
+   #ffffff page · #eeeeee cards and lines · #323232 / #111111 text · #646262 secondary text · #e97e57 badges.
+   Nothing outside this list is used. Primary actions are orchid with plum text, as in the store.
+   ===================================================================== */
+:root {
+  --bg: #ffffff; --white: #ffffff; --footer: #ffffff;
+  --plum: #502d4e; --plum-dark: #502d4e; --accent: #502d4e; --hl: #502d4e;
+  --ink: #323232; --ink-2: #646262; --line: #eeeeee;
+  --taupe: #cfaccd; --accent-soft: #a986a7; --coral: #e97e57;
+  --edge: #eeeeee; --edge-hover: #cfaccd; --edge-input: #a986a7; --edge-header: #eeeeee;
+}
+
+/* primary actions: orchid fill, plum text; hover turns plum */
+.btn-solid, .hero .btn-solid, .card-actions .btn-solid, .detail .btn-solid.btn-block, .buybar .btn-solid, .all-link,
+.toast button, .voice-nav button, .faq-box .btn-light { background: #cfaccd; border-color: #cfaccd; color: #502d4e; }
+.btn-solid:hover, .hero .btn-solid:hover, .card-actions .btn-solid:hover, .detail .btn-solid.btn-block:hover, .all-link:hover,
+.toast button:hover, .voice-nav button:hover, .faq-box .btn-light:hover { background: #502d4e; border-color: #502d4e; color: #ffffff; }
+.btn-ghost, .hero .btn-ghost, .card-actions .btn-ghost { background: #ffffff; border-color: #a986a7; color: #502d4e; }
+.btn-ghost:hover, .hero .btn-ghost:hover, .card-actions .btn-ghost:hover { background: #f5d2f3; border-color: #a986a7; color: #502d4e; }
+.btn-light { background: #ffffff; border-color: #ffffff; color: #502d4e; }
+.btn-light:hover { background: #502d4e; border-color: #502d4e; color: #ffffff; }
+.more { color: #502d4e; }
+
+/* selected states: orchid with plum text */
+.tab[aria-selected="true"], .chip[aria-current] { background: #cfaccd; border-color: #cfaccd; color: #502d4e; }
+.v-dots i.on { background: #502d4e; }
+.card-tag, .tag { background: #f5d2f3; color: #502d4e; }
+.cart-btn span { background: #e97e57; color: #502d4e; }
+.badge { background: #e97e57; color: #502d4e; }
+.badge-light { background: #ffffff; color: #502d4e; }
+
+/* bands that were dark plum are orchid now */
+.strip { background: #cfaccd; color: #502d4e; }
+.strip-track svg { stroke: #502d4e; }
+.promo-plum, .closing, .stats, .tall-cap, .v-cta { background: #cfaccd; color: #502d4e; }
+.promo-plum h3, .promo-plum .hl, .closing h2, .tall-cap strong, .tall-cap small, .v-cta blockquote, .v-cta .v-q { color: #502d4e; }
+.promo-plum p { color: #323232; }
+.stats dd { color: #502d4e; }
+.stats dt { color: #323232; }
+.seal { background: #cfaccd; }
+.seal svg { stroke: #502d4e; }
+.faq-list details[open] { background: #f5d2f3; border-color: #cfaccd; }
+.faq-list details[open] summary { color: #502d4e; }
+.faq-list details[open] summary::after { background: #cfaccd; color: #502d4e; }
+.faq-list details[open] p { color: #323232; }
+.announce { background: #f5d2f3; border-bottom: 1px solid #cfaccd; }
+.announce a { color: #502d4e; }
+.toast::before { background: #cfaccd; }
+
+/* footer: white with grey text, like the store's */
+.footer { background: #ffffff; color: #646262; border-top: 1px solid #eeeeee; }
+.footer h2 { color: #323232; }
+.footer a { color: #646262; }
+.footer a:hover { color: #502d4e; }
+.footer .brand-foot, .brand-foot .brand-text { color: #323232; }
+.brand-foot .brand-text small { color: #646262; }
+.brand-foot svg { stroke: #a986a7; }
+.footer-note, .footer-brand p { color: #646262; }
+.footer-bottom { color: #646262; border-top-color: #eeeeee; }
+.footer-wordmark { color: #323232; }

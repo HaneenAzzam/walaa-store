@@ -4,22 +4,22 @@
    Headings: Tajawal. Text, menus, buttons: IBM Plex Sans Arabic. */
 
 :root {
-  --bg: #FFFAF5;          /* warm white page */
+  --bg: #ffffff;          /* warm white page */
   --white: #FFFFFF;
-  --cream: #FFF1E6;       /* peach cream sections */
-  --ivory: #F5E6F3;       /* soft lilac sections */
-  --sand: #E4C6E1;        /* light orchid */
+  --cream: rgba(245, 210, 243, .4);       /* peach cream sections */
+  --ivory: rgba(245, 210, 243, .4);       /* soft lilac sections */
+  --sand: #eeeeee;        /* light orchid */
   --taupe: #CFACCD;       /* brand orchid: borders and frames */
   --plum: #502D4E;        /* brand deep plum: buttons, closing */
-  --plum-dark: #3A1F38;
+  --plum-dark: #502d4e;
   --coral: #E97E57;       /* brand accent: small sparks only */
-  --peach: #FFDDCB;
-  --ink: #2A1A29;
-  --ink-2: #6A5568;
-  --line: #EBDAE8;
-  --accent: #7A4378;      /* bright plum for kickers and links */
-  --accent-soft: #B07DAD;
-  --footer: #2F1A2E;
+  --peach: rgba(245, 210, 243, .4);
+  --ink: #323232;
+  --ink-2: #646262;
+  --line: #eeeeee;
+  --accent: #502d4e;      /* bright plum for kickers and links */
+  --accent-soft: #a986a7;
+  --footer: #323232;
 
   --display: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
   --text: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
@@ -112,14 +112,14 @@ svg.icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: curren
 .mobile-nav a { display: block; padding: 14px 2px; border-bottom: 1px solid var(--line); font-family: var(--display); font-size: 19px; }
 
 /* ---------- hero ---------- */
-.hero { position: relative; display: flex; align-items: center; min-height: clamp(560px, 46vw, 680px); overflow: hidden; background: #4a2448; color: #fff; isolation: isolate; }
+.hero { position: relative; display: flex; align-items: center; min-height: clamp(560px, 46vw, 680px); overflow: hidden; background: #502d4e; color: #fff; isolation: isolate; }
 .hero-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 56%; }
-.hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(270deg, rgba(58, 26, 56, .74) 0%, rgba(58, 26, 56, .5) 36%, rgba(58, 26, 56, .08) 68%); }
+.hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(270deg, rgba(80, 45, 78, .74) 0%, rgba(80, 45, 78, .5) 36%, rgba(80, 45, 78, .08) 68%); }
 .hero-inner { padding-block: 72px; }
 .hero-copy { max-width: 560px; }
-.hero-kicker { font-size: 17px; font-weight: 500; color: #F8DFF5; margin-bottom: 14px; }
+.hero-kicker { font-size: 17px; font-weight: 500; color: rgba(245, 210, 243, .4); margin-bottom: 14px; }
 .hero h1 { color: #fff; font-size: clamp(44px, 5vw, 64px); font-weight: 500; line-height: 1.4; }
-.hero-lead { font-size: 19px; line-height: 1.9; color: #FDF0FA; margin: 20px 0 34px; max-width: 480px; }
+.hero-lead { font-size: 19px; line-height: 1.9; color: #ffffff; margin: 20px 0 34px; max-width: 480px; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
 .link-light { font-size: 16px; font-weight: 500; color: #fff; padding-bottom: 4px; border-bottom: 1px solid rgba(255, 255, 255, .75); transition: border-color var(--t); }
 .link-light:hover { border-color: #fff; }
@@ -148,7 +148,7 @@ svg.icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: curren
 .card-media { position: relative; display: block; aspect-ratio: 1; overflow: hidden; background: var(--ivory); }
 .card-media img, .detail-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
 .card:hover .card-media img { transform: scale(1.03); }
-.card-tag { position: absolute; top: 12px; right: 12px; background: var(--peach); color: #7C2D12; font-size: 12.5px; font-weight: 500; line-height: 1; padding: 6px 10px; border-radius: var(--radius); }
+.card-tag { position: absolute; top: 12px; right: 12px; background: var(--peach); color: #502d4e; font-size: 12.5px; font-weight: 500; line-height: 1; padding: 6px 10px; border-radius: var(--radius); }
 .card-mark { position: absolute; bottom: 10px; left: 12px; direction: ltr; font-family: Georgia, serif; font-size: 12px; color: #fff; opacity: .92; text-shadow: 0 1px 6px rgba(0, 0, 0, .35); }
 .card-body { display: flex; flex-direction: column; flex: 1; padding: 18px 18px 18px; }
 .card-body h3 { font-size: 20px; line-height: 1.55; }
@@ -240,7 +240,7 @@ svg.icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: curren
 /* ---------- closing & footer ---------- */
 .closing { background: radial-gradient(circle at 12% 20%, rgba(207, 172, 205, .28), transparent 42%), radial-gradient(circle at 88% 90%, rgba(233, 126, 87, .22), transparent 38%), var(--plum); color: #fff; text-align: center; padding-block: 88px; }
 .closing h2 { color: #fff; font-size: clamp(28px, 3.6vw, 46px); font-weight: 400; margin-bottom: 30px; }
-.footer { background: var(--footer); color: #E8D6E6; padding-top: 72px; }
+.footer { background: var(--footer); color: #eeeeee; padding-top: 72px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 48px; }
 .footer-wordmark { direction: ltr; display: inline-block; font-family: Georgia, serif; font-size: 29px; line-height: 1; color: #fff; }
 .footer-wordmark span { display: block; text-align: center; font-family: var(--text); font-size: 11px; letter-spacing: 3px; color: var(--sand); margin-top: 8px; }
@@ -250,7 +250,7 @@ svg.icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: curren
 .footer a:hover { color: #fff; }
 .footer-wordmark:hover { color: #fff; }
 .footer-note { font-size: 14px; margin-top: 10px; }
-.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin-top: 56px; padding-block: 24px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13.5px; color: #C9B2C7; }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin-top: 56px; padding-block: 24px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13.5px; color: #a986a7; }
 
 /* ---------- inner pages ---------- */
 .page-head { padding: 56px 0 44px; background: var(--ivory); }
@@ -303,8 +303,8 @@ svg.icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: curren
 .buybar { display: none; }
 
 /* ---------- dialogs ---------- */
-dialog { border: 0; padding: 28px; background: var(--bg); color: var(--ink); box-shadow: 0 30px 80px rgba(58, 26, 56, .3); max-height: 90dvh; overflow-y: auto; }
-dialog::backdrop { background: rgba(58, 26, 56, .5); }
+dialog { border: 0; padding: 28px; background: var(--bg); color: var(--ink); box-shadow: 0 30px 80px rgba(80, 45, 78, .3); max-height: 90dvh; overflow-y: auto; }
+dialog::backdrop { background: rgba(80, 45, 78, .5); }
 body:has(dialog[open]) { overflow: hidden; }
 .dialog-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
 .dialog-head h2 { font-size: 26px; }
@@ -375,7 +375,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .brand svg { width: 36px; height: 36px; }
   .brand-text { font-size: 22px; }
   .hero { min-height: 600px; align-items: flex-end; }
-  .hero::after { background: linear-gradient(0deg, rgba(58, 26, 56, .82) 0%, rgba(58, 26, 56, .55) 45%, rgba(58, 26, 56, .1) 80%); }
+  .hero::after { background: linear-gradient(0deg, rgba(80, 45, 78, .82) 0%, rgba(80, 45, 78, .55) 45%, rgba(80, 45, 78, .1) 80%); }
   .hero-inner { padding-block: 40px 52px; }
   .hero h1 { font-size: clamp(34px, 8vw, 46px); }
   .hero-lead { font-size: 17px; }
