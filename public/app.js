@@ -58,7 +58,7 @@ function privateRow(p) {
   return `<article class="prow"><div class="prow-info"><h3><a href="#product/${p.id}">${p.name}</a></h3><p>${p.desc}</p></div><div class="prow-end"><span class="price">${money(p.price)}</span><a class="text-link" href="#product/${p.id}">تفاصيل الجلسة ${icon('arrow-left')}</a></div></article>`;
 }
 
-const faqHTML = () => `<div class="faq-list">${W.faqs.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
+const faqHTML = (list = W.faqs) => `<div class="faq-list">${list.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
 
 function pageHead(title, text, crumb) {
   return `<section class="page-head"><div class="wrap"><nav class="breadcrumb" aria-label="مسار التنقل"><a href="#">الرئيسية</a><span aria-hidden="true">/</span><span>${crumb || title}</span></nav><h1>${title}</h1>${text ? `<p>${text}</p>` : ''}</div></section>`;
@@ -122,12 +122,6 @@ ${strip}
   </div>
 </div></section>
 
-<section class="sec sec-lilac"><div class="wrap">
-  <div class="sec-head"><div><h2>الأكثر <span class="hl">اختيارًا</span></h2></div><a class="more" href="#catalog/all">كل التجارب ${icon('arrow-left')}</a></div>
-  <div class="tabs" role="tablist" aria-label="نوع التجربة">${tabs.map(([k, l], i) => `<button type="button" role="tab" class="tab" data-tab="${k}" aria-selected="${i === 0}">${l}</button>`).join('')}</div>
-  <div class="products" id="pick-grid"></div>
-</div></section>
-
 ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
   <div class="count-banner">
     <img class="count-side count-l" src="${img('cov-bowl')}" alt="" loading="lazy" width="300" height="400">
@@ -143,14 +137,6 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
 
 ${strip}
 
-<section class="sec"><div class="wrap">
-  <div class="sec-head"><div><h2>جلسات خاصة <span class="hl">لكِ وحدك</span></h2><p class="sec-text">تجارب فردية، وقتها لكِ. اقرئي تفاصيل كل جلسة وطريقة تنسيق موعدها قبل الاختيار.</p></div><a class="more" href="#catalog/private">كل الجلسات الخاصة ${icon('arrow-left')}</a></div>
-  <div class="private-grid">
-    <a class="tall" href="#catalog/private"><img src="${img('private')}" alt="زهرة سوسن بنفسجية على ورق ناعم" loading="lazy" width="502" height="627"><span class="tall-cap"><strong>جلسة فردية</strong><small>من ${fmt(Math.min(...prv.map(p => p.price)))} ر.س</small></span></a>
-    <div class="products products-2">${prv.map(card).join('')}</div>
-  </div>
-</div></section>
-
 <section class="sec voices"><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2><p class="sec-text">كلمات حقيقية من تقييمات الزائرات في المتجر الحالي.</p></div></div>
   <div class="v-grid">${W.testimonials.map(t => `<figure class="v-item"><span class="v-q" aria-hidden="true">”</span><blockquote>${t.quote}</blockquote><figcaption><span class="v-avatar" aria-hidden="true">ز</span><span><strong>زائرة</strong><small>${t.source.replace('من تقييم زائرة في ', 'تقييم في ')}</small></span></figcaption></figure>`).join('')}
@@ -159,20 +145,11 @@ ${strip}
 </div></section>
 
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
-  <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML()}</div>
+  <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML(W.faqs.slice(0, 4))}</div>
   <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا عبر المتجر الأصلي.</p><a class="btn btn-light" href="#faq">كل الأسئلة</a></aside>
 </div></section>
 
 <section class="sec sec-tight"><div class="wrap"><div class="closing"><h2>خذي وقتك… واختاري المساحة الأقرب لكِ.</h2><a class="btn btn-light" href="#catalog/all">اكتشفي جميع التجارب</a></div></div></section>`;
-}
-
-function drawPicks(tab) {
-  const grid = $('#pick-grid'); if (!grid) return;
-  const rank = { recorded: 0, group: 1, private: 2 };
-  const picks = W.homePicks.recorded.map(byId).concat(upcoming(), inCat('private'), inCat('recorded').filter(p => !W.homePicks.recorded.includes(p.id)));
-  const list = (tab === 'all' ? picks : picks.filter(p => p.cat === tab)).slice(0, 8);
-  grid.innerHTML = list.map(card).join('');
-  $$('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
 }
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -291,12 +268,6 @@ function aboutPage() {
 </div></section>
 <section class="sec"><div class="wrap narrow"><h2>كيف تقدّم التجارب؟</h2><p>يمكنك الاختيار بين محتوى مسجل، لقاءات حضورية جماعية، أو جلسات خاصة. تعرّفي على محتوى كل تجربة وآلية تقديمها وشروطها قبل الحجز.</p><div class="button-row"><a class="btn btn-solid" href="#choose">اختاري مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div><p class="fine">تُضاف صورة ولاء الشخصية وسيرتها ومؤهلاتها المعتمدة في النسخة النهائية.</p></div></section>`;
 }
-function researchPage() {
-  return `${pageHead('فضولك له مساحة', 'المعرفة والمصادر: مساحة للقراءة والتعرّف على موضوعات الصوت والتأمل.', 'المعرفة والمصادر')}
-<section class="sec"><div class="wrap"><div class="narrow"><h2>للفهم أيضًا مكان في الرحلة.</h2><p>سيضم هذا القسم مقالات مبسطة مرتبطة بالمصادر الأصلية، مع توضيح ما تقوله الدراسات وحدود نتائجها.</p></div>
-<div class="topics">${W.research.map(([t, d]) => `<div class="topic"><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
-<p class="fine center">لا توجد مقالات منشورة بعد. تُنشر المقالات بعد تزويدنا بالمصادر ومراجعة محتواها.</p></div></section>`;
-}
 function faqPage() {
   return `${pageHead('الأسئلة الشائعة', 'كل ما يساعدك على فهم الخيارات وطريقة الشراء والوصول.')}<section class="sec"><div class="wrap narrow">${faqHTML()}</div></section>`;
 }
@@ -313,7 +284,6 @@ function route() {
     else html = `${pageHead('لم نجد هذه الجلسة', 'يمكنك العودة لاكتشاف جميع التجارب.')}<section class="sec"><div class="wrap"><a class="btn btn-solid" href="#catalog/all">كل التجارب</a></div></section>`;
   }
   else if (hash === 'about') { html = aboutPage(); title = 'عن ولاء | ولاء فاضل'; nav = 'about'; }
-  else if (hash === 'research') { html = researchPage(); title = 'المعرفة والمصادر | ولاء فاضل'; }
   else if (hash === 'faq') { html = faqPage(); title = 'الأسئلة الشائعة | ولاء فاضل'; }
   else html = home();
   document.title = title;
@@ -325,7 +295,6 @@ function route() {
   icons(); setMenu(false);
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
-  if ($('#pick-grid')) drawPicks('all');
   initCountdown();
   if (hash === 'choose') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
   $('#main').focus({ preventScroll: true });
@@ -391,7 +360,6 @@ function openSearch() { $('#search-dialog').showModal(); searchResults(); $('#se
 document.addEventListener('click', e => {
   const t = e.target;
   const add = t.closest('[data-add]'); if (add) addCart(add.dataset.add);
-  const tab = t.closest('[data-tab]'); if (tab) drawPicks(tab.dataset.tab);
   if (t.closest('[data-open-cart]')) openCart();
   if (t.closest('[data-search]')) openSearch();
   const hint = t.closest('[data-hint]'); if (hint) { $('#search-input').value = hint.dataset.hint; searchResults(); }
