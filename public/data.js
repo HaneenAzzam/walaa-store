@@ -31,7 +31,9 @@ window.WALAA = {
     affirmation: { title: 'مساحة التوكيدات', text: 'سيُضاف هنا محتوى التوكيدات بعد اعتماده من ولاء.' }
   },
 
-  /* id, name, price (null = not given), category, short description, [date] */
+  /* id, name, price (null = not given), category, short description, [date].
+     Add journals as rows with category 'journal' (e.g. ['123', 'اسم المفكرة', 90, 'journal', 'وصف قصير']):
+     the "اكتبي واكتشفي" section on the home page appears by itself once one exists. */
   products: [
     ['632074305', 'النمو المالي', 115, 'recorded', 'تأمل في علاقتك بالمال ومعتقداتك'],
     ['2031889342', 'التشافي العاطفي', 115, 'recorded', 'مساحة للتواصل مع مشاعرك بلطف'],

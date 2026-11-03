@@ -31,8 +31,8 @@ const products = W.products.map((p, i) => ({
 }));
 const byId = id => products.find(p => p.id === id);
 const inCat = c => products.filter(p => p.cat === c);
-const typeLabel = p => p.cat === 'recorded' ? 'جلسة مسجلة' : p.cat === 'private' ? 'جلسة خاصة' : 'لقاء حضوري';
-const tagLabel = p => p.cat === 'recorded' ? 'مسجلة' : p.cat === 'private' ? 'خاصة' : 'حضوري';
+const typeLabel = p => p.cat === 'recorded' ? 'جلسة مسجلة' : p.cat === 'private' ? 'جلسة خاصة' : p.cat === 'journal' ? 'مفكرة وتدوين' : 'لقاء حضوري';
+const tagLabel = p => p.cat === 'recorded' ? 'مسجلة' : p.cat === 'private' ? 'خاصة' : p.cat === 'journal' ? 'مفكرة' : 'حضوري';
 const MONTHS = { 'أكتوبر': 10, 'نوفمبر': 11, 'ديسمبر': 12 };
 const dateParts = d => { const [day, month] = d.split(' '); return { day, month, order: (MONTHS[month] || 0) * 100 + Number(day) }; };
 const events = () => inCat('group').sort((a, b) => dateParts(a.date).order - dateParts(b.date).order);
@@ -45,7 +45,7 @@ const sectionHead = (kicker, title, text, link) => `<div class="sec-head"><div>$
 const addBtn = p => p.price === null ? '' : `<button class="btn btn-solid btn-sm" type="button" data-add="${p.id}" aria-label="أضيفي ${esc(p.name)} إلى السلة">للسلة</button>`;
 
 function card(p) {
-  const label = p.cat === 'group' ? 'التفاصيل والحجز' : 'تفاصيل الجلسة';
+  const label = p.cat === 'group' ? 'التفاصيل والحجز' : p.cat === 'journal' ? 'التفاصيل' : 'تفاصيل الجلسة';
   return `<article class="card"><a class="card-media" href="#product/${p.id}" tabindex="-1" aria-hidden="true"><img src="${img(p.cover)}" alt="" loading="lazy" width="600" height="600"><span class="card-tag">${tagLabel(p)}</span></a><div class="card-body"><h3><a href="#product/${p.id}">${p.name}</a></h3><p>${p.desc}</p>${p.date ? `<p class="card-date">${p.date}</p>` : ''}<div class="card-price price">${money(p.price)}</div><div class="card-actions"><a class="btn btn-ghost btn-sm" href="#product/${p.id}">${label}</a>${addBtn(p)}</div></div></article>`;
 }
 
@@ -142,7 +142,12 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
   <div class="products">${prv.map(p => card(p)).join('')}</div>
 </div></section>
 
-<section class="sec" id="trial"><div class="wrap"><div class="trial">
+${inCat('journal').length ? `<section class="sec" id="journal-home"><div class="wrap">
+  ${sectionHead('', 'اكتبي واكتشفي', 'مفكرات وتمارين تدوين تفتح لكِ مساحة للتأمل في نفسك.', ['#catalog/journal', 'كل المفكرات والتدوين'])}
+  <div class="products">${inCat('journal').slice(0, 4).map(p => card(p)).join('')}</div>
+</div></section>
+
+` : ''}<section class="sec" id="trial"><div class="wrap"><div class="trial">
   <div class="trial-copy"><h2>ابدئي بتجربة مجانية</h2><p>${trial.text}</p></div>
   <a class="btn btn-light" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ↗</a>
 </div></div></section>
