@@ -113,6 +113,21 @@ function home() {
   <div class="need-grid">${boxes}</div>
 </div></section>
 
+${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
+  ${sectionHead('', 'عيشي تجربة معنا', 'لقاءات حضورية بمواعيد محددة. المواعيد مرجعية، ويُؤكَّد التوافر عند الحجز.', ['#catalog/group', 'كل اللقاءات'])}
+  <div class="count-banner">
+    <img class="count-side count-l" src="${img('cov-bowl')}" alt="" loading="lazy" width="300" height="400">
+    <div class="count-main">
+      <h2>اللقاء القادم: <span class="hl" id="cd-name"></span></h2>
+      <p id="cd-date"></p>
+      <div class="cd" role="timer" aria-label="الوقت المتبقي للقاء">${[['d', 'يوم'], ['h', 'ساعة'], ['m', 'دقيقة'], ['s', 'ثانية']].map(([k, l]) => `<div class="cd-unit"><div class="flip" id="cd-${k}"><span class="fl up">0</span><span class="fl down">0</span><span class="fl fold-top">0</span><span class="fl fold-bot">0</span></div><span class="cd-label">${l}</span></div>`).join('<i aria-hidden="true">:</i>')}</div>
+      <a class="btn btn-solid" id="cd-link" href="#catalog/group">التفاصيل والحجز</a>
+    </div>
+    <img class="count-side count-r" src="${img('cov-arch')}" alt="" loading="lazy" width="300" height="400">
+  </div>
+  ${grp.length > 1 ? `<div class="events-list">${grp.slice(1).map(p => eventRow(p)).join('')}</div>` : ''}
+</div></section>` : ''}
+
 <section class="sec" id="numbers"><div class="wrap">
   <div class="sec-head center"><div><h2>ولاء <span class="hl">بالأرقام</span></h2></div></div>
   <div class="numbers">
