@@ -142,12 +142,20 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
   <div class="products">${prv.map(p => card(p)).join('')}</div>
 </div></section>
 
-${inCat('journal').length ? `<section class="sec" id="journal-home"><div class="wrap">
-  ${sectionHead('', 'اكتبي واكتشفي', 'مفكرات وتمارين تدوين تفتح لكِ مساحة للتأمل في نفسك.', ['#catalog/journal', 'كل المفكرات والتدوين'])}
-  <div class="products">${inCat('journal').slice(0, 4).map(p => card(p)).join('')}</div>
+<section class="sec" id="journal-home"><div class="wrap">
+  <div class="write-grid">
+    <figure class="write-media"><img src="${img('writing')}" alt="مفكرة مفتوحة وغصن مجفف على قماش وردي" loading="lazy" decoding="async" width="627" height="470"></figure>
+    <div class="write-copy">
+      <h2>اكتبي واكتشفي</h2>
+      <p>مفكرات وتمارين تدوين تفتح لكِ مساحة للتأمل في نفسك.</p>
+      <a class="btn btn-ghost" href="#catalog/journal">اكتشفي المفكرات والتدوين</a>
+      ${inCat('journal').length ? '' : '<p class="fine">المنتجات قيد التجهيز، وستظهر هنا قريبًا.</p>'}
+    </div>
+  </div>
+  ${inCat('journal').length ? `<div class="products journal-products">${inCat('journal').slice(0, 4).map(p => card(p)).join('')}</div>` : ''}
 </div></section>
 
-` : ''}<section class="sec" id="trial"><div class="wrap"><div class="trial">
+<section class="sec" id="trial"><div class="wrap"><div class="trial">
   <div class="trial-copy"><h2>ابدئي بتجربة مجانية</h2><p>${trial.text}</p></div>
   <a class="btn btn-light" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ↗</a>
 </div></div></section>
