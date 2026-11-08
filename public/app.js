@@ -124,10 +124,11 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
   <div class="count-banner">
     <img class="count-side count-l" src="${img('event-left')}" alt="" loading="lazy" width="600" height="750">
     <div class="count-main">
-      <h2>اللقاء القادم: <span class="hl" id="cd-name"></span></h2>
-      <p id="cd-date"></p>
-      <div class="cd" role="timer" aria-label="الوقت المتبقي للقاء">${[['d', 'يوم'], ['h', 'ساعة'], ['m', 'دقيقة'], ['s', 'ثانية']].map(([k, l]) => `<div class="cd-unit"><div class="flip" id="cd-${k}"><span class="fl up">0</span><span class="fl down">0</span><span class="fl fold-top">0</span><span class="fl fold-bot">0</span></div><span class="cd-label">${l}</span></div>`).join('<i aria-hidden="true">:</i>')}</div>
-      <a class="btn btn-solid" id="cd-link" href="#catalog/group">التفاصيل والحجز</a>
+      <p class="next-kicker">اللقاء القادم</p>
+      <h2><span class="hl">${grp[0].name}</span></h2>
+      <ul class="next-facts"><li>${icon('calendar')} ${grp[0].date}</li><li>${grp[0].desc}</li><li class="price">${money(grp[0].price)}</li></ul>
+      <p>الموعد مرجعي، ويُؤكَّد التوافر عند الحجز.</p>
+      <a class="btn btn-solid" href="#product/${grp[0].id}">التفاصيل والحجز</a>
     </div>
     <img class="count-side count-r" src="${img('event-right')}" alt="" loading="lazy" width="600" height="750">
   </div>
@@ -185,35 +186,6 @@ function initNumbers() {
     el.textContent = '0+'; requestAnimationFrame(step);
   }), { threshold: .4 });
   els.forEach(el => io.observe(el));
-}
-let cdTimer;
-function flipTo(el, v) {
-  if (!el || el.dataset.v === v) return;
-  const first = el.dataset.v === undefined, old = el.dataset.v ?? v;
-  el.dataset.v = v;
-  const [up, down, ft, fb] = el.children;
-  up.textContent = v;
-  if (first || reduced()) { down.textContent = ft.textContent = fb.textContent = v; return; }
-  ft.textContent = old; down.textContent = old; fb.textContent = v;
-  el.classList.remove('go'); void el.offsetWidth; el.classList.add('go');
-  clearTimeout(el._t);
-  el._t = setTimeout(() => { down.textContent = v; el.classList.remove('go'); }, 640);
-}
-function initCountdown() {
-  clearInterval(cdTimer);
-  const name = $('#cd-name'); if (!name) return;
-  const next = upcoming().map(p => ({ p, at: eventAt(p) }))[0];
-  if (!next) { $('#countdown-sec').hidden = true; return; }
-  name.textContent = next.p.name;
-  $('#cd-date').textContent = `${next.p.date} · ${next.p.desc}. الموعد مرجعي، يُؤكَّد عند الحجز.`;
-  $('#cd-link').href = `#product/${next.p.id}`;
-  const pad = n => String(n).padStart(2, '0');
-  const tick = () => {
-    let s = Math.max(0, Math.floor((next.at - new Date()) / 1000));
-    const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
-    flipTo($('#cd-d'), pad(d)); flipTo($('#cd-h'), pad(h)); flipTo($('#cd-m'), pad(m)); flipTo($('#cd-s'), pad(s));
-  };
-  tick(); cdTimer = setInterval(() => { if (!$('#cd-s')) return clearInterval(cdTimer); tick(); }, 1000);
 }
 
 /* ---------- catalog ---------- */
@@ -328,7 +300,6 @@ function route() {
   icons(); setMenu(false); initNumbers();
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
-  initCountdown();
   if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
   $('#main').focus({ preventScroll: true });
 }

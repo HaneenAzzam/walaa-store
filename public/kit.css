@@ -441,3 +441,10 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 #private-home .private-media { border-radius: 999px 999px 24px 24px; }
 @media (max-width: 1023px) { #private-home .private-layout { grid-template-columns: 1fr; gap: 28px; } #private-home .private-media { position: static; width: min(80%, 320px); margin-inline: auto; } }
 .home-close { padding-block: 0 var(--sec-pad); }
+
+/* next gathering: plain facts instead of a countdown */
+.next-kicker { font-size: 15px; font-weight: 500; color: #646262; }
+.next-facts { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 18px 0 10px; padding: 0; }
+.next-facts li { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 9999px; background: #fff; font-size: 16px; font-weight: 500; color: #502d4e; }
+.next-facts .icon { width: 18px; height: 18px; }
+.count-main > p:not(.next-kicker) { margin: 0 auto 22px; font-size: 14px; }

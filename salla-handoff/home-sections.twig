@@ -1,6 +1,6 @@
 {# Walaa Fadel home page, v4: ordered so a visitor understands the store in the first seconds and can buy fast.
    Order: banner (what is sold + trust line) → إيش تحتاجي اليوم (4 ways in with starting prices) → ابدئي من هنا
-   (real products with add-to-cart) → كيف تشترين (3 steps) → next gathering → private sessions → numbers + reviews
+   (real products with add-to-cart) → كيف تشترين (3 steps) → next gathering (no countdown) → private sessions → numbers + reviews
    → about Walaa → questions → closing.
    For a Salla theme started from Theme Raed: paste into src/views/pages/index.twig, put the images from
    assets/ in src/assets/images/ and walaa-redesign.css in src/assets/styles/ (import it after the theme styles).
@@ -8,7 +8,7 @@
    NOT yet run on Salla: check with `salla theme preview`. Product cards come from Salla's own
    salla-products-list so cart and checkout keep working; the CSS only restyles them.
    Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL (links),
-   COUNTDOWN-DATE (next gathering, format 2026-11-05T00:00:00), and the prices in `prices` below when they change. #}
+   NEXT-NAME / NEXT-DATE / NEXT-DESC / NEXT-PRICE / NEXT-URL (next gathering), and the prices in `prices` below when they change. #}
 
 {# Starting prices shown on the banner and the four boxes. Reference values from the store (Nov 2026); update by hand. #}
 {% set prices = { recorded: '113.85', group: '299', private: '460' } %}
@@ -88,12 +88,11 @@
   <div class="count-banner">
     <img class="count-side count-l" src="{{ 'event-left.jpg' | asset }}" alt="" loading="lazy">
     <div class="count-main">
-      <h2>اللقاء القادم: <span class="hl">اسم اللقاء</span></h2>
-      <p>التاريخ والوصف. الموعد يُؤكَّد عند الحجز.</p>
-      <div class="cd" role="timer" data-date="COUNTDOWN-DATE">
-        <div><b data-u="d">0</b><span>يوم</span></div><i>:</i><div><b data-u="h">00</b><span>ساعة</span></div><i>:</i><div><b data-u="m">00</b><span>دقيقة</span></div><i>:</i><div><b data-u="s">00</b><span>ثانية</span></div>
-      </div>
-      <a class="btn btn-solid" href="CATEGORY-2-URL">التفاصيل والحجز</a>
+      <p class="next-kicker">اللقاء القادم</p>
+      <h2><span class="hl">NEXT-NAME</span></h2>
+      <ul class="next-facts"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg> NEXT-DATE</li><li>NEXT-DESC</li><li>NEXT-PRICE ر.س</li></ul>
+      <p>الموعد مرجعي، ويُؤكَّد التوافر عند الحجز.</p>
+      <a class="btn btn-solid" href="NEXT-URL">التفاصيل والحجز</a>
     </div>
     <img class="count-side count-r" src="{{ 'event-right.jpg' | asset }}" alt="" loading="lazy">
   </div>
@@ -155,18 +154,3 @@
   <a class="btn btn-light" href="CATEGORY-1-URL">تصفّحي الجلسات</a>
 </div></div></section>
 
-<script>
-  // countdown to the date in data-date (start of that day; no time of day is assumed)
-  (function () {
-    var cd = document.querySelector('.cd'); if (!cd) return;
-    var at = new Date(cd.dataset.date); if (isNaN(at)) { cd.closest('.sec').hidden = true; return; }
-    function pad(n) { return String(n).padStart(2, '0'); }
-    function tick() {
-      var s = Math.max(0, Math.floor((at - new Date()) / 1000));
-      var d = Math.floor(s / 86400); s -= d * 86400; var h = Math.floor(s / 3600); s -= h * 3600; var m = Math.floor(s / 60); s -= m * 60;
-      cd.querySelector('[data-u=d]').textContent = d; cd.querySelector('[data-u=h]').textContent = pad(h);
-      cd.querySelector('[data-u=m]').textContent = pad(m); cd.querySelector('[data-u=s]').textContent = pad(s);
-    }
-    tick(); setInterval(tick, 1000);
-  })();
-</script>
