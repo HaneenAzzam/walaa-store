@@ -25,10 +25,16 @@ const fmt = v => new Intl.NumberFormat('ar-SA', { maximumFractionDigits: 2, numb
 const money = v => v === null ? '<span class="price-note">السعر في المتجر</span>' : `${fmt(v)}<span class="currency">ر.س</span>`;
 
 /* ---------- data ---------- */
-const COVERS = ['cov-iris', 'cov-olive', 'cov-arch', 'cov-journal', 'cov-bowl'];
+/* product covers per category, cropped from Walaa's photos (Drive folder «صور للموقع») */
+const COVERS = {
+  recorded: ['cover-1', 'cover-2', 'cover-3', 'cover-4', 'cover-5'],
+  group: ['cover-group'],
+  private: ['cover-private-1', 'cover-private-2'],
+  journal: ['cover-journal']
+};
 const products = W.products.map((p, i) => ({
   id: p[0], name: p[1], price: p[2], cat: p[3], desc: p[4], date: p[5],
-  cover: p[3] === 'group' ? 'cov-bowl' : COVERS[i % COVERS.length],
+  cover: (COVERS[p[3]] || COVERS.recorded)[i % (COVERS[p[3]] || COVERS.recorded).length],
   url: `https://walaafadel.com/p${p[0]}`
 }));
 const byId = id => products.find(p => p.id === id);
@@ -66,7 +72,7 @@ function pageHead(title, text, crumb) {
   return `<section class="page-head"><div class="wrap"><nav class="breadcrumb" aria-label="مسار التنقل"><a href="#">الرئيسية</a><span aria-hidden="true">/</span><span>${crumb || title}</span></nav><h1>${title}</h1>${text ? `<p>${text}</p>` : ''}</div></section>`;
 }
 
-const aboutMedia = () => `<div class="about-media"><div class="about-frame"><img src="${img('about-main')}" alt="وعاء صوتي نحاسي وأغصان مجففة على قماش طبيعي" loading="lazy" width="1000" height="964"></div><p class="caption">صورة توضيحية، بانتظار صور ولاء الأصلية</p></div>`;
+const aboutMedia = () => `<div class="about-media"><div class="about-frame"><img src="${img('about-main')}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy" width="800" height="1000"></div></div>`;
 
 /* ---------- home ---------- */
 function home() {
@@ -94,9 +100,9 @@ function home() {
 
 <section class="sec"><div class="wrap about-grid">
   <div class="collage">
-    <img class="c1" src="${img('about-main')}" alt="وعاء صوتي نحاسي وأغصان مجففة على قماش طبيعي" loading="lazy" width="500" height="500">
-    <img class="c2" src="${img('writing')}" alt="مفكرة مفتوحة وغصن مجفف" loading="lazy" width="300" height="300">
-    <img class="c3" src="${img('research')}" alt="غصن زيتون عليه ثمار" loading="lazy" width="300" height="300">
+    <img class="c1" src="${img('about-main')}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy" width="800" height="1000">
+    <img class="c2" src="${img('about-2')}" alt="وعاءان صوتيان كريستاليان وردي وأزرق" loading="lazy" width="600" height="600">
+    <img class="c3" src="${img('about-3')}" alt="وعاء صوتي بنفسجي أمام طبل كبير" loading="lazy" width="600" height="600">
     <span class="seal" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg></span>
   </div>
   <div class="about-copy">
@@ -116,14 +122,14 @@ function home() {
 ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
   ${sectionHead('', 'عيشي تجربة معنا', 'لقاءات حضورية بمواعيد محددة. المواعيد مرجعية، ويُؤكَّد التوافر عند الحجز.', ['#catalog/group', 'كل اللقاءات'])}
   <div class="count-banner">
-    <img class="count-side count-l" src="${img('cov-bowl')}" alt="" loading="lazy" width="300" height="400">
+    <img class="count-side count-l" src="${img('event-left')}" alt="" loading="lazy" width="600" height="750">
     <div class="count-main">
       <h2>اللقاء القادم: <span class="hl" id="cd-name"></span></h2>
       <p id="cd-date"></p>
       <div class="cd" role="timer" aria-label="الوقت المتبقي للقاء">${[['d', 'يوم'], ['h', 'ساعة'], ['m', 'دقيقة'], ['s', 'ثانية']].map(([k, l]) => `<div class="cd-unit"><div class="flip" id="cd-${k}"><span class="fl up">0</span><span class="fl down">0</span><span class="fl fold-top">0</span><span class="fl fold-bot">0</span></div><span class="cd-label">${l}</span></div>`).join('<i aria-hidden="true">:</i>')}</div>
       <a class="btn btn-solid" id="cd-link" href="#catalog/group">التفاصيل والحجز</a>
     </div>
-    <img class="count-side count-r" src="${img('cov-arch')}" alt="" loading="lazy" width="300" height="400">
+    <img class="count-side count-r" src="${img('event-right')}" alt="" loading="lazy" width="600" height="750">
   </div>
   ${grp.length > 1 ? `<div class="events-list">${grp.slice(1).map(p => eventRow(p)).join('')}</div>` : ''}
 </div></section>` : ''}

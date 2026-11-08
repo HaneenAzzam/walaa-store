@@ -24,3 +24,6 @@ desktop.ini
 
 # Old packaged copy of public/
 public.zip
+
+# Original photos from Google Drive (too large for the repo)
+source/drive/

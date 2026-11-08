@@ -40,11 +40,11 @@
   <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">كل يوم يحمل احتياجًا مختلفًا. اختاري المساحة الأقرب لكِ.</p></div></div>
   <div class="circles">
     {% for c in [
-      {t:'وقت لنفسي', u:'CATEGORY-1-URL', i:'entry-olive.jpg'},
-      {t:'أعيش تجربة', u:'CATEGORY-2-URL', i:'entry-bowl.jpg'},
-      {t:'أكتب وأكتشف', u:'CATEGORY-3-URL', i:'entry-journal.jpg'},
-      {t:'مساحة خاصة', u:'CATEGORY-4-URL', i:'entry-arch.jpg'},
-      {t:'التوكيدات', u:'CATEGORY-5-URL', i:'cov-iris.jpg'}
+      {t:'وقت لنفسي', u:'CATEGORY-1-URL', i:'need-recorded.jpg'},
+      {t:'أعيش تجربة', u:'CATEGORY-2-URL', i:'need-group.jpg'},
+      {t:'أكتب وأكتشف', u:'CATEGORY-3-URL', i:'need-journal.jpg'},
+      {t:'مساحة خاصة', u:'CATEGORY-4-URL', i:'need-private.jpg'},
+      {t:'التوكيدات', u:'CATEGORY-5-URL', i:'cover-4.jpg'}
     ] %}
       <a class="circle" href="{{ c.u }}"><span class="circle-img"><img src="{{ c.i | asset }}" alt="" loading="lazy"></span><strong>{{ c.t }}</strong></a>
     {% endfor %}
@@ -52,15 +52,15 @@
 </div></section>
 
 <section class="sec sec-tight"><div class="wrap promos">
-  <article class="promo promo-peach"><div class="promo-copy"><h3>جلسات مسجلة <span class="hl">لوقتك</span></h3><p>جلسات صوت وتأمل، استمعي لها متى ما ناسبك.</p><a class="btn btn-solid btn-sm" href="CATEGORY-1-URL">تصفّحي الجلسات</a></div><img src="{{ 'cov-olive.jpg' | asset }}" alt="" loading="lazy"></article>
-  <article class="promo promo-plum"><div class="promo-copy"><h3>نلتقي ونتشارك <span class="hl">التجربة</span></h3><p>رحلات صوتية وتأمل جماعية بمواعيد محددة.</p><a class="btn btn-light btn-sm" href="CATEGORY-2-URL">اللقاءات الحضورية</a></div><img src="{{ 'event-side.jpg' | asset }}" alt="" loading="lazy"></article>
+  <article class="promo promo-peach"><div class="promo-copy"><h3>جلسات مسجلة <span class="hl">لوقتك</span></h3><p>جلسات صوت وتأمل، استمعي لها متى ما ناسبك.</p><a class="btn btn-solid btn-sm" href="CATEGORY-1-URL">تصفّحي الجلسات</a></div><img src="{{ 'cover-2.jpg' | asset }}" alt="" loading="lazy"></article>
+  <article class="promo promo-plum"><div class="promo-copy"><h3>نلتقي ونتشارك <span class="hl">التجربة</span></h3><p>رحلات صوتية وتأمل جماعية بمواعيد محددة.</p><a class="btn btn-light btn-sm" href="CATEGORY-2-URL">اللقاءات الحضورية</a></div><img src="{{ 'cover-group.jpg' | asset }}" alt="" loading="lazy"></article>
 </div></section>
 
 <section class="sec"><div class="wrap about-grid">
   <div class="collage">
-    <img class="c1" src="{{ 'about-main.jpg' | asset }}" alt="وعاء صوتي نحاسي وأغصان مجففة" loading="lazy">
-    <img class="c2" src="{{ 'writing.jpg' | asset }}" alt="" loading="lazy">
-    <img class="c3" src="{{ 'research.jpg' | asset }}" alt="" loading="lazy">
+    <img class="c1" src="{{ 'about-main.jpg' | asset }}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy">
+    <img class="c2" src="{{ 'about-2.jpg' | asset }}" alt="" loading="lazy">
+    <img class="c3" src="{{ 'about-3.jpg' | asset }}" alt="" loading="lazy">
   </div>
   <div class="about-copy">
     <h2>رحلة نحو <span class="hl">راحة أعمق</span> مع نفسك</h2>
@@ -85,7 +85,7 @@
 
 <section class="sec"><div class="wrap">
   <div class="count-banner">
-    <img class="count-side count-l" src="{{ 'cov-bowl.jpg' | asset }}" alt="" loading="lazy">
+    <img class="count-side count-l" src="{{ 'event-left.jpg' | asset }}" alt="" loading="lazy">
     <div class="count-main">
       <h2>اللقاء القادم: <span class="hl">اسم اللقاء</span></h2>
       <p>التاريخ والوصف. الموعد يُؤكَّد عند الحجز.</p>
@@ -94,7 +94,7 @@
       </div>
       <a class="btn btn-solid" href="CATEGORY-2-URL">التفاصيل والحجز</a>
     </div>
-    <img class="count-side count-r" src="{{ 'cov-arch.jpg' | asset }}" alt="" loading="lazy">
+    <img class="count-side count-r" src="{{ 'event-right.jpg' | asset }}" alt="" loading="lazy">
   </div>
 </div></section>
 
@@ -103,7 +103,7 @@
 <section class="sec"><div class="wrap">
   <div class="sec-head"><div><h2>جلسات خاصة <span class="hl">لكِ وحدك</span></h2><p class="sec-text">تجارب فردية، وقتها لكِ. اقرئي تفاصيل كل جلسة قبل الاختيار.</p></div><a class="more" href="CATEGORY-4-URL">كل الجلسات الخاصة</a></div>
   <div class="private-grid">
-    <a class="tall" href="CATEGORY-4-URL"><img src="{{ 'private.jpg' | asset }}" alt="" loading="lazy"><span class="tall-cap"><strong>جلسة فردية</strong></span></a>
+    <a class="tall" href="CATEGORY-4-URL"><img src="{{ 'need-private.jpg' | asset }}" alt="" loading="lazy"><span class="tall-cap"><strong>جلسة فردية</strong></span></a>
     <salla-products-list source="categories" source-value="[CATEGORY-ID]" limit="4" class="products products-2"></salla-products-list>
   </div>
 </div></section>

@@ -1,49 +1,62 @@
-# Crops the two supplied source images (source\hero.png, source\editorial-art.png)
-# into the JPEG assets the site uses. Re-run after replacing a source image.
+# Crops Walaa's photos (Google Drive folder «صور للموقع»:
+# https://drive.google.com/drive/folders/1yjpKNC8D491ImqNbCShN9iYDkFo4NAx1) into public\assets.
+# The originals are not kept in the repo (about 36 MB). Download the folder, then:
+#   powershell -ExecutionPolicy Bypass -File tools\make-assets.ps1 -In "<downloaded folder>"
+# Files are expected with these names: 14.png, Post1-3.png, P1062687/94/96/703/724/769.jpg ("Copy of " prefix removed).
+# The banner (hero-hand.webp) is not touched.
+param($In = (Join-Path (Split-Path $PSScriptRoot -Parent) 'source\drive'), $Out = (Join-Path (Split-Path $PSScriptRoot -Parent) 'public\assets'))
 Add-Type -AssemblyName System.Drawing
-$root = Split-Path $PSScriptRoot -Parent
-$src = Join-Path $root 'source'
-$out = Join-Path $root 'public\assets'
-New-Item -ItemType Directory -Force $out | Out-Null
-
+New-Item -ItemType Directory -Force $Out | Out-Null
 $jpeg = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
 $ep = New-Object System.Drawing.Imaging.EncoderParameters(1)
-$ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]84)
+$ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]82)
 
-function Save-Crop($img, $name, $x, $y, $w, $h, $outW) {
+# name, source, x, y, w, h, outW
+$jobs = @(
+  @('about-main',     'P1062687.jpg',    0,  500, 1584, 1980,  800),
+  @('about-2',        'Post2.png',       0,  420, 3375, 3375,  600),
+  @('about-3',        'Post3.png',       0,  250, 3240, 3240,  600),
+  @('need-recorded',  'Post1.png',       0,    0, 3375, 4219,  640),
+  @('need-group',     '14.png',          0,    0, 3375, 4219,  640),
+  @('need-journal',   'P1062769.jpg', 1150,    0, 1267, 1584,  640),
+  @('need-private',   'P1062703.jpg',    0,  700, 1584, 1980,  640),
+  @('event-left',     'P1062694.jpg',    0,  450, 1584, 1980,  600),
+  @('event-right',    'P1062724.jpg',    0,  450, 1584, 1980,  600),
+  @('cover-1',        'Post1.png',       0,  300, 3375, 3375,  600),
+  @('cover-2',        'P1062687.jpg',    0,  850, 1584, 1584,  600),
+  @('cover-3',        '14.png',          0,  844, 3375, 3375,  600),
+  @('cover-4',        'P1062696.jpg',    0,  850, 1584, 1584,  600),
+  @('cover-5',        'Post2.png',       0,  420, 3375, 3375,  600),
+  @('cover-group',    'Post3.png',       0,  250, 3240, 3240,  600),
+  @('cover-private-1','P1062703.jpg',    0,  750, 1584, 1584,  600),
+  @('cover-private-2','P1062724.jpg',    0,  650, 1584, 1584,  600),
+  @('cover-journal',  'P1062769.jpg',  950,    0, 1584, 1584,  600)
+)
+
+$cache = @{}
+function Get-Upright($name) {
+  if (-not $cache[$name]) {
+    $im = [System.Drawing.Image]::FromFile((Join-Path $In $name))
+    if ($im.PropertyIdList -contains 0x0112) {
+      switch ($im.GetPropertyItem(0x0112).Value[0]) { 3 { $im.RotateFlip('Rotate180FlipNone') } 6 { $im.RotateFlip('Rotate90FlipNone') } 8 { $im.RotateFlip('Rotate270FlipNone') } }
+    }
+    $cache[$name] = $im
+  }
+  $cache[$name]
+}
+
+foreach ($j in $jobs) {
+  $name, $src, $x, $y, $w, $h, $outW = $j
+  $im = Get-Upright $src
   $outH = [int][math]::Round($outW * $h / $w)
   $bmp = New-Object System.Drawing.Bitmap $outW, $outH
   $g = [System.Drawing.Graphics]::FromImage($bmp)
-  $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-  $g.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
-  $dest = New-Object System.Drawing.Rectangle 0, 0, $outW, $outH
-  $from = New-Object System.Drawing.Rectangle $x, $y, $w, $h
-  $g.DrawImage($img, $dest, $from, [System.Drawing.GraphicsUnit]::Pixel)
-  $bmp.Save((Join-Path $out "$name.jpg"), $jpeg, $ep)
+  $g.InterpolationMode = 'HighQualityBicubic'; $g.PixelOffsetMode = 'HighQuality'
+  $g.Clear([System.Drawing.Color]::White)
+  $g.DrawImage($im, (New-Object System.Drawing.Rectangle 0, 0, $outW, $outH), (New-Object System.Drawing.Rectangle $x, $y, $w, $h), 'Pixel')
+  $file = Join-Path $Out "$name.jpg"
+  $bmp.Save($file, $jpeg, $ep)
+  '{0,-16} {1}x{2} {3,4} KB' -f $name, $outW, $outH, [math]::Round((Get-Item $file).Length / 1KB)
   $g.Dispose(); $bmp.Dispose()
 }
-
-$hero = [System.Drawing.Image]::FromFile((Join-Path $src 'hero.png'))     # 1536 x 1024
-$art = [System.Drawing.Image]::FromFile((Join-Path $src 'editorial-art.png')) # 1254 x 1254, 2x2 sheet
-
-# hero.png: brass bowl, mallet, dried flowers, linen
-Save-Crop $hero 'hero'         0 0 1536 1024 1536
-Save-Crop $hero 'entry-bowl'   800 399 500 625 500
-Save-Crop $hero 'about-main'   0 60 1000 964 1000
-Save-Crop $hero 'event-side'   916 249 620 775 620
-Save-Crop $hero 'cov-bowl'     230 300 700 700 600
-
-# editorial-art.png quadrants: iris (0,0) olive (627,0) arch (0,627) journal (627,627)
-Save-Crop $art 'entry-olive'   700 0 502 627 502
-Save-Crop $art 'entry-journal' 720 627 502 627 502
-Save-Crop $art 'entry-arch'    60 627 502 627 502
-Save-Crop $art 'private'       100 0 502 627 502
-Save-Crop $art 'writing'       627 670 627 470 627
-Save-Crop $art 'research'      627 130 627 392 627
-Save-Crop $art 'cov-iris'      0 0 627 627 600
-Save-Crop $art 'cov-olive'     627 0 627 627 600
-Save-Crop $art 'cov-arch'      0 627 627 627 600
-Save-Crop $art 'cov-journal'   627 627 627 627 600
-
-$hero.Dispose(); $art.Dispose()
-Get-ChildItem $out -Filter *.jpg | ForEach-Object { '{0,-18} {1,6} KB' -f $_.Name, [math]::Round($_.Length / 1KB) }
+$cache.Values | ForEach-Object { $_.Dispose() }
