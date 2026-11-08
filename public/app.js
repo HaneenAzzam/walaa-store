@@ -75,48 +75,48 @@ function pageHead(title, text, crumb) {
 const aboutMedia = () => `<div class="about-media"><div class="about-frame"><img src="${img('about-main')}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy" width="800" height="1000"></div></div>`;
 
 /* ---------- home ---------- */
+/* Home order follows the visitor's questions: what is this (hero) → which one is for me (4 ways in, with prices)
+   → show me something to buy (recorded picks) → how do I get it (3 steps) → what's coming up (next gathering)
+   → one-to-one (private) → can I trust it (numbers + reviews) → who is Walaa → questions → start now. */
 function home() {
   const rec = inCat('recorded'), prv = inCat('private'), grp = upcoming();
-  const trial = Object.assign({ button: 'ابدئي بتجربة مجانية', url: W.storeUrl }, W.freeTrial || {});
-  const counts = { recorded: rec.length, group: events().length, private: prv.length, journal: 0, affirmation: 0 };
-  /* four boxes: the four ways in from data.js (entries) */
-  const boxes = W.entries.map(e => `<a class="need-box" href="#catalog/${e.to}"><span class="need-media"><img src="${img(e.art)}" alt="" loading="lazy" decoding="async" width="502" height="627"></span><strong>${e.title}</strong><span class="need-text">${e.text}</span><small>${counts[e.to] ? `${counts[e.to]} تجربة` : 'قريبًا'}</small></a>`).join('');
+  const counts = { recorded: rec.length, group: events().length, private: prv.length, journal: inCat('journal').length, affirmation: 0 };
+  const from = c => { const ps = inCat(c).map(p => p.price).filter(v => v !== null); return ps.length ? Math.min(...ps) : null; };
+  const lotus = '<svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg>';
+  /* four boxes: the four ways in from data.js (entries), each with its count and starting price */
+  const boxes = W.entries.map(e => {
+    const n = counts[e.to], p = from(e.to);
+    return `<a class="need-box" href="#catalog/${e.to}"><span class="need-media"><img src="${img(e.art)}" alt="" loading="lazy" decoding="async" width="640" height="800"></span><strong>${e.title}</strong><span class="need-text">${e.text}</span><small>${n ? `${n} تجربة${p !== null ? ` · تبدأ من ${fmt(p)} ر.س` : ''}` : 'قريبًا'}</small></a>`;
+  }).join('');
+  const picks = W.homePicks.recorded.map(byId).filter(Boolean);
   return `
 <section class="hero">
   <img class="hero-img" src="${img('hero-hand')}" alt="يد تمسك مطرقة خشبية فوق وعاء صوتي نحاسي في ضوء دافئ" width="1536" height="1024" fetchpriority="high">
   <div class="wrap hero-inner"><div class="hero-copy">
     <h1 class="hero-script">مساحة تتقرّبي فيها <span>من نفسك أكثر</span></h1>
-    <p class="hero-lead">من الصوت والتأمل إلى الكتابة واكتشاف الذات، اختاري المساحة الأقرب لكِ وابدئي بوقت صغير لنفسك.</p>
-    <div class="hero-actions"><a class="btn btn-solid" href="#choose">اكتشفي مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div>
+    <p class="hero-lead">جلسات صوت وتأمل مع ولاء فاضل: <b>مسجلة</b> تسمعينها في وقتك، <b>لقاءات حضورية</b>، و<b>جلسات خاصة</b> لكِ وحدك.</p>
+    <div class="hero-actions"><a class="btn btn-solid" href="#catalog/recorded">تصفّحي الجلسات</a><a class="btn btn-ghost" href="#choose">إيش يناسبني؟</a></div>
+    <ul class="hero-trust"><li><b dir="ltr">+5000</b> عميل</li><li>جلسات تبدأ من <b>${fmt(from('recorded'))} ر.س</b></li><li>${icon('shield')} الدفع عبر متجر سلة</li></ul>
   </div></div>
 </section>
 
-<section class="sec" id="intro"><div class="wrap"><div class="intro">
-  <p class="intro-label">أهلًا أنا ولاء فاضل</p>
-  <h2>وهنا مساحة تقتربي فيها من نفسك أكثر</h2>
-  <p>من الصوت والتأمل الذاتي إلى الكتابة والكوتشينغ، أقدم لك تجارب وأدوات مختلفة تساعدك تفهمي نفسك وتخصصي وقتًا لك بالطريقة اللي تناسبك.</p>
-  <a class="btn btn-solid" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ${icon('arrow-left')}</a>
-</div></div></section>
-
-<section class="sec"><div class="wrap about-grid">
-  <div class="collage">
-    <img class="c1" src="${img('about-main')}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy" width="800" height="1000">
-    <img class="c2" src="${img('about-2')}" alt="وعاءان صوتيان كريستاليان وردي وأزرق" loading="lazy" width="600" height="600">
-    <img class="c3" src="${img('about-3')}" alt="وعاء صوتي بنفسجي أمام طبل كبير" loading="lazy" width="600" height="600">
-    <span class="seal" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg></span>
-  </div>
-  <div class="about-copy">
-    <h2>تعرفي على ولاء</h2>
-    <p class="about-lead">أهلًا، أنا ولاء. بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات.</p>
-    <p>هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.</p>
-    <dl class="stats"><div><dd>${products.length}</dd><dt>تجربة</dt></div><div><dd>${rec.length}</dd><dt>جلسة مسجلة</dt></div><div><dd>${grp.length}</dd><dt>لقاءات قادمة</dt></div></dl>
-    <a class="btn btn-ghost" href="#about">تعرّفي على ولاء</a>
-  </div>
+<section class="sec" id="choose"><div class="wrap">
+  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">أربع طرق للبدء. اختاري الأقرب لكِ.</p></div></div>
+  <div class="need-grid">${boxes}</div>
 </div></section>
 
-<section class="sec" id="choose"><div class="wrap">
-  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">كل يوم يحمل احتياجًا مختلفًا. اختاري المساحة الأقرب لكِ.</p></div></div>
-  <div class="need-grid">${boxes}</div>
+${picks.length ? `<section class="sec sec-lilac" id="start-here"><div class="wrap">
+  ${sectionHead('', 'ابدئي من <span class="hl">هنا</span>', 'جلسات مسجلة تسمعينها في وقتك، تضيفينها للسلة بضغطة.', ['#catalog/recorded', `كل الجلسات المسجلة (${rec.length})`])}
+  <div class="products">${picks.map(card).join('')}</div>
+</div></section>` : ''}
+
+<section class="sec" id="how"><div class="wrap">
+  <div class="sec-head center"><div><h2>كيف <span class="hl">تشترين؟</span></h2></div></div>
+  <ol class="steps">
+    <li><span class="step-n">1</span><strong>اختاري التجربة</strong><p>جلسة مسجلة، لقاء حضوري، أو جلسة خاصة.</p></li>
+    <li><span class="step-n">2</span><strong>أتمّي الطلب</strong><p>الدفع عبر متجر سلة.</p></li>
+    <li><span class="step-n">3</span><strong>تصلك تفاصيل الوصول</strong><p>بعد إتمام الطلب، كما هو موضح في صفحة كل منتج.</p></li>
+  </ol>
 </div></section>
 
 ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
@@ -134,27 +134,45 @@ ${grp.length ? `<section class="sec" id="countdown-sec"><div class="wrap">
   ${grp.length > 1 ? `<div class="events-list">${grp.slice(1).map(p => eventRow(p)).join('')}</div>` : ''}
 </div></section>` : ''}
 
-<section class="sec" id="numbers"><div class="wrap">
-  <div class="sec-head center"><div><h2>ولاء <span class="hl">بالأرقام</span></h2></div></div>
-  <div class="numbers">
-    <div class="num num-a"><svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg><span class="num-icon">${icon('users')}</span><b dir="ltr" data-to="5000">5000+</b><span class="num-label">عميل</span></div>
-    <div class="num num-b"><svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg><span class="num-icon">${icon('calendar')}</span><b dir="ltr" data-to="100">100+</b><span class="num-label">جلسة حضورية</span></div>
+${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-layout">
+  <figure class="private-media"><img src="${img('need-private')}" alt="يدان على آلة شروتي بوكس خشبية" loading="lazy" width="640" height="800"></figure>
+  <div>
+    ${sectionHead('', 'مساحة <span class="hl">خاصة لكِ</span>', 'جلسات فردية، وقتها لكِ وحدك. يُنسَّق الموعد عند الحجز.', ['#catalog/private', 'كل الجلسات الخاصة'])}
+    <div class="prows">${prv.map(privateRow).join('')}</div>
   </div>
+</div></section>` : ''}
+
+<section class="sec" id="numbers"><div class="wrap">
+  <div class="sec-head center"><div><h2>إيش قالوا عن <span class="hl">التجربة؟</span></h2></div></div>
+  <div class="numbers">
+    <div class="num num-a">${lotus}<span class="num-icon">${icon('users')}</span><b dir="ltr" data-to="5000">5000+</b><span class="num-label">عميل</span></div>
+    <div class="num num-b">${lotus}<span class="num-icon">${icon('calendar')}</span><b dir="ltr" data-to="100">100+</b><span class="num-label">جلسة حضورية</span></div>
+  </div>
+  <div class="quotes">${W.testimonials.map(t => `<figure class="quote"><blockquote>«${t.quote}»</blockquote><figcaption>${t.source}</figcaption></figure>`).join('')}</div>
 </div></section>
 
-<section class="sec" id="curious"><div class="wrap"><div class="curious">
-  <div class="curious-copy">
-    <p class="curious-label">للي تحب تعرف أكثر</p>
-    <h2>فضولك له مساحة</h2>
-    <p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p>
+<section class="sec"><div class="wrap about-grid">
+  <div class="collage">
+    <img class="c1" src="${img('about-main')}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy" width="800" height="1000">
+    <img class="c2" src="${img('about-2')}" alt="وعاءان صوتيان كريستاليان وردي وأزرق" loading="lazy" width="600" height="600">
+    <img class="c3" src="${img('about-3')}" alt="وعاء صوتي بنفسجي أمام طبل كبير" loading="lazy" width="600" height="600">
+    <span class="seal" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg></span>
   </div>
-  <a class="btn btn-ghost" href="https://pubmed.ncbi.nlm.nih.gov/?term=sound+meditation+stress" target="_blank" rel="noopener" aria-label="شوفي الأبحاث على موقع PubMed، يفتح في تبويب جديد">شوفي الأبحاث ↗</a>
-</div></div></section>
+  <div class="about-copy">
+    <h2>تعرفي على ولاء</h2>
+    <p class="about-lead">أهلًا، أنا ولاء. بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات.</p>
+    <p>هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.</p>
+    <dl class="stats"><div><dd>${products.length}</dd><dt>تجربة</dt></div><div><dd>${rec.length}</dd><dt>جلسة مسجلة</dt></div><div><dd>${grp.length}</dd><dt>لقاءات قادمة</dt></div></dl>
+    <a class="btn btn-ghost" href="#about">تعرّفي على ولاء</a>
+  </div>
+</div></section>
 
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
   <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML(W.faqs.slice(0, 4))}</div>
   <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا عبر المتجر الأصلي.</p><a class="btn btn-light" href="#faq">كل الأسئلة</a></aside>
-</div></section>`;
+</div></section>
+
+<section class="home-close"><div class="wrap"><div class="closing"><h2>خذي وقتك لنفسك… وابدئي اليوم.</h2><a class="btn btn-light" href="#catalog/recorded">تصفّحي الجلسات</a></div></div></section>`;
 }
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -311,7 +329,7 @@ function route() {
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
   initCountdown();
-  if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#journal-home').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
+  if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
   $('#main').focus({ preventScroll: true });
 }
 function announce() {
