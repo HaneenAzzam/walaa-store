@@ -1078,3 +1078,19 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .num-b .num-mark { inset-inline-end: auto; inset-inline-start: -26px; }
 @media (max-width: 519px) { .num { min-height: 200px; padding: 32px 16px; } .num-mark { width: 150px; } }
 @media (prefers-reduced-motion: reduce) { .num { transition: none; } .num:hover { transform: none; } }
+
+/* ---------- home order for clarity (Nov 2026): trust line, how-to-buy steps, reviews ---------- */
+.hero-lead b { font-weight: 600; color: var(--plum); }
+.hero-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 20px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(80, 45, 78, .12); font-size: 14px; color: #646262; }
+.hero-trust li { display: inline-flex; align-items: center; gap: 6px; }
+.hero-trust b { font-weight: 600; color: #502d4e; }
+.hero-trust .icon { width: 16px; height: 16px; color: #502d4e; }
+
+.steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; counter-reset: none; }
+.steps li { position: relative; padding: 28px 24px; border: 1px solid rgba(207, 172, 205, .45); border-radius: 24px; background: #fff; text-align: center; }
+.steps strong { display: block; margin-top: 12px; font-size: 18px; font-weight: 600; color: #323232; }
+.steps p { margin-top: 4px; font-size: 15px; line-height: 1.8; color: #646262; }
+.step-n { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(245, 210, 243, .6); font-weight: 700; font-size: 18px; color: #502d4e; }
+@media (max-width: 767px) { .steps { grid-template-columns: 1fr; gap: 10px; } .steps li { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; text-align: start; padding: 18px; } .steps strong { margin-top: 0; align-self: center; } .steps p { grid-column: 2; } .step-n { grid-row: span 2; } }
+.voices .numbers { margin-bottom: 24px; }
+.circle small { margin-top: 2px; }
