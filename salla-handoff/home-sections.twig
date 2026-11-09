@@ -7,7 +7,7 @@
    Add the fonts Readex Pro + IBM Plex Sans Arabic in master.twig.
    NOT yet run on Salla: check with `salla theme preview`. Product cards come from Salla's own
    salla-products-list so cart and checkout keep working; the CSS only restyles them.
-   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL (links),
+   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL / ACCESS-FAQ-URL (links),
    NEXT-NAME / NEXT-DATE / NEXT-DESC / NEXT-PRICE / NEXT-URL (next gathering), and the prices in `prices` below when they change. #}
 
 {# Starting prices shown on the banner and the four boxes. Reference values from the store (Nov 2026); update by hand. #}
@@ -76,9 +76,9 @@
 <section class="sec" id="how"><div class="wrap">
   <div class="sec-head center"><div><h2>كيف <span class="hl">تشترين؟</span></h2></div></div>
   <ol class="steps">
-    <li><span class="step-n">1</span><strong>اختاري التجربة</strong><p>جلسة مسجلة، لقاء حضوري، أو جلسة خاصة.</p></li>
-    <li><span class="step-n">2</span><strong>أتمّي الطلب</strong><p>الدفع عبر متجر سلة.</p></li>
-    <li><span class="step-n">3</span><strong>تصلك تفاصيل الوصول</strong><p>بعد إتمام الطلب، كما هو موضح في صفحة كل منتج.</p></li>
+    <li><div class="step-card"><span class="step-n">1</span><strong>اختاري التجربة</strong><p>من الجلسات مرتبة حسب النوع:</p><p class="step-links"><a href="CATEGORY-1-URL">جلسة مسجلة</a><a href="CATEGORY-2-URL">لقاء حضوري</a><a href="CATEGORY-4-URL">جلسة خاصة</a></p></div></li>
+    <li><a class="step-card" href="{{ links.cart ?? '/cart' }}"><span class="step-n">2</span><strong>أتمّي الطلب</strong><p>الدفع عبر متجر سلة.</p><span class="step-go">سلّتك</span></a></li>
+    <li><a class="step-card" href="ACCESS-FAQ-URL"><span class="step-n">3</span><strong>تصلك تفاصيل الوصول</strong><p>بعد إتمام الطلب، وتختلف من منتج لآخر.</p><span class="step-go">كيف أصل لجلستي؟ <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"/></svg></span></a></li>
   </ol>
 </div></section>
 

@@ -113,9 +113,9 @@ ${picks.length ? `<section class="sec sec-lilac" id="start-here"><div class="wra
 <section class="sec" id="how"><div class="wrap">
   <div class="sec-head center"><div><h2>كيف <span class="hl">تشترين؟</span></h2></div></div>
   <ol class="steps">
-    <li><span class="step-n">1</span><strong>اختاري التجربة</strong><p>جلسة مسجلة، لقاء حضوري، أو جلسة خاصة.</p></li>
-    <li><span class="step-n">2</span><strong>أتمّي الطلب</strong><p>الدفع عبر متجر سلة.</p></li>
-    <li><span class="step-n">3</span><strong>تصلك تفاصيل الوصول</strong><p>بعد إتمام الطلب، كما هو موضح في صفحة كل منتج.</p></li>
+    <li><div class="step-card"><span class="step-n">1</span><strong>اختاري التجربة</strong><p>من الجلسات مرتبة حسب النوع:</p><p class="step-links"><a href="#catalog/recorded">جلسة مسجلة</a><a href="#catalog/group">لقاء حضوري</a><a href="#catalog/private">جلسة خاصة</a></p></div></li>
+    <li><a class="step-card" href="${W.storeUrl}cart" target="_blank" rel="noopener"><span class="step-n">2</span><strong>أتمّي الطلب</strong><p>الدفع عبر متجر سلة.</p><span class="step-go">سلّتك في متجر سلة ↗</span></a></li>
+    <li><a class="step-card" href="#faq/access"><span class="step-n">3</span><strong>تصلك تفاصيل الوصول</strong><p>بعد إتمام الطلب، وتختلف من منتج لآخر.</p><span class="step-go">كيف أصل لجلستي؟ ${icon('arrow-left')}</span></a></li>
   </ol>
 </div></section>
 
@@ -178,7 +178,7 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 function initNumbers() {
-  const els = $('.num b[data-to]'); if (!els.length || reduced() || !('IntersectionObserver' in window)) return;
+  const els = $$('.num b[data-to]'); if (!els.length || reduced() || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(entries => entries.forEach(en => {
     if (!en.isIntersecting) return; io.unobserve(en.target);
     const el = en.target, to = Number(el.dataset.to), t0 = performance.now(), ms = 1400;
@@ -289,7 +289,7 @@ function route() {
     else html = `${pageHead('لم نجد هذه الجلسة', 'يمكنك العودة لاكتشاف جميع التجارب.')}<section class="sec"><div class="wrap"><a class="btn btn-solid" href="#catalog/all">كل التجارب</a></div></section>`;
   }
   else if (hash === 'about') { html = aboutPage(); title = 'عن ولاء | ولاء فاضل'; nav = 'about'; }
-  else if (hash === 'faq') { html = faqPage(); title = 'الأسئلة الشائعة | ولاء فاضل'; }
+  else if (hash === 'faq' || hash === 'faq/access') { html = faqPage(); title = 'الأسئلة الشائعة | ولاء فاضل'; }
   else html = home();
   document.title = title;
   document.body.classList.toggle('has-buybar', hash.startsWith('product/') && !!byId(hash.split('/')[1]));
@@ -300,7 +300,9 @@ function route() {
   icons(); setMenu(false); initNumbers();
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
-  if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
+  const access = hash === 'faq/access' && $$('.faq-list details').find(d => d.textContent.includes('كيف أصل'));
+  if (access) { access.open = true; access.scrollIntoView({ block: 'center' }); }
+  else if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
   $('#main').focus({ preventScroll: true });
 }
 function announce() {
