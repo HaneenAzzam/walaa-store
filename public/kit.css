@@ -384,17 +384,6 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .intro > p:not(.intro-label) { max-width: 760px; margin-top: 18px; font-size: 18px; line-height: 2; color: #646262; }
 .intro .btn { margin-top: 22px; min-height: 54px; padding-inline: 32px; font-size: 17px; font-weight: 600; }
 
-.need-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.need-box { display: flex; flex-direction: column; gap: 4px; padding: 12px 12px 18px; border: 1px solid #eeeeee; border-radius: 16px; background: #ffffff; transition: border-color .15s ease, transform .15s ease; }
-.need-box:hover { border-color: #cfaccd; }
-.need-media { display: block; aspect-ratio: 4 / 4.2; margin-bottom: 14px; overflow: hidden; border-radius: 12px; background: rgba(245, 210, 243, .4); }
-.need-media img { width: 100%; height: 100%; object-fit: cover; }
-.need-box strong { padding-inline: 6px; font-size: 20px; font-weight: 600; line-height: 1.5; color: #323232; }
-.need-box:hover strong { color: #502d4e; }
-.need-text { padding-inline: 6px; font-size: 15px; line-height: 1.7; color: #646262; }
-.need-box small { padding-inline: 6px; margin-top: 6px; font-size: 13.5px; font-weight: 500; color: #502d4e; }
-@media (max-width: 1023px) { .need-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 519px) { .need-grid { gap: 12px; } .need-box { padding: 8px 8px 14px; } .need-box strong { font-size: 17px; } .need-text { font-size: 14px; } }
 
 .numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .num { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 36px 20px; border-radius: 24px; text-align: center; }
@@ -478,3 +467,36 @@ a.step-card:hover .step-go .icon { transform: translateX(-4px); }
 .btn-trial:hover .icon { transform: translateX(-4px); }
 .hero :focus-visible.btn-trial { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #502d4e; }
 @media (max-width: 760px) { .hero .hero-title { font-size: clamp(22px, 6vw, 26px); } .hero-actions .btn-trial { flex: 1 1 auto; justify-content: center; } }
+
+/* ---------- «إيش تحتاجي اليوم؟»: أربع بطاقات بيضاء كبيرة الزوايا على خلفية بنفسجية، أيقونة داخل دائرة، زر صغير (Nov 2026) ---------- */
+.need-sec { position: relative; overflow: hidden; background: #502d4e; padding-block: clamp(56px, 7vw, 96px); }
+.need-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .16; mix-blend-mode: luminosity; pointer-events: none; }
+.need-sec > .wrap { position: relative; z-index: 1; }
+.need-head { text-align: center; margin-bottom: clamp(32px, 4vw, 52px); }
+.need-kicker { font-size: 13px; font-weight: 600; letter-spacing: .12em; color: #cfaccd; }
+.need-head h2 { margin-top: 8px; font-size: clamp(28px, 3.2vw, 40px); font-weight: 600; color: #fff; }
+.need-head h2 .hl { color: #f5d2f3; }
+.need-rule { display: block; width: 56px; height: 2px; margin: 16px auto 14px; border-radius: 2px; background: #cfaccd; }
+.need-head > p:last-child { font-size: 17px; color: rgba(255, 255, 255, .8); }
+.need-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.need-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 36px 22px 28px; border-radius: 36px; background: #fff; box-shadow: 0 24px 40px -30px rgba(0, 0, 0, .55); transition: transform .25s ease, box-shadow .25s ease; }
+.need-card:hover { transform: translateY(-6px); box-shadow: 0 32px 46px -28px rgba(0, 0, 0, .65); }
+.need-ico { display: grid; place-items: center; width: 76px; height: 76px; border-radius: 50%; background: #502d4e; color: #fff; box-shadow: 0 0 0 6px rgba(207, 172, 205, .4); }
+.need-ico svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.need-card strong { margin-top: 22px; font-size: 20px; font-weight: 600; line-height: 1.5; color: #323232; }
+.need-text { margin-top: 4px; font-size: 15px; line-height: 1.8; color: #646262; }
+.need-card small { margin: 10px 0 20px; font-size: 13px; font-weight: 500; line-height: 1.6; color: #806080; }
+.need-btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; min-width: 112px; margin-top: auto; padding-inline: 22px; border-radius: 9999px; background: #502d4e; color: #fff; font-size: 14px; font-weight: 600; transition: background-color .2s ease; }
+.need-card:hover .need-btn { background: #806080; }
+.need-sec :focus-visible { box-shadow: 0 0 0 3px #502d4e, 0 0 0 6px #f5d2f3; }
+@media (max-width: 1023px) { .need-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 519px) {
+  .need-grid { gap: 12px; }
+  .need-card { padding: 26px 12px 20px; border-radius: 28px; }
+  .need-ico { width: 60px; height: 60px; box-shadow: 0 0 0 5px rgba(207, 172, 205, .4); }
+  .need-ico svg { width: 28px; height: 28px; }
+  .need-card strong { margin-top: 16px; font-size: 17px; }
+  .need-text { font-size: 13.5px; }
+  .need-btn { height: 36px; min-width: 92px; padding-inline: 16px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .need-card, .need-card:hover { transition: none; transform: none; } }

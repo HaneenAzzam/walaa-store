@@ -16,7 +16,11 @@ const ICONS = {
   users: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/>',
   calendar: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="m9 15 2 2 4-4"/>',
   shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>',
-  plus: '<path d="M12 5v14M5 12h14"/>'
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  headphones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.8"/><rect x="17" y="14" width="4" height="6" rx="1.8"/>',
+  lotus: '<path d="M12 19c-3.6-1.7-4.7-5.9-2.6-9.9.9-1.7 1.9-2.9 2.6-3.6.7.7 1.7 1.9 2.6 3.6 2.1 4 1 8.2-2.6 9.9Z"/><path d="M12 19c-4.4.4-7.7-2.2-8.4-6.6 3.5-.3 6.3.9 7.8 3.3"/><path d="M12 19c4.4.4 7.7-2.2 8.4-6.6-3.5-.3-6.3.9-7.8 3.3"/><path d="M8 21.2h8"/>',
+  pen: '<path d="M4.5 20.5 5.6 16 16.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L9 19.4l-4.5 1.1Z"/><path d="m14.5 7.1 2.4 2.4"/>',
+  heart: '<path d="M12 20.5s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.8a4.2 4.2 0 0 1 7.5 2.5c0 5.6-7.5 10.2-7.5 10.2Z"/>'
 };
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 const img = name => (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.${name === 'hero-hand' ? 'webp' : 'jpg'}`;
@@ -87,7 +91,7 @@ function home() {
   /* four boxes: the four ways in from data.js (entries), each with its count and starting price */
   const boxes = W.entries.map(e => {
     const n = counts[e.to], p = from(e.to);
-    return `<a class="need-box" href="#catalog/${e.to}"><span class="need-media"><img src="${img(e.art)}" alt="" loading="lazy" decoding="async" width="640" height="800"></span><strong>${e.title}</strong><span class="need-text">${e.text}</span><small>${n ? `${n} تجربة${p !== null ? ` · تبدأ من ${fmt(p)} ر.س` : ''}` : 'قريبًا'}</small></a>`;
+    return `<a class="need-card" href="#catalog/${e.to}"><span class="need-ico">${icon(e.icon)}</span><strong>${e.title}</strong><span class="need-text">${e.text}</span><small>${n ? `${n} تجربة${p !== null ? ` · تبدأ من ${fmt(p)} ر.س` : ''}` : 'قريبًا'}</small><span class="need-btn">اكتشفي</span></a>`;
   }).join('');
   const picks = W.homePicks.recorded.map(byId).filter(Boolean);
   return `
@@ -101,10 +105,13 @@ function home() {
   </div></div>
 </section>
 
-<section class="sec" id="choose"><div class="wrap">
-  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">أربع طرق للبدء. اختاري الأقرب لكِ.</p></div></div>
-  <div class="need-grid">${boxes}</div>
-</div></section>
+<section class="sec need-sec" id="choose">
+  <img class="need-bg" src="${img('need-bg')}" alt="" aria-hidden="true" loading="lazy" width="1600" height="900">
+  <div class="wrap">
+    <div class="need-head"><p class="need-kicker">مساحات ولاء</p><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><span class="need-rule" aria-hidden="true"></span><p>اختاري المساحة الأقرب لك</p></div>
+    <div class="need-grid">${boxes}</div>
+  </div>
+</section>
 
 ${picks.length ? `<section class="sec sec-lilac" id="start-here"><div class="wrap">
   ${sectionHead('', 'ابدئي من <span class="hl">هنا</span>', 'جلسات مسجلة تسمعينها في وقتك، تضيفينها للسلة بضغطة.', ['#catalog/recorded', `كل الجلسات المسجلة (${rec.length})`])}

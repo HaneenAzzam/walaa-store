@@ -81,11 +81,11 @@ window.WALAA = {
 
   /* Four ways in, shown on the home page. `to` is the route, `art` the image name */
   entries: [
-    { title: 'وقت لنفسي', text: 'جلسات مسجلة وتوكيدات', to: 'recorded', art: 'need-recorded', alt: 'يد تعزف على وعاء صوتي كريستالي أزرق',
+    { title: 'وقت لنفسي', text: 'جلسات مسجلة وتوكيدات', to: 'recorded', icon: 'headphones',
       sub: { label: 'التوكيدات', to: 'affirmation' } },
-    { title: 'أعيش تجربة', text: 'لقاءات حضورية جماعية', to: 'group', art: 'need-group', alt: 'يد تعزف على وعاء صوتي كريستالي برتقالي' },
-    { title: 'أكتب وأكتشف', text: 'مفكرات وتمارين تدوين', to: 'journal', art: 'need-journal', alt: 'كتاب وفنجان قهوة تحت ضوء مصباح هادئ' },
-    { title: 'مساحة خاصة', text: 'جلسات فردية', to: 'private', art: 'need-private', alt: 'يدان على آلة شروتي بوكس خشبية' }
+    { title: 'أعيش تجربة', text: 'لقاءات حضورية جماعية', to: 'group', icon: 'lotus' },
+    { title: 'أكتب وأكتشف', text: 'مفكرات وتمارين تدوين', to: 'journal', icon: 'pen' },
+    { title: 'مساحة خاصة', text: 'جلسات فردية', to: 'private', icon: 'heart' }
   ],
 
   homePicks: {

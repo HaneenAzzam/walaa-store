@@ -4,7 +4,7 @@
 2. استوردي `walaa-redesign.css` (يجمع redesign.css وkit.css) بعد ستايل القالب، وأضيفي خطي Readex Pro وIBM Plex Sans Arabic في `master.twig`.
 3. الصقي `home-sections.twig` في `src/views/pages/index.twig` واستبدلي:
    - `CATEGORY-ID` برقم القسم في كل `salla-products-list` (ابدئي من هنا: الجلسات المسجلة أو قسم «الأكثر طلبًا»، والجلسات الخاصة).
-   - `CATEGORY-1-URL` إلى `CATEGORY-5-URL`: المسجلة، الحضورية، المفكرات، الخاصة، التوكيدات. و`ABOUT-PAGE-URL` و`FAQ-PAGE-URL`.
+   - `CATEGORY-1-URL` إلى `CATEGORY-4-URL`: المسجلة، الحضورية، المفكرات، الخاصة. و`ABOUT-PAGE-URL` و`FAQ-PAGE-URL`.
    - `FREE-TRIAL-URL`: رابط التجربة المجانية (زر «ابدئي بتجربة مجانية» في البنر).
    - `ACCESS-FAQ-URL`: رابط صفحة أو سؤال «كيف أصل إلى جلستي بعد الشراء» (خطوة 3 في «كيف تشترين؟»). زر خطوة 2 يفتح سلة المتجر تلقائيًا.
    - اللقاء القادم: `NEXT-NAME` (الاسم)، `NEXT-DATE` (مثل 9 نوفمبر)، `NEXT-DESC` (وصف قصير)، `NEXT-PRICE` (السعر)، `NEXT-URL` (رابط صفحة اللقاء). لا يوجد عدّاد.

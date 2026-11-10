@@ -46,20 +46,29 @@
 {{ strip|raw }}
 
 {# 2. Four ways in, each with its starting price #}
-<section class="sec" id="choose"><div class="wrap">
-  <div class="sec-head center"><div><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><p class="sec-text">طرق مختلفة للبدء. اختاري الأقرب لكِ.</p></div></div>
-  <div class="circles">
-    {% for c in [
-      {t:'وقت لنفسي', s:'جلسات مسجلة · تبدأ من ' ~ prices.recorded ~ ' ر.س', u:'CATEGORY-1-URL', i:'need-recorded.jpg'},
-      {t:'أعيش تجربة', s:'لقاءات حضورية · تبدأ من ' ~ prices.group ~ ' ر.س', u:'CATEGORY-2-URL', i:'need-group.jpg'},
-      {t:'مساحة خاصة', s:'جلسات فردية · تبدأ من ' ~ prices.private ~ ' ر.س', u:'CATEGORY-4-URL', i:'need-private.jpg'},
-      {t:'أكتب وأكتشف', s:'مفكرات وتدوين · قريبًا', u:'CATEGORY-3-URL', i:'need-journal.jpg'},
-      {t:'التوكيدات', s:'قريبًا', u:'CATEGORY-5-URL', i:'cover-4.jpg'}
-    ] %}
-      <a class="circle" href="{{ c.u }}"><span class="circle-img"><img src="{{ c.i | asset }}" alt="" loading="lazy"></span><strong>{{ c.t }}</strong><small>{{ c.s }}</small></a>
-    {% endfor %}
+<section class="sec need-sec" id="choose">
+  <img class="need-bg" src="{{ 'need-bg.jpg' | asset }}" alt="" aria-hidden="true" loading="lazy">
+  <div class="wrap">
+    <div class="need-head"><p class="need-kicker">مساحات ولاء</p><h2>إيش تحتاجي <span class="hl">اليوم؟</span></h2><span class="need-rule" aria-hidden="true"></span><p>اختاري المساحة الأقرب لك</p></div>
+    {# Four cards: icon in a circle, title, short text, starting price, small button. The whole card is the link. #}
+    {% set need_icons = {
+      headphones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.8"/><rect x="17" y="14" width="4" height="6" rx="1.8"/>',
+      lotus: '<path d="M12 19c-3.6-1.7-4.7-5.9-2.6-9.9.9-1.7 1.9-2.9 2.6-3.6.7.7 1.7 1.9 2.6 3.6 2.1 4 1 8.2-2.6 9.9Z"/><path d="M12 19c-4.4.4-7.7-2.2-8.4-6.6 3.5-.3 6.3.9 7.8 3.3"/><path d="M12 19c4.4.4 7.7-2.2 8.4-6.6-3.5-.3-6.3.9-7.8 3.3"/><path d="M8 21.2h8"/>',
+      pen: '<path d="M4.5 20.5 5.6 16 16.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L9 19.4l-4.5 1.1Z"/><path d="m14.5 7.1 2.4 2.4"/>',
+      heart: '<path d="M12 20.5s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.8a4.2 4.2 0 0 1 7.5 2.5c0 5.6-7.5 10.2-7.5 10.2Z"/>'
+    } %}
+    <div class="need-grid">
+      {% for c in [
+        {t:'وقت لنفسي', d:'جلسات مسجلة وتوكيدات', s:'تبدأ من ' ~ prices.recorded ~ ' ر.س', u:'CATEGORY-1-URL', i:'headphones'},
+        {t:'أعيش تجربة', d:'لقاءات حضورية جماعية', s:'تبدأ من ' ~ prices.group ~ ' ر.س', u:'CATEGORY-2-URL', i:'lotus'},
+        {t:'أكتب وأكتشف', d:'مفكرات وتمارين تدوين', s:'قريبًا', u:'CATEGORY-3-URL', i:'pen'},
+        {t:'مساحة خاصة', d:'جلسات فردية', s:'تبدأ من ' ~ prices.private ~ ' ر.س', u:'CATEGORY-4-URL', i:'heart'}
+      ] %}
+        <a class="need-card" href="{{ c.u }}"><span class="need-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{{ need_icons[c.i]|raw }}</svg></span><strong>{{ c.t }}</strong><span class="need-text">{{ c.d }}</span><small>{{ c.s }}</small><span class="need-btn">اكتشفي</span></a>
+      {% endfor %}
+    </div>
   </div>
-</div></section>
+</section>
 
 {# 3. Products right away, with Salla's own add-to-cart. Use the recorded-sessions category (or a "best sellers" one) #}
 <section class="sec sec-lilac" id="start-here"><div class="wrap">
