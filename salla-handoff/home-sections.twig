@@ -1,5 +1,5 @@
 {# Walaa Fadel home page, v4: ordered so a visitor understands the store in the first seconds and can buy fast.
-   Order: banner (what is sold + trust line) → إيش تحتاجي اليوم (4 ways in with starting prices) → ابدئي من هنا
+   Order: banner (Walaa's intro + free-trial button) → إيش تحتاجي اليوم (4 ways in with starting prices) → ابدئي من هنا
    (real products with add-to-cart) → كيف تشترين (3 steps) → next gathering (no countdown) → private sessions → numbers + reviews
    → about Walaa → questions → closing.
    For a Salla theme started from Theme Raed: paste into src/views/pages/index.twig, put the images from
@@ -7,7 +7,7 @@
    Add the fonts Readex Pro + IBM Plex Sans Arabic in master.twig.
    NOT yet run on Salla: check with `salla theme preview`. Product cards come from Salla's own
    salla-products-list so cart and checkout keep working; the CSS only restyles them.
-   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL / ACCESS-FAQ-URL (links),
+   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL / ACCESS-FAQ-URL / FREE-TRIAL-URL (links),
    NEXT-NAME / NEXT-DATE / NEXT-DESC / NEXT-PRICE / NEXT-URL (next gathering), and the prices in `prices` below when they change. #}
 
 {# Starting prices shown on the banner and the four boxes. Reference values from the store (Nov 2026); update by hand. #}
@@ -29,17 +29,12 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <h1>مساحة تتقرّبي فيها <span class="hl">من نفسك أكثر</span></h1>
-      <p class="hero-lead">جلسات صوت وتأمل مع ولاء فاضل: <b>مسجلة</b> تسمعينها في وقتك، <b>لقاءات حضورية</b>، و<b>جلسات خاصة</b> لكِ وحدك.</p>
+      <p class="hero-kicker">أهلًا أنا ولاء فاضل</p>
+      <h1 class="hero-title">وهنا مساحة تقتربي فيها من نفسك أكثر</h1>
+      <p class="hero-lead">من الصوت والتأمل الذاتي إلى الكتابة والكوتشينغ، أقدم لك تجارب وأدوات مختلفة تساعدك تفهمي نفسك وتخصصي وقتًا لك بالطريقة اللي تناسبك.</p>
       <div class="hero-actions">
-        <a class="btn btn-solid" href="CATEGORY-1-URL">تصفّحي الجلسات</a>
-        <a class="btn btn-ghost" href="#choose">إيش يناسبني؟</a>
+        <a class="btn btn-trial" href="FREE-TRIAL-URL">ابدئي بتجربة مجانية <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"/></svg></a>
       </div>
-      <ul class="hero-trust">
-        <li><b dir="ltr">+5000</b> عميل</li>
-        <li>جلسات تبدأ من <b>{{ prices.recorded }} ر.س</b></li>
-        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg> الدفع عبر متجر سلة</li>
-      </ul>
     </div>
     <div class="hero-art">
       <div class="hero-photo"><img src="{{ 'hero.jpg' | asset }}" alt="وعاء صوتي نحاسي على قماش طبيعي" fetchpriority="high"></div>

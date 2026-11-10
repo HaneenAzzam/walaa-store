@@ -1117,3 +1117,15 @@ a.step-card:hover .step-go .icon { transform: translateX(-4px); }
 .next-facts li { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 9999px; background: #fff; font-size: 16px; font-weight: 500; color: #502d4e; }
 .next-facts .icon { width: 18px; height: 18px; }
 .count-main > p:not(.next-kicker) { margin: 0 auto 22px; font-size: 14px; }
+/* banner: the client's own intro text and the free-trial CTA (Nov 2026) */
+.hero .hero-copy { max-width: 540px; }
+.hero-kicker { margin: 0 0 8px; font-size: 15px; font-weight: 600; color: #806080; }
+.hero-title { font-size: clamp(28px, 3vw, 42px); font-weight: 600; line-height: 1.45; color: #323232; }
+.hero .hero-lead { max-width: none; margin: 14px 0 24px; font-size: 16.5px; line-height: 2; color: #646262; font-weight: 400; text-shadow: none; }
+.hero-actions .btn-trial { flex: 0 0 auto; }
+.btn-trial { display: inline-flex; align-items: center; gap: 8px; min-height: 54px; padding-inline: 30px; border-radius: 12px; background: #806080; border-color: #806080; color: #fff; font-size: 17px; font-weight: 600; }
+.btn-trial:hover { background: #502d4e; border-color: #502d4e; color: #fff; }
+.btn-trial .icon { width: 18px; height: 18px; transition: transform var(--dur) var(--ease); }
+.btn-trial:hover .icon { transform: translateX(-4px); }
+.hero :focus-visible.btn-trial { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #502d4e; }
+@media (max-width: 760px) { .hero-title { font-size: clamp(26px, 7.4vw, 32px); } .hero-actions .btn-trial { flex: 1 1 auto; justify-content: center; } }

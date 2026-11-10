@@ -80,6 +80,7 @@ const aboutMedia = () => `<div class="about-media"><div class="about-frame"><img
    → one-to-one (private) → can I trust it (numbers + reviews) → who is Walaa → questions → start now. */
 function home() {
   const rec = inCat('recorded'), prv = inCat('private'), grp = upcoming();
+  const trial = Object.assign({ button: 'ابدئي بتجربة مجانية', url: W.storeUrl }, W.freeTrial || {});
   const counts = { recorded: rec.length, group: events().length, private: prv.length, journal: inCat('journal').length, affirmation: 0 };
   const from = c => { const ps = inCat(c).map(p => p.price).filter(v => v !== null); return ps.length ? Math.min(...ps) : null; };
   const lotus = '<svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg>';
@@ -93,10 +94,10 @@ function home() {
 <section class="hero">
   <img class="hero-img" src="${img('hero-hand')}" alt="يد تمسك مطرقة خشبية فوق وعاء صوتي نحاسي في ضوء دافئ" width="1536" height="1024" fetchpriority="high">
   <div class="wrap hero-inner"><div class="hero-copy">
-    <h1 class="hero-script">مساحة تتقرّبي فيها <span>من نفسك أكثر</span></h1>
-    <p class="hero-lead">جلسات صوت وتأمل مع ولاء فاضل: <b>مسجلة</b> تسمعينها في وقتك، <b>لقاءات حضورية</b>، و<b>جلسات خاصة</b> لكِ وحدك.</p>
-    <div class="hero-actions"><a class="btn btn-solid" href="#catalog/recorded">تصفّحي الجلسات</a><a class="btn btn-ghost" href="#choose">إيش يناسبني؟</a></div>
-    <ul class="hero-trust"><li><b dir="ltr">+5000</b> عميل</li><li>جلسات تبدأ من <b>${fmt(from('recorded'))} ر.س</b></li><li>${icon('shield')} الدفع عبر متجر سلة</li></ul>
+    <p class="hero-kicker">أهلًا أنا ولاء فاضل</p>
+    <h1 class="hero-title">وهنا مساحة تقتربي فيها من نفسك أكثر</h1>
+    <p class="hero-lead">من الصوت والتأمل الذاتي إلى الكتابة والكوتشينغ، أقدم لك تجارب وأدوات مختلفة تساعدك تفهمي نفسك وتخصصي وقتًا لك بالطريقة اللي تناسبك.</p>
+    <div class="hero-actions"><a class="btn btn-trial" href="${trial.url}" target="_blank" rel="noopener">${trial.button} ${icon('arrow-left')}</a></div>
   </div></div>
 </section>
 
