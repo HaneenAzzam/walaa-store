@@ -1106,11 +1106,11 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 
 /* reviews come first and stand out; the numbers are a quiet line underneath (Nov 2026) */
 .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.quote { display: flex; flex-direction: column; margin: 0; padding: 38px 38px 28px; border-radius: 28px; background: #fff; border: 1px solid rgba(207, 172, 205, .5); box-shadow: 0 22px 36px -30px rgba(80, 45, 78, .55); }
-.q-mark { width: 56px; height: 56px; fill: #cfaccd; }
-.quote blockquote { flex: 1; margin: 14px 0 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.8; font-weight: 600; color: #502d4e; }
-.quote figcaption { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(207, 172, 205, .45); font-size: 13.5px; color: #646262; }
-.trust-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 18px; margin: 28px 0 0; font-size: 14.5px; color: #646262; }
+.quote { display: flex; flex-direction: column; margin: 0; padding: 30px 32px 24px; border-radius: 28px; background: #fff; border: 1px solid rgba(207, 172, 205, .5); box-shadow: 0 22px 36px -30px rgba(80, 45, 78, .55); }
+.q-mark { width: 44px; height: 44px; fill: #cfaccd; }
+.quote blockquote { flex: 1; margin: 14px 0 0; font-size: clamp(18px, 1.55vw, 22px); line-height: 1.85; font-weight: 600; color: #502d4e; }
+.quote figcaption { margin-top: 18px; padding-top: 12px; border-top: 1px solid rgba(207, 172, 205, .45); font-size: 13px; color: #646262; }
+.trust-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 18px; margin: 24px 0 0; font-size: 14px; color: #646262; }
 .trust-line b { font-weight: 600; color: #806080; font-variant-numeric: tabular-nums; }
 .trust-line i { width: 4px; height: 4px; border-radius: 50%; background: #cfaccd; }
-@media (max-width: 519px) { .quote { padding: 26px 22px 20px; border-radius: 22px; } .q-mark { width: 40px; height: 40px; } .quotes { grid-template-columns: 1fr; gap: 12px; } }
+@media (max-width: 519px) { .quote { padding: 26px 22px 20px; border-radius: 22px; } .q-mark { width: 34px; height: 34px; } .quotes { grid-template-columns: 1fr; gap: 12px; } }
