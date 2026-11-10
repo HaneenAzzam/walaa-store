@@ -1045,35 +1045,9 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .intro .btn { margin-top: 22px; min-height: 54px; padding-inline: 32px; font-size: 17px; font-weight: 600; }
 
 
-.numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.num { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 36px 20px; border-radius: 24px; text-align: center; }
-.num b { font-size: clamp(36px, 4vw, 52px); font-weight: 700; line-height: 1.2; color: #502d4e; font-variant-numeric: tabular-nums; }
-.num span { font-size: 17px; color: #646262; }
-.num-a { background: rgba(245, 210, 243, .4); }
-.num-b { background: #eeeeee; }
-@media (max-width: 519px) { .numbers { grid-template-columns: 1fr; } .num { padding: 28px 16px; } }
 
-/* ---- numbers, richer: icon chip, big counter, lotus watermark ---- */
-.numbers { gap: 20px; }
-.num { position: relative; overflow: hidden; min-height: 240px; padding: 44px 24px; gap: 6px; border: 1px solid rgba(207, 172, 205, .35); border-radius: 28px; transition: transform .2s ease, border-color .2s ease; }
-.num:hover { transform: translateY(-3px); border-color: #cfaccd; }
-.num-a { background: rgba(245, 210, 243, .45); }
-.num-b { background: rgba(207, 172, 205, .32); }
-.num-icon { display: grid; place-items: center; width: 58px; height: 58px; margin-bottom: 10px; border-radius: 50%; background: #ffffff; color: #502d4e; }
-.num-icon .icon { width: 28px; height: 28px; stroke-width: 1.5; }
-.num b { font-size: clamp(48px, 5.4vw, 72px); letter-spacing: -.01em; }
-.num-label { font-size: 20px; font-weight: 500; color: #323232; }
-.num-mark { position: absolute; inset-inline-end: -26px; inset-block-end: -30px; width: 190px; fill: none; stroke: #502d4e; stroke-width: 1.1; opacity: .12; pointer-events: none; }
-.num-b .num-mark { inset-inline-end: auto; inset-inline-start: -26px; }
-@media (max-width: 519px) { .num { min-height: 200px; padding: 32px 16px; } .num-mark { width: 150px; } }
-@media (prefers-reduced-motion: reduce) { .num { transition: none; } .num:hover { transform: none; } }
-
-/* ---------- home order for clarity (Nov 2026): trust line, how-to-buy steps, reviews ---------- */
+/* ---------- home order for clarity (Nov 2026) ---------- */
 .hero-lead b { font-weight: 600; color: var(--plum); }
-.hero-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 20px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(80, 45, 78, .12); font-size: 14px; color: #646262; }
-.hero-trust li { display: inline-flex; align-items: center; gap: 6px; }
-.hero-trust b { font-weight: 600; color: #502d4e; }
-.hero-trust .icon { width: 16px; height: 16px; color: #502d4e; }
 
 .voices .numbers { margin-bottom: 24px; }
 .circle small { margin-top: 2px; }
@@ -1129,3 +1103,14 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
   .need-btn { height: 34px; min-width: 88px; padding-inline: 14px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { .need-card, .need-card:hover { transition: none; transform: none; } }
+
+/* reviews come first and stand out; the numbers are a quiet line underneath (Nov 2026) */
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.quote { display: flex; flex-direction: column; margin: 0; padding: 38px 38px 28px; border-radius: 28px; background: #fff; border: 1px solid rgba(207, 172, 205, .5); box-shadow: 0 22px 36px -30px rgba(80, 45, 78, .55); }
+.q-mark { width: 56px; height: 56px; fill: #cfaccd; }
+.quote blockquote { flex: 1; margin: 14px 0 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.8; font-weight: 600; color: #502d4e; }
+.quote figcaption { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(207, 172, 205, .45); font-size: 13.5px; color: #646262; }
+.trust-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 18px; margin: 28px 0 0; font-size: 14.5px; color: #646262; }
+.trust-line b { font-weight: 600; color: #806080; font-variant-numeric: tabular-nums; }
+.trust-line i { width: 4px; height: 4px; border-radius: 50%; background: #cfaccd; }
+@media (max-width: 519px) { .quote { padding: 26px 22px 20px; border-radius: 22px; } .q-mark { width: 40px; height: 40px; } .quotes { grid-template-columns: 1fr; gap: 12px; } }

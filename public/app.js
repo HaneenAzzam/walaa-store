@@ -87,7 +87,6 @@ function home() {
   const trial = Object.assign({ button: 'ابدئي بتجربة مجانية', url: W.storeUrl }, W.freeTrial || {});
   const counts = { recorded: rec.length, group: events().length, private: prv.length, journal: inCat('journal').length, affirmation: 0 };
   const from = c => { const ps = inCat(c).map(p => p.price).filter(v => v !== null); return ps.length ? Math.min(...ps) : null; };
-  const lotus = '<svg class="num-mark" viewBox="0 0 64 58" aria-hidden="true"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg>';
   /* four boxes: the four ways in from data.js (entries), each with its count and starting price */
   const boxes = W.entries.map(e => {
     const n = counts[e.to], p = from(e.to);
@@ -142,13 +141,10 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
   </div>
 </div></section>` : ''}
 
-<section class="sec" id="numbers"><div class="wrap">
+<section class="sec sec-lilac" id="reviews"><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا عن <span class="hl">التجربة؟</span></h2></div></div>
-  <div class="numbers">
-    <div class="num num-a">${lotus}<span class="num-icon">${icon('users')}</span><b dir="ltr" data-to="5000">5000+</b><span class="num-label">عميل</span></div>
-    <div class="num num-b">${lotus}<span class="num-icon">${icon('calendar')}</span><b dir="ltr" data-to="100">100+</b><span class="num-label">جلسة حضورية</span></div>
-  </div>
-  <div class="quotes">${W.testimonials.map(t => `<figure class="quote"><blockquote>«${t.quote}»</blockquote><figcaption>${t.source}</figcaption></figure>`).join('')}</div>
+  <div class="quotes">${W.testimonials.map(t => `<figure class="quote"><svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 6.2C6.2 7.3 4 10 4 13.6V18h5.8v-5.6H6.9c.1-2 1.2-3.5 3.1-4.2L9.4 6.2Zm9.6 0c-3.2 1.1-5.4 3.8-5.4 7.4V18h5.8v-5.6h-2.9c.1-2 1.2-3.5 3.1-4.2L19 6.2Z"/></svg><blockquote>${t.quote}</blockquote><figcaption>${t.source}</figcaption></figure>`).join('')}</div>
+  <p class="trust-line"><span><b dir="ltr">5000+</b> عميل</span><i aria-hidden="true"></i><span><b dir="ltr">100+</b> جلسة حضورية</span></p>
 </div></section>
 
 <section class="sec"><div class="wrap about-grid">
@@ -175,17 +171,6 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
 <section class="home-close"><div class="wrap"><div class="closing"><h2>خذي وقتك لنفسك… وابدئي اليوم.</h2><a class="btn btn-light" href="#catalog/recorded">تصفّحي الجلسات</a></div></div></section>`;
 }
 
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-function initNumbers() {
-  const els = $$('.num b[data-to]'); if (!els.length || reduced() || !('IntersectionObserver' in window)) return;
-  const io = new IntersectionObserver(entries => entries.forEach(en => {
-    if (!en.isIntersecting) return; io.unobserve(en.target);
-    const el = en.target, to = Number(el.dataset.to), t0 = performance.now(), ms = 1400;
-    const step = now => { const p = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(to * e) + '+'; if (p < 1) requestAnimationFrame(step); };
-    el.textContent = '0+'; requestAnimationFrame(step);
-  }), { threshold: .4 });
-  els.forEach(el => io.observe(el));
-}
 
 /* ---------- catalog ---------- */
 const state = { cat: 'all', sort: 'default', q: '' };
@@ -296,7 +281,7 @@ function route() {
   document.body.classList.toggle('is-home', !!$('.hero'));
   announce();
   $$('.main-nav a').forEach(a => { const on = a.dataset.nav === nav; on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
-  icons(); setMenu(false); initNumbers();
+  icons(); setMenu(false);
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
   if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
