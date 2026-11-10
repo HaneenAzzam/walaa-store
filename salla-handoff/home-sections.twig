@@ -1,13 +1,13 @@
 {# Walaa Fadel home page, v4: ordered so a visitor understands the store in the first seconds and can buy fast.
    Order: banner (Walaa's intro + free-trial button) → إيش تحتاجي اليوم (4 ways in with starting prices) → ابدئي من هنا
-   (real products with add-to-cart) → كيف تشترين (3 steps) → next gathering (no countdown) → private sessions → numbers + reviews
+   (real products with add-to-cart) → next gathering (no countdown) → private sessions → numbers + reviews
    → about Walaa → questions → closing.
    For a Salla theme started from Theme Raed: paste into src/views/pages/index.twig, put the images from
    assets/ in src/assets/images/ and walaa-redesign.css in src/assets/styles/ (import it after the theme styles).
    Add the fonts Readex Pro + IBM Plex Sans Arabic in master.twig.
    NOT yet run on Salla: check with `salla theme preview`. Product cards come from Salla's own
    salla-products-list so cart and checkout keep working; the CSS only restyles them.
-   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL / ACCESS-FAQ-URL / FREE-TRIAL-URL (links),
+   Replace: CATEGORY-ID (category id), CATEGORY-N-URL / ABOUT-PAGE-URL / FAQ-PAGE-URL / FREE-TRIAL-URL (links),
    NEXT-NAME / NEXT-DATE / NEXT-DESC / NEXT-PRICE / NEXT-URL (next gathering), and the prices in `prices` below when they change. #}
 
 {# Starting prices shown on the banner and the four boxes. Reference values from the store (Nov 2026); update by hand. #}
@@ -76,17 +76,7 @@
   <salla-products-list source="categories" source-value="[CATEGORY-ID]" limit="4" class="products"></salla-products-list>
 </div></section>
 
-{# 4. How buying works #}
-<section class="sec" id="how"><div class="wrap">
-  <div class="sec-head center"><div><h2>كيف <span class="hl">تشترين؟</span></h2></div></div>
-  <ol class="steps">
-    <li><div class="step-card"><span class="step-n">1</span><strong>اختاري التجربة</strong><p>من الجلسات مرتبة حسب النوع:</p><p class="step-links"><a href="CATEGORY-1-URL">جلسة مسجلة</a><a href="CATEGORY-2-URL">لقاء حضوري</a><a href="CATEGORY-4-URL">جلسة خاصة</a></p></div></li>
-    <li><a class="step-card" href="{{ links.cart ?? '/cart' }}"><span class="step-n">2</span><strong>أتمّي الطلب</strong><p>الدفع عبر متجر سلة.</p><span class="step-go">سلّتك</span></a></li>
-    <li><a class="step-card" href="ACCESS-FAQ-URL"><span class="step-n">3</span><strong>تصلك تفاصيل الوصول</strong><p>بعد إتمام الطلب، وتختلف من منتج لآخر.</p><span class="step-go">كيف أصل لجلستي؟ <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"/></svg></span></a></li>
-  </ol>
-</div></section>
-
-{# 5. Next gathering #}
+{# 4. Next gathering #}
 <section class="sec"><div class="wrap">
   <div class="sec-head"><div><h2>عيشي تجربة <span class="hl">معنا</span></h2><p class="sec-text">لقاءات حضورية بمواعيد محددة. يُؤكَّد التوافر عند الحجز.</p></div><a class="more" href="CATEGORY-2-URL">كل اللقاءات</a></div>
   <div class="count-banner">
@@ -102,7 +92,7 @@
   </div>
 </div></section>
 
-{# 6. Private sessions #}
+{# 5. Private sessions #}
 <section class="sec"><div class="wrap">
   <div class="sec-head"><div><h2>مساحة <span class="hl">خاصة لكِ</span></h2><p class="sec-text">جلسات فردية، وقتها لكِ وحدك. يُنسَّق الموعد عند الحجز.</p></div><a class="more" href="CATEGORY-4-URL">كل الجلسات الخاصة</a></div>
   <div class="private-grid">
@@ -113,7 +103,7 @@
 
 {{ strip|raw }}
 
-{# 7. Trust: numbers + the store's own reviews #}
+{# 6. Trust: numbers + the store's own reviews #}
 <section class="sec sec-peach voices"><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا <span class="hl">عن التجربة؟</span></h2></div></div>
   <div class="numbers">
@@ -123,7 +113,7 @@
   {% component 'home.testimonials' %}
 </div></section>
 
-{# 8. About Walaa, after the visitor is already interested #}
+{# 7. About Walaa, after the visitor is already interested #}
 <section class="sec"><div class="wrap about-grid">
   <div class="collage">
     <img class="c1" src="{{ 'about-main.jpg' | asset }}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy">
@@ -138,7 +128,7 @@
   </div>
 </div></section>
 
-{# 9. Questions #}
+{# 8. Questions #}
 <section class="sec"><div class="wrap faq-layout">
   <div class="faq-col">
     <h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>
@@ -152,7 +142,7 @@
   <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا.</p><a class="btn btn-light" href="FAQ-PAGE-URL">كل الأسئلة</a></aside>
 </div></section>
 
-{# 10. Closing #}
+{# 9. Closing #}
 <section class="sec sec-tight"><div class="wrap"><div class="closing">
   <h2>خذي وقتك لنفسك… وابدئي اليوم.</h2>
   <a class="btn btn-light" href="CATEGORY-1-URL">تصفّحي الجلسات</a>

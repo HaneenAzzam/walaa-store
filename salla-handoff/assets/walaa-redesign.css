@@ -1075,29 +1075,6 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .hero-trust b { font-weight: 600; color: #502d4e; }
 .hero-trust .icon { width: 16px; height: 16px; color: #502d4e; }
 
-.steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; }
-.steps li { display: flex; }
-.step-card { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 28px 24px; border: 1px solid rgba(207, 172, 205, .45); border-radius: 24px; background: #fff; text-align: center; color: inherit; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
-a.step-card:hover { border-color: #cfaccd; box-shadow: 0 14px 30px -24px rgba(80, 45, 78, .6); transform: translateY(-2px); }
-.steps strong { display: block; margin-top: 12px; font-size: 18px; font-weight: 600; color: #323232; }
-.steps p { margin-top: 4px; font-size: 15px; line-height: 1.8; color: #646262; }
-.step-n { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(245, 210, 243, .6); font-weight: 700; font-size: 18px; color: #502d4e; }
-.steps .step-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
-.step-links a { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 9999px; background: rgba(245, 210, 243, .6); font-size: 14px; font-weight: 500; color: #502d4e; transition: background-color .2s ease; }
-.step-links a:hover { background: #cfaccd; }
-.step-go { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 14px; font-size: 14px; font-weight: 600; color: #502d4e; border-bottom: 1px solid transparent; }
-.step-go .icon { width: 15px; height: 15px; transition: transform .2s ease; }
-a.step-card:hover .step-go .icon { transform: translateX(-4px); }
-@media (max-width: 767px) {
-  .steps { grid-template-columns: 1fr; gap: 10px; }
-  .step-card { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; align-items: start; text-align: start; padding: 18px; }
-  .step-card > :not(.step-n) { grid-column: 2; }
-  .step-n { grid-row: 1 / span 4; }
-  .steps strong { margin-top: 8px; }
-  .steps .step-links { justify-content: flex-start; }
-  .step-go { padding-top: 8px; justify-self: start; }
-}
-@media (prefers-reduced-motion: reduce) { a.step-card, a.step-card:hover { transform: none; } }
 .voices .numbers { margin-bottom: 24px; }
 .circle small { margin-top: 2px; }
 /* next gathering: plain facts instead of a countdown */
