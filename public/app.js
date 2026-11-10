@@ -23,7 +23,7 @@ const ICONS = {
   heart: '<path d="M12 20.5s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.8a4.2 4.2 0 0 1 7.5 2.5c0 5.6-7.5 10.2-7.5 10.2Z"/>'
 };
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
-const img = name => (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.${name === 'hero-hand' ? 'webp' : 'jpg'}`;
+const img = name => /^https?:/.test(name) ? name : (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.${name === 'hero-hand' ? 'webp' : 'jpg'}`;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmt = v => new Intl.NumberFormat('ar-SA', { maximumFractionDigits: 2, numberingSystem: 'latn' }).format(v);
 const money = v => v === null ? '<span class="price-note">السعر في المتجر</span>' : `${fmt(v)}<span class="currency">ر.س</span>`;
@@ -38,8 +38,8 @@ const COVERS = {
 };
 const products = W.products.map((p, i) => ({
   id: p[0], name: p[1], price: p[2], cat: p[3], desc: p[4], date: p[5],
-  cover: (COVERS[p[3]] || COVERS.recorded)[i % (COVERS[p[3]] || COVERS.recorded).length],
-  url: `https://walaafadel.com/p${p[0]}`
+  cover: p[7] || (COVERS[p[3]] || COVERS.recorded)[i % (COVERS[p[3]] || COVERS.recorded).length],
+  url: p[6] || `https://walaafadel.com/-/p${p[0]}`
 }));
 const byId = id => products.find(p => p.id === id);
 const inCat = c => products.filter(p => p.cat === c);

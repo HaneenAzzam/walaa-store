@@ -31,7 +31,8 @@ window.WALAA = {
     affirmation: { title: 'مساحة التوكيدات', text: 'سيُضاف هنا محتوى التوكيدات بعد اعتماده من ولاء.' }
   },
 
-  /* id, name, price (null = not given), category, short description, [date].
+  /* id, name, price (null = not given), category, short description, [date], [store link], [image link].
+     The last two are only needed when the link is not the default one built from the id, or the product has its own cover. 
      Add journals as rows with category 'journal' (e.g. ['123', 'اسم المفكرة', 90, 'journal', 'وصف قصير']):
      the "اكتبي واكتشفي" section on the home page appears by itself once one exists. */
   products: [
@@ -66,11 +67,16 @@ window.WALAA = {
     ['29178586', 'تحرير العار', 460, 'private', 'جلسة فردية أونلاين'],
     ['1827713436', 'تحرير الحزن', 460, 'private', 'جلسة فردية أونلاين'],
     ['2120694810', 'تحرير الغضب', 460, 'private', 'جلسة فردية أونلاين'],
-    ['120871242', 'شمس وقمر', 1150, 'private', 'جلسة ساوند هيلينغ خاصة']
+    ['120871242', 'شمس وقمر', 1150, 'private', 'جلسة ساوند هيلينغ خاصة'],
+    /* مقياس بيركمان للطلاب: data and cover image are the store's own (private-sessions category, checked Nov 2026) */
+    ['1436715423', 'مقياس بيركمان للطلاب', 517.5, 'private', 'تقرير مهني للطلاب ابتداءً من عمر 14 عامًا', '', '', 'https://cdn.salla.sa/lGvGdD/d4c16dce-77f1-4ed1-a7b9-b9b475654318-400x500-J73BOZluTzrAxsBIGMCaQUqlX3HuxgRiiLglAMcP.png']
   ],
 
   /* Product-specific facts, only where the supplied materials state them */
   details: {
+    '1436715423': {
+      includes: 'البوصلة المهنية للطلاب (Birkman Career Compass): تقرير متخصص قائم على منهج بيركمان، يساعد الطلاب على استكشاف اهتماماتهم وميولهم المهنية وفهم خصائصهم الشخصية، تمهيدًا لاتخاذ قرارات دراسية ومهنية أكثر وعيًا. الهدف ليس اختيار تخصص نيابةً عنك، بل مساعدتك على فهم نفسك لتتخذ القرار الأنسب لك.'
+    },
     '2031889342': {
       duration: '33 دقيقة تقريبًا',
       delivery: 'قناة خاصة على تيليجرام',
