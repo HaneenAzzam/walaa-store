@@ -1149,3 +1149,6 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
   .ab-slide p { font-size: 15.5px; line-height: 1.9; }
 }
 @media (prefers-reduced-motion: reduce) { .ab-slide, .ab-card, .ab-dot { transition: none; } }
+
+/* the about slider now sits right under the banner, so the panel below it needs no extra top gap */
+#about-home + .need-sec { margin-top: 0; }
