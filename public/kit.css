@@ -506,3 +506,13 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .cu-card p { margin-top: 2px; font-size: 13.5px; line-height: 1.7; color: #646262; }
 @media (max-width: 899px) { .cu-head { flex-direction: column; align-items: stretch; gap: 18px; } .cu-act { align-items: stretch; } .cu-act .btn { width: 100%; } .cu-act small { text-align: center; } .cu-cards { grid-template-columns: 1fr; gap: 10px; margin-top: 20px; } }
 @media (max-width: 519px) { .cu { border-radius: 24px; padding: 24px 18px; } .cu-card { padding: 14px; border-radius: 18px; } }
+
+/* FAQ: every question in two columns, no side box (Nov 2026) */
+.faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; align-items: start; }
+.faq-grid .faq-list details { padding-inline: 20px; }
+.faq-grid .faq-list summary { font-size: 15.5px; line-height: 1.7; }
+.faq-grid .faq-list details p { padding-bottom: 20px; font-size: 15px; line-height: 1.95; max-width: none; }
+.faq-list details:first-child:not([open]) { border: 1px solid var(--edge); }
+.faq-list details[open]:first-child { border: 1px solid #cfaccd; }
+@media (max-width: 899px) { .faq-grid { grid-template-columns: 1fr; } .faq-grid .faq-list details { padding-inline: 16px; } }
+.faq-list details[open] summary::after { background: transparent; }

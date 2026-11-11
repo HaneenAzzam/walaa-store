@@ -73,6 +73,8 @@ function privateRow(p) {
 }
 
 const faqHTML = (list = W.faqs) => `<div class="faq-list">${list.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
+/* all the questions in two independent columns (opening one never moves the other column) */
+const faqGrid = () => { const n = Math.ceil(W.faqs.length / 2); return `<div class="faq-grid">${faqHTML(W.faqs.slice(0, n))}${faqHTML(W.faqs.slice(n))}</div>`; };
 
 function pageHead(title, text, crumb) {
   return `<section class="page-head"><div class="wrap"><nav class="breadcrumb" aria-label="مسار التنقل"><a href="#">الرئيسية</a><span aria-hidden="true">/</span><span>${crumb || title}</span></nav><h1>${title}</h1>${text ? `<p>${text}</p>` : ''}</div></section>`;
@@ -169,9 +171,9 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
   <div class="cu-cards">${W.curious.topics.map(([ic, t, d]) => `<div class="cu-card"><span class="cu-ico">${icon(ic)}</span><div><strong>${t}</strong><p>${d}</p></div></div>`).join('')}</div>
 </div></div></section>
 
-<section class="sec" id="home-faq"><div class="wrap faq-layout">
-  <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML(W.faqs.slice(0, 4))}</div>
-  <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا عبر المتجر الأصلي.</p><a class="btn btn-light" href="#faq">كل الأسئلة</a></aside>
+<section class="sec" id="home-faq"><div class="wrap">
+  <div class="sec-head center"><div><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2></div></div>
+  ${faqGrid()}
 </div></section>
 
 <section class="home-close"><div class="wrap"><div class="closing"><h2>خذي وقتك لنفسك… وابدئي اليوم.</h2><a class="btn btn-light" href="#catalog/recorded">تصفّحي الجلسات</a></div></div></section>`;
@@ -277,7 +279,7 @@ function aboutPage() {
 <section class="sec"><div class="wrap narrow"><h2>كيف تقدّم التجارب؟</h2><p>يمكنك الاختيار بين محتوى مسجل، لقاءات حضورية جماعية، أو جلسات خاصة. تعرّفي على محتوى كل تجربة وآلية تقديمها وشروطها قبل الحجز.</p><div class="button-row"><a class="btn btn-solid" href="#choose">اختاري مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div><p class="fine">تُضاف صورة ولاء الشخصية وسيرتها ومؤهلاتها المعتمدة في النسخة النهائية.</p></div></section>`;
 }
 function faqPage() {
-  return `${pageHead('الأسئلة الشائعة', 'كل ما يساعدك على فهم الخيارات وطريقة الشراء والوصول.')}<section class="sec"><div class="wrap narrow">${faqHTML()}</div></section>`;
+  return `${pageHead('الأسئلة الشائعة', 'كل ما يساعدك على فهم الخيارات وطريقة الشراء والوصول.')}<section class="sec"><div class="wrap">${faqGrid()}</div></section>`;
 }
 
 /* ---------- router ---------- */
