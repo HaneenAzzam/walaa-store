@@ -147,19 +147,14 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
   <p class="trust-line"><span><b dir="ltr">5000+</b> عميل</span><i aria-hidden="true"></i><span><b dir="ltr">100+</b> جلسة حضورية</span></p>
 </div></section>
 
-<section class="sec"><div class="wrap about-grid">
-  <div class="collage">
-    <img class="c1" src="${img('about-main')}" alt="ولاء تعزف على وعاء صوتي كريستالي بنفسجي" loading="lazy" width="800" height="1000">
-    <img class="c2" src="${img('about-2')}" alt="وعاءان صوتيان كريستاليان وردي وأزرق" loading="lazy" width="600" height="600">
-    <img class="c3" src="${img('about-3')}" alt="وعاء صوتي بنفسجي أمام طبل كبير" loading="lazy" width="600" height="600">
-    <span class="seal" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M32 45C16 38 19 19 32 6c13 13 16 32 0 39ZM32 45C15 46 5 33 6 18c17 2 27 12 26 27Zm0 0c17 1 27-12 26-27-17 2-27 12-26 27ZM15 48c10 8 24 8 34 0"/></svg></span>
-  </div>
-  <div class="about-copy">
-    <h2>تعرفي على ولاء</h2>
-    <p class="about-lead">أهلًا، أنا ولاء. بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات.</p>
-    <p>هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.</p>
-    <dl class="stats"><div><dd>${products.length}</dd><dt>تجربة</dt></div><div><dd>${rec.length}</dd><dt>جلسة مسجلة</dt></div><div><dd>${grp.length}</dd><dt>لقاءات قادمة</dt></div></dl>
-    <a class="btn btn-ghost" href="#about">تعرّفي على ولاء</a>
+<section class="sec" id="about-home"><div class="wrap">
+  <div class="ab">
+    <div class="ab-rail" aria-label="اختاري الشريحة">${W.aboutSlides.map((s, i) => `<button class="ab-dot" type="button" data-i="${i}" aria-label="${s.title}"${i === 0 ? ' aria-current="true"' : ''}><span>${i + 1}</span></button>`).join('')}</div>
+    <div class="ab-text">
+      <p class="ab-kicker">تعرفي على ولاء</p>
+      <div class="ab-slides">${W.aboutSlides.map((s, i) => `<div class="ab-slide${i === 0 ? ' is-on' : ''}" aria-hidden="${i !== 0}"><h2>${s.title}</h2><p>${s.text}</p><a class="btn btn-solid" href="${s.cta[1]}"${i === 0 ? '' : ' tabindex="-1"'}>${s.cta[0]}</a></div>`).join('')}</div>
+    </div>
+    <div class="ab-stage">${W.aboutSlides.map((s, i) => `<button class="ab-card o${Math.min(i, 3)}" type="button" data-i="${i}" aria-label="${s.title}" tabindex="-1"><img src="${img(s.img)}" alt="" loading="lazy" width="600" height="750"></button>`).join('')}</div>
   </div>
 </div></section>
 
@@ -171,6 +166,19 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
 <section class="home-close"><div class="wrap"><div class="closing"><h2>خذي وقتك لنفسك… وابدئي اليوم.</h2><a class="btn btn-light" href="#catalog/recorded">تصفّحي الجلسات</a></div></div></section>`;
 }
 
+
+/* "تعرفي على ولاء": text slides on one side, a row of photo cards on the other; the dots, the cards or the keyboard change the slide */
+function initAbout() {
+  const root = $('.ab'); if (!root) return;
+  const slides = $$('.ab-slide', root), cards = $$('.ab-card', root), dots = $$('.ab-dot', root);
+  const show = cur => {
+    slides.forEach((s, k) => { const on = k === cur; s.classList.toggle('is-on', on); s.setAttribute('aria-hidden', String(!on)); $('a', s).tabIndex = on ? 0 : -1; });
+    cards.forEach((c, k) => { c.className = 'ab-card ' + (k < cur ? 'past' : 'o' + Math.min(k - cur, 3)); });
+    dots.forEach((d, k) => { k === cur ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'); });
+  };
+  root.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) show(Number(b.dataset.i)); });
+  show(0);
+}
 
 /* ---------- catalog ---------- */
 const state = { cat: 'all', sort: 'default', q: '' };
@@ -281,7 +289,7 @@ function route() {
   document.body.classList.toggle('is-home', !!$('.hero'));
   announce();
   $$('.main-nav a').forEach(a => { const on = a.dataset.nav === nav; on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
-  icons(); setMenu(false);
+  icons(); setMenu(false); initAbout();
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
   if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });
