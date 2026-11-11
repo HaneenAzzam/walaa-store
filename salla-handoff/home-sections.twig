@@ -1,7 +1,7 @@
 {# Walaa Fadel home page, v4: ordered so a visitor understands the store in the first seconds and can buy fast.
    Order: banner (Walaa's intro + free-trial button) → about Walaa (slider) → إيش تحتاجي اليوم (4 ways in with starting prices)
    → ابدئي من هنا (real products with add-to-cart) → next gathering (no countdown) → private sessions
-   → reviews (+ a quiet numbers line) → questions → closing.
+   → reviews (+ a quiet numbers line) → «فضولك له مساحة» (PubMed) → questions → closing.
    For a Salla theme started from Theme Raed: paste into src/views/pages/index.twig, put the images from
    assets/ in src/assets/images/ and walaa-redesign.css in src/assets/styles/ (import it after the theme styles).
    Add the fonts Readex Pro + IBM Plex Sans Arabic in master.twig.
@@ -152,7 +152,30 @@
   <p class="trust-line"><span><b dir="ltr">5000+</b> عميل</span><i aria-hidden="true"></i><span><b dir="ltr">100+</b> جلسة حضورية</span></p>
 </div></section>
 
-{# 8. Questions #}
+{# 8. «فضولك له مساحة»: a calm strip with a faint Drive photo, one clear button (PubMed, new tab) and three small topic cards #}
+{% set curious_icons = {
+  wave: '<path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/>',
+  lotus: '<path d="M12 19c-3.6-1.7-4.7-5.9-2.6-9.9.9-1.7 1.9-2.9 2.6-3.6.7.7 1.7 1.9 2.6 3.6 2.1 4 1 8.2-2.6 9.9Z"/><path d="M12 19c-4.4.4-7.7-2.2-8.4-6.6 3.5-.3 6.3.9 7.8 3.3"/><path d="M12 19c4.4.4 7.7-2.2 8.4-6.6-3.5-.3-6.3.9-7.8 3.3"/><path d="M8 21.2h8"/>',
+  book: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>'
+} %}
+<section class="sec" id="curious"><div class="wrap"><div class="cu">
+  <img class="cu-bg" src="{{ 'curious-bg.jpg' | asset }}" alt="" aria-hidden="true" loading="lazy">
+  <div class="cu-head">
+    <div class="cu-copy"><p class="cu-kicker">للي تحب تعرف أكثر</p><h2>فضولك له مساحة</h2><p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p></div>
+    <div class="cu-act"><a class="btn btn-solid" href="https://pubmed.ncbi.nlm.nih.gov/?term=sound+meditation+stress" target="_blank" rel="noopener" aria-label="شوفي الأبحاث على موقع PubMed، يفتح في تبويب جديد">شوفي الأبحاث <span aria-hidden="true">↗</span></a><small>النتائج بالإنجليزية</small></div>
+  </div>
+  <div class="cu-cards">
+    {% for t in [
+      {i:'wave', t:'الصوت والاسترخاء', d:'مدخل للتعرّف على موضوعات الصوت وتجربة الاستماع.'},
+      {i:'lotus', t:'التأمل والانتباه', d:'موضوعات عن الممارسة وطبيعة التجربة.'},
+      {i:'book', t:'قراءة الأبحاث', d:'المصدر، نوع الدراسة، وحدود تفسير النتائج.'}
+    ] %}
+      <div class="cu-card"><span class="cu-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{{ curious_icons[t.i]|raw }}</svg></span><div><strong>{{ t.t }}</strong><p>{{ t.d }}</p></div></div>
+    {% endfor %}
+  </div>
+</div></div></section>
+
+{# 9. Questions #}
 <section class="sec"><div class="wrap faq-layout">
   <div class="faq-col">
     <h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>
@@ -166,7 +189,7 @@
   <aside class="faq-box"><h3>عندك سؤال ثاني؟</h3><p>اقرئي الأسئلة الشائعة كاملة، أو تواصلي معنا.</p><a class="btn btn-light" href="FAQ-PAGE-URL">كل الأسئلة</a></aside>
 </div></section>
 
-{# 9. Closing #}
+{# 10. Closing #}
 <section class="sec sec-tight"><div class="wrap"><div class="closing">
   <h2>خذي وقتك لنفسك… وابدئي اليوم.</h2>
   <a class="btn btn-light" href="CATEGORY-1-URL">تصفّحي الجلسات</a>

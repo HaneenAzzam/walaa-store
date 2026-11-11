@@ -17,6 +17,8 @@ const ICONS = {
   calendar: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="m9 15 2 2 4-4"/>',
   shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
+  wave: '<path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/>',
+  book: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>',
   headphones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.8"/><rect x="17" y="14" width="4" height="6" rx="1.8"/>',
   lotus: '<path d="M12 19c-3.6-1.7-4.7-5.9-2.6-9.9.9-1.7 1.9-2.9 2.6-3.6.7.7 1.7 1.9 2.6 3.6 2.1 4 1 8.2-2.6 9.9Z"/><path d="M12 19c-4.4.4-7.7-2.2-8.4-6.6 3.5-.3 6.3.9 7.8 3.3"/><path d="M12 19c4.4.4 7.7-2.2 8.4-6.6-3.5-.3-6.3.9-7.8 3.3"/><path d="M8 21.2h8"/>',
   pen: '<path d="M4.5 20.5 5.6 16 16.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L9 19.4l-4.5 1.1Z"/><path d="m14.5 7.1 2.4 2.4"/>',
@@ -157,6 +159,15 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
   <div class="quotes">${W.testimonials.map(t => `<figure class="quote"><svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 6.2C6.2 7.3 4 10 4 13.6V18h5.8v-5.6H6.9c.1-2 1.2-3.5 3.1-4.2L9.4 6.2Zm9.6 0c-3.2 1.1-5.4 3.8-5.4 7.4V18h5.8v-5.6h-2.9c.1-2 1.2-3.5 3.1-4.2L19 6.2Z"/></svg><blockquote>${t.quote}</blockquote><figcaption>${t.source}</figcaption></figure>`).join('')}</div>
   <p class="trust-line"><span><b dir="ltr">5000+</b> عميل</span><i aria-hidden="true"></i><span><b dir="ltr">100+</b> جلسة حضورية</span></p>
 </div></section>
+
+<section class="sec" id="curious"><div class="wrap"><div class="cu">
+  <img class="cu-bg" src="${img('curious-bg')}" alt="" aria-hidden="true" loading="lazy" width="1400" height="619">
+  <div class="cu-head">
+    <div class="cu-copy"><p class="cu-kicker">للي تحب تعرف أكثر</p><h2>فضولك له مساحة</h2><p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p></div>
+    <div class="cu-act"><a class="btn btn-solid" href="${W.curious.link}" target="_blank" rel="noopener" aria-label="شوفي الأبحاث على موقع PubMed، يفتح في تبويب جديد">شوفي الأبحاث <span aria-hidden="true">↗</span></a><small>النتائج بالإنجليزية</small></div>
+  </div>
+  <div class="cu-cards">${W.curious.topics.map(([ic, t, d]) => `<div class="cu-card"><span class="cu-ico">${icon(ic)}</span><div><strong>${t}</strong><p>${d}</p></div></div>`).join('')}</div>
+</div></div></section>
 
 <section class="sec" id="home-faq"><div class="wrap faq-layout">
   <div class="faq-col"><h2>أسئلة ممكن <span class="hl">تدور في بالك</span></h2>${faqHTML(W.faqs.slice(0, 4))}</div>

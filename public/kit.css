@@ -340,17 +340,6 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .footer-bottom { color: #646262; border-top-color: #eeeeee; }
 .footer-wordmark { color: #323232; }
 
-/* "فضولك له مساحة": a calm banner pointing to the research search (external link) */
-.curious { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px 48px; border: 1px solid #eeeeee; border-radius: 24px; background: rgba(245, 210, 243, .4); }
-.curious-copy { max-width: 700px; }
-.curious-label { margin: 0 0 6px; font-size: 14px; font-weight: 500; color: #502d4e; }
-.curious h2 { font-size: clamp(26px, 2.6vw, 34px); font-weight: 600; color: #323232; }
-.curious-copy p:not(.curious-label) { margin-top: 10px; font-size: 17px; line-height: 1.9; color: #646262; }
-.curious .btn { flex-shrink: 0; }
-@media (max-width: 760px) {
-  .curious { flex-direction: column; align-items: stretch; gap: 20px; padding: 28px 20px; }
-  .curious .btn { width: 100%; }
-}
 
 /* home order (client): events block gets its upcoming list under the flip-calendar banner; free-experience band */
 .count-banner + .events-list { margin-top: 24px; }
@@ -497,3 +486,23 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 
 /* the about slider now sits right under the banner, so the panel below it needs no extra top gap */
 #about-home + .need-sec { margin-top: 0; }
+
+/* ---------- «فضولك له مساحة»: شريط عريض هادئ بصورة خلفية باهتة، زر واضح، وثلاث بطاقات صغيرة (Nov 2026) ---------- */
+.cu { position: relative; overflow: hidden; isolation: isolate; padding: clamp(26px, 3.4vw, 40px); border-radius: 32px; background: rgba(245, 210, 243, .4); border: 1px solid rgba(207, 172, 205, .45); }
+.cu-bg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; opacity: .14; mix-blend-mode: multiply; pointer-events: none; }
+.cu-head { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.cu-copy { max-width: 660px; }
+.cu-kicker { margin-bottom: 4px; font-size: 14px; font-weight: 600; color: #806080; }
+.cu-copy h2 { font-size: clamp(24px, 2.4vw, 32px); font-weight: 600; color: #323232; }
+.cu-copy > p:last-child { margin-top: 8px; font-size: 16px; line-height: 1.9; color: #646262; }
+.cu-act { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+.cu-act .btn { min-width: 170px; font-weight: 600; }
+.cu-act small { font-size: 12.5px; color: #806080; }
+.cu-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+.cu-card { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 22px; background: rgba(255, 255, 255, .85); border: 1px solid rgba(207, 172, 205, .4); }
+.cu-ico { display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: #502d4e; color: #fff; }
+.cu-ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cu-card strong { display: block; font-size: 16px; font-weight: 600; color: #323232; }
+.cu-card p { margin-top: 2px; font-size: 13.5px; line-height: 1.7; color: #646262; }
+@media (max-width: 899px) { .cu-head { flex-direction: column; align-items: stretch; gap: 18px; } .cu-act { align-items: stretch; } .cu-act .btn { width: 100%; } .cu-act small { text-align: center; } .cu-cards { grid-template-columns: 1fr; gap: 10px; margin-top: 20px; } }
+@media (max-width: 519px) { .cu { border-radius: 24px; padding: 24px 18px; } .cu-card { padding: 14px; border-radius: 18px; } }
