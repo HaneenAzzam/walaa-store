@@ -110,12 +110,12 @@ function home() {
 
 <section class="sec" id="about-home"><div class="wrap">
   <div class="ab">
-    <div class="ab-rail" aria-label="اختاري الشريحة">${W.aboutSlides.map((s, i) => `<button class="ab-dot" type="button" data-i="${i}" aria-label="${s.title}"${i === 0 ? ' aria-current="true"' : ''}><span>${i + 1}</span></button>`).join('')}</div>
     <div class="ab-text">
-      <p class="ab-kicker">تعرفي على ولاء</p>
-      <div class="ab-slides">${W.aboutSlides.map((s, i) => `<div class="ab-slide${i === 0 ? ' is-on' : ''}" aria-hidden="${i !== 0}"><h2>${s.title}</h2><p>${s.text}</p><a class="btn btn-solid" href="${s.cta[1]}"${i === 0 ? '' : ' tabindex="-1"'}>${s.cta[0]}</a></div>`).join('')}</div>
+      <h2>تعرفي على ولاء</h2>
+      <p>${W.about.text}</p>
+      <a class="btn btn-solid" href="${W.about.cta[1]}">${W.about.cta[0]}</a>
     </div>
-    <div class="ab-stage">${W.aboutSlides.map((s, i) => `<button class="ab-card o${Math.min(i, 3)}" type="button" data-i="${i}" aria-label="${s.title}" tabindex="-1"><img src="${img(s.img)}" alt="" loading="lazy" width="600" height="750"></button>`).join('')}</div>
+    <div class="ab-stage" aria-hidden="true">${W.about.images.map((n, i) => `<div class="ab-card o${Math.min(i, 3)}"><img src="${img(n)}" alt="" loading="lazy" width="600" height="750"></div>`).join('')}</div>
   </div>
 </div></section>
 
@@ -180,18 +180,6 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
 }
 
 
-/* "تعرفي على ولاء": text slides on one side, a row of photo cards on the other; the dots, the cards or the keyboard change the slide */
-function initAbout() {
-  const root = $('.ab'); if (!root) return;
-  const slides = $$('.ab-slide', root), cards = $$('.ab-card', root), dots = $$('.ab-dot', root);
-  const show = cur => {
-    slides.forEach((s, k) => { const on = k === cur; s.classList.toggle('is-on', on); s.setAttribute('aria-hidden', String(!on)); $('a', s).tabIndex = on ? 0 : -1; });
-    cards.forEach((c, k) => { c.className = 'ab-card ' + (k < cur ? 'past' : 'o' + Math.min(k - cur, 3)); });
-    dots.forEach((d, k) => { k === cur ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'); });
-  };
-  root.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) show(Number(b.dataset.i)); });
-  show(0);
-}
 
 /* ---------- catalog ---------- */
 const state = { cat: 'all', sort: 'default', q: '' };
@@ -302,7 +290,7 @@ function route() {
   document.body.classList.toggle('is-home', !!$('.hero'));
   announce();
   $$('.main-nav a').forEach(a => { const on = a.dataset.nav === nav; on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
-  icons(); setMenu(false); initAbout();
+  icons(); setMenu(false);
   $$('dialog[open]').forEach(d => d.close());
   if ($('#catalog-results')) drawCatalog();
   if (hash === 'choose') $('#choose').scrollIntoView(); else if (hash === 'journal') $('#choose').scrollIntoView(); else window.scrollTo({ top: 0, behavior: 'instant' });

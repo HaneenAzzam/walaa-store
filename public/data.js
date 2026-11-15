@@ -98,14 +98,13 @@ window.WALAA = {
     recorded: ['2031889342', '1785085102', '436476921', '668178991']
   },
 
-  /* "تعرفي على ولاء" slider on the home page. The wording comes from the client's own texts (banner, about page, quote).
-     img = a file name in assets/ (or a full image link); cta = [button label, link] */
-  aboutSlides: [
-    { title: 'أهلًا، أنا ولاء', text: 'بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات.', cta: ['تعرّفي على ولاء', '#about'], img: 'about-main' },
-    { title: 'الصوت والتأمل والكتابة', text: 'من الصوت والتأمل الذاتي إلى الكتابة والكوتشينغ، أقدم لك تجارب وأدوات مختلفة تساعدك تفهمي نفسك وتخصصي وقتًا لك بالطريقة اللي تناسبك.', cta: ['تصفّحي الجلسات', '#catalog/recorded'], img: 'about-3' },
-    { title: 'تجارب وأدوات تناسبك', text: 'هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.', cta: ['كل التجارب', '#catalog/all'], img: 'about-2' },
-    { title: 'بكل حب', text: 'أساعدك بما يخدم مرحلتك الحالية… بكل حب.', cta: ['تعرّفي على ولاء', '#about'], img: 'cover-journal' }
-  ],
+  /* "تعرفي على ولاء" on the home page (client's edit, Nov 2026): one title, one text, one button «اقري قصتي»;
+     the photos are decorative cards from the Drive folder. images = file names in assets/ (or full image links). */
+  about: {
+    text: 'بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات. هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.',
+    cta: ['اقري قصتي', '#about'],
+    images: ['about-main', 'about-3', 'about-2', 'cover-journal']
+  },
 
   /* "فضولك له مساحة" (before the questions): the button opens PubMed in a new tab.
      topics = [icon name from app.js, title, one short line]. The wording is the client's own. */
