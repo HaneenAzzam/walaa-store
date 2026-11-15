@@ -1205,3 +1205,14 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .social-link svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .social-link:hover, .social-link:focus-visible { background: #fff; color: #502d4e; }
 @media (max-width: 519px) { .social-link { padding: 9px 13px; } }
+
+/* السوشال: أيقونات دائرية بارزة */
+.footer-social p { font-size: 15px; font-weight: 600; opacity: 1; }
+.social-row { gap: 18px; }
+.social-link { flex-direction: column; gap: 8px; padding: 0; border: 0; border-radius: 0; font-size: 13px; color: #eeeeee; min-width: 64px; }
+.social-link svg { box-sizing: content-box; width: 26px; height: 26px; padding: 13px; border-radius: 50%; background: #f5d2f3; color: #502d4e; stroke: #502d4e; stroke-width: 2.1; transition: transform .2s, background .2s; }
+.social-link:hover, .social-link:focus-visible { background: none; color: #fff; }
+.social-link:hover svg, .social-link:focus-visible svg { background: #fff; transform: translateY(-3px); }
+@media (max-width: 519px) { .social-row { gap: 12px; } .social-link { min-width: 56px; padding: 0; } .social-link svg { width: 22px; height: 22px; padding: 12px; } }
+
+.footer .social-link { display: flex; align-items: center; justify-content: flex-start; text-align: center; }
