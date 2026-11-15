@@ -1192,6 +1192,12 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 @media (max-width: 899px) { .rs-grid { grid-template-columns: 1fr; } }
 @media (max-width: 519px) { .rs-sec { padding-top: 34px; } .rs-card { padding: 18px 18px; border-radius: 18px; } .rs-ico { width: 44px; height: 44px; } .rs-advice { flex-direction: column; padding: 20px 18px; border-radius: 20px; } }
 
-/* home reviews: two cards per row (four reviews) */
-.quotes-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (max-width: 767px) { .quotes-2 { grid-template-columns: 1fr; } }
+
+/* home reviews: four compact square-ish boxes in one row, smaller text (Nov 2026) */
+.quotes-2 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.quotes-2 .quote { padding: 22px 20px 18px; border-radius: 22px; }
+.quotes-2 .q-mark { width: 30px; height: 30px; }
+.quotes-2 .quote blockquote { margin-top: 10px; font-size: 15.5px; line-height: 1.8; font-weight: 500; }
+.quotes-2 .quote figcaption { margin-top: 14px; padding-top: 10px; font-size: 12px; }
+@media (max-width: 1023px) { .quotes-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .quotes-2 { grid-template-columns: 1fr; gap: 10px; } .quotes-2 .quote { padding: 20px 18px 16px; } }
