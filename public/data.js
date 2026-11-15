@@ -68,14 +68,15 @@ window.WALAA = {
     ['1827713436', 'تحرير الحزن', 460, 'private', 'جلسة فردية أونلاين'],
     ['2120694810', 'تحرير الغضب', 460, 'private', 'جلسة فردية أونلاين'],
     ['120871242', 'شمس وقمر', 1150, 'private', 'جلسة ساوند هيلينغ خاصة'],
-    /* مقياس بيركمان للطلاب: data and cover image are the store's own (private-sessions category, checked Nov 2026) */
-    ['1436715423', 'مقياس بيركمان للطلاب', 517.5, 'private', 'تقرير مهني للطلاب ابتداءً من عمر 14 عامًا', '', '', 'https://cdn.salla.sa/lGvGdD/d4c16dce-77f1-4ed1-a7b9-b9b475654318-400x500-J73BOZluTzrAxsBIGMCaQUqlX3HuxgRiiLglAMcP.png']
+    /* مقياس بيركمان سجنتشر: data and cover image are the store's own (private-sessions category, checked Nov 2026).
+       It replaced «مقياس بيركمان للطلاب» (id 1436715423, 517.5) at the client's request. */
+    ['628896551', 'مقياس بيركمان سجنتشر', 1150, 'private', 'تقرير Birkman Signature الشامل + جلسة فردية لمدة 90 دقيقة', '', '', 'https://cdn.salla.sa/lGvGdD/e3160401-8811-4f79-8258-0c893f61c13e-400x500-KQ2yGrKu6lIFW1LMgyXVOIktvmfgDgA5wdyZNnAY.png']
   ],
 
   /* Product-specific facts, only where the supplied materials state them */
   details: {
-    '1436715423': {
-      includes: 'البوصلة المهنية للطلاب (Birkman Career Compass): تقرير متخصص قائم على منهج بيركمان، يساعد الطلاب على استكشاف اهتماماتهم وميولهم المهنية وفهم خصائصهم الشخصية، تمهيدًا لاتخاذ قرارات دراسية ومهنية أكثر وعيًا. الهدف ليس اختيار تخصص نيابةً عنك، بل مساعدتك على فهم نفسك لتتخذ القرار الأنسب لك.'
+    '628896551': {
+      includes: 'تقرير Birkman Signature الشامل + جلسة فردية لمدة 90 دقيقة لتحليل نتائجك. يساعدك مقياس بيركمان (The Birkman Method) على اكتشاف نقاط قوتك واهتماماتك واحتياجاتك غير الظاهرة، وفهم تأثيرها في سلوكك وعلاقاتك وأدائك المهني. بعد إتمام الحجز ستتلقى رابطًا إلكترونيًا للإجابة عن 298 سؤالًا، وتستغرق تعبئته عادةً نحو 30 دقيقة، ثم يصدر تقريرك ويُحدَّد موعد الجلسة.'
     },
     '2031889342': {
       duration: '33 دقيقة تقريبًا',

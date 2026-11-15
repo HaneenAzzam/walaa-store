@@ -1201,3 +1201,9 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .quotes-2 .quote figcaption { margin-top: 14px; padding-top: 10px; font-size: 12px; }
 @media (max-width: 1023px) { .quotes-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 599px) { .quotes-2 { grid-template-columns: 1fr; gap: 10px; } .quotes-2 .quote { padding: 20px 18px 16px; } }
+
+/* phone (client's edit, Nov 2026): no photo cards under «تعرفي على ولاء» and no topic cards in «فضولك له مساحة» */
+@media (max-width: 767px) {
+  .ab-stage, .cu-cards { display: none; }
+  .ab { gap: 0; }
+}
