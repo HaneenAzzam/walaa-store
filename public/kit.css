@@ -503,3 +503,6 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
   .ab-text h2 { font-size: 26px; }
   .ab-text p { font-size: 15.5px; line-height: 1.9; }
 }
+
+/* banner photo (sofa, lamp): on the phone show the whole lamp and table */
+@media (max-width: 760px) { .hero .hero-img { object-position: 54% 50%; } }
