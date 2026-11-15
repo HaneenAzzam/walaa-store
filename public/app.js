@@ -99,7 +99,7 @@ function home() {
   const picks = W.homePicks.recorded.map(byId).filter(Boolean);
   return `
 <section class="hero">
-  <img class="hero-img" src="${img('hero')}" alt="يد تمسك عصا كريستالية فوق وعاء صوتي برتقالي" width="2000" height="1025" fetchpriority="high">
+  <img class="hero-img" src="${img('hero')}" alt="يدان على آلة شروتي بوكس خشبية بمقبض نحاسي" width="1584" height="856" fetchpriority="high">
   <div class="wrap hero-inner"><div class="hero-copy">
     <p class="hero-kicker">أهلًا أنا ولاء فاضل</p>
     <h1 class="hero-title">وهنا مساحة تقتربي فيها من نفسك أكثر</h1>
