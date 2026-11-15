@@ -14,8 +14,6 @@ $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawin
 # name, source, x, y, w, h, outW
 $jobs = @(
   @('about-main',     'P1062687.jpg',    0,  500, 1584, 1980,  800),
-  @('about-2',        'Post2.png',       0,  420, 3375, 3375,  600),
-  @('about-3',        'Post3.png',       0,  250, 3240, 3240,  600),
   @('need-bg',        'P1062769.jpg',    0,    0, 2816, 1584, 1600),
   @('need-private',   'P1062703.jpg',    0,  700, 1584, 1980,  640),
   @('event-left',     'P1062694.jpg',    0,  450, 1584, 1980,  600),

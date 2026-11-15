@@ -53,9 +53,6 @@
       <p>بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات. هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.</p>
       <a class="btn btn-solid" href="ABOUT-PAGE-URL">اقري قصتي</a>
     </div>
-    <div class="ab-stage" aria-hidden="true">
-      {% for p in ['about-main.jpg', 'about-3.jpg', 'about-2.jpg', 'cover-journal.jpg'] %}<div class="ab-card o{{ min(loop.index0, 3) }}"><img src="{{ p | asset }}" alt="" loading="lazy"></div>{% endfor %}
-    </div>
   </div>
 </div></section>
 
@@ -134,25 +131,11 @@
 </div></section>
 
 {# 8. «فضولك له مساحة»: a calm strip with a faint Drive photo, one clear button (to the research page) and three small topic cards #}
-{% set curious_icons = {
-  wave: '<path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/>',
-  lotus: '<path d="M12 19c-3.6-1.7-4.7-5.9-2.6-9.9.9-1.7 1.9-2.9 2.6-3.6.7.7 1.7 1.9 2.6 3.6 2.1 4 1 8.2-2.6 9.9Z"/><path d="M12 19c-4.4.4-7.7-2.2-8.4-6.6 3.5-.3 6.3.9 7.8 3.3"/><path d="M12 19c4.4.4 7.7-2.2 8.4-6.6-3.5-.3-6.3.9-7.8 3.3"/><path d="M8 21.2h8"/>',
-  book: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>'
-} %}
 <section class="sec" id="curious"><div class="wrap"><div class="cu">
   <img class="cu-bg" src="{{ 'curious-bg.jpg' | asset }}" alt="" aria-hidden="true" loading="lazy">
   <div class="cu-head">
     <div class="cu-copy"><p class="cu-kicker">للي تحب تعرف أكثر</p><h2>فضولك له مساحة</h2><p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p></div>
     <div class="cu-act"><a class="btn btn-solid" href="RESEARCH-PAGE-URL">شوفي الأبحاث <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6"/></svg></a></div>
-  </div>
-  <div class="cu-cards">
-    {% for t in [
-      {i:'wave', t:'الصوت والاسترخاء', d:'مدخل للتعرّف على موضوعات الصوت وتجربة الاستماع.'},
-      {i:'lotus', t:'التأمل والانتباه', d:'موضوعات عن الممارسة وطبيعة التجربة.'},
-      {i:'book', t:'قراءة الأبحاث', d:'المصدر، نوع الدراسة، وحدود تفسير النتائج.'}
-    ] %}
-      <div class="cu-card"><span class="cu-ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{{ curious_icons[t.i]|raw }}</svg></span><div><strong>{{ t.t }}</strong><p>{{ t.d }}</p></div></div>
-    {% endfor %}
   </div>
 </div></div></section>
 

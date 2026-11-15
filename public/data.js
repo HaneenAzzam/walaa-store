@@ -99,23 +99,15 @@ window.WALAA = {
     recorded: ['2031889342', '1785085102', '436476921', '668178991']
   },
 
-  /* "تعرفي على ولاء" on the home page (client's edit, Nov 2026): one title, one text, one button «اقري قصتي»;
-     the photos are decorative cards from the Drive folder. images = file names in assets/ (or full image links). */
+  /* "تعرفي على ولاء" on the home page (client's edit, Nov 2026): one title, one text, one button «اقري قصتي», no photos. */
   about: {
     text: 'بدأت رحلتي في المختبرات الطبية، ثم قادني فضولي إلى الصحة الشمولية والصوت والكوتشينغ واكتشاف الذات. هنا أشاركك تجارب وأدوات تختارين منها ما يناسب مرحلتك.',
-    cta: ['اقري قصتي', '#about'],
-    images: ['about-main', 'about-3', 'about-2', 'cover-journal']
+    cta: ['اقري قصتي', '#about']
   },
 
-  /* "فضولك له مساحة" (before the questions): the button opens the internal sources page (#research).
-     topics = [icon name from app.js, title, one short line]. The wording is the client's own. */
+  /* "فضولك له مساحة" (before the questions): the button opens the internal sources page (#research). */
   curious: {
-    link: '#research',
-    topics: [
-      ['wave', 'الصوت والاسترخاء', 'مدخل للتعرّف على موضوعات الصوت وتجربة الاستماع.'],
-      ['lotus', 'التأمل والانتباه', 'موضوعات عن الممارسة وطبيعة التجربة.'],
-      ['book', 'قراءة الأبحاث', 'المصدر، نوع الدراسة، وحدود تفسير النتائج.']
-    ]
+    link: '#research'
   },
 
   /* Page «المصادر العلمية» (#research), opened by the button of «فضولك له مساحة» on the home page.

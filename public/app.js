@@ -117,7 +117,6 @@ function home() {
       <p>${W.about.text}</p>
       <a class="btn btn-solid" href="${W.about.cta[1]}">${W.about.cta[0]}</a>
     </div>
-    <div class="ab-stage" aria-hidden="true">${W.about.images.map((n, i) => `<div class="ab-card o${Math.min(i, 3)}"><img src="${img(n)}" alt="" loading="lazy" width="600" height="750"></div>`).join('')}</div>
   </div>
 </div></section>
 
@@ -170,7 +169,6 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
     <div class="cu-copy"><p class="cu-kicker">للي تحب تعرف أكثر</p><h2>فضولك له مساحة</h2><p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p></div>
     <div class="cu-act"><a class="btn btn-solid" href="${W.curious.link}">شوفي الأبحاث ${icon('arrow-left')}</a></div>
   </div>
-  <div class="cu-cards">${W.curious.topics.map(([ic, t, d]) => `<div class="cu-card"><span class="cu-ico">${icon(ic)}</span><div><strong>${t}</strong><p>${d}</p></div></div>`).join('')}</div>
 </div></div></section>
 
 <section class="sec" id="home-faq"><div class="wrap">
