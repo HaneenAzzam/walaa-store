@@ -18,6 +18,8 @@ const ICONS = {
   shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
   wave: '<path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/>',
+  hospital: '<path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M3 21h18M12 7.5v6M9 10.5h6"/>',
+  leaf: '<path d="M5 19c0-8 5-14 15-14 0 9-5 15-13 15-.8 0-1.4-.2-2-.5Z"/><path d="M5 19c2.5-4 5-6.5 9-8.5"/>',
   book: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>',
   headphones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.8"/><rect x="17" y="14" width="4" height="6" rx="1.8"/>',
   lotus: '<path d="M12 19c-3.6-1.7-4.7-5.9-2.6-9.9.9-1.7 1.9-2.9 2.6-3.6.7.7 1.7 1.9 2.6 3.6 2.1 4 1 8.2-2.6 9.9Z"/><path d="M12 19c-4.4.4-7.7-2.2-8.4-6.6 3.5-.3 6.3.9 7.8 3.3"/><path d="M12 19c4.4.4 7.7-2.2 8.4-6.6-3.5-.3-6.3.9-7.8 3.3"/><path d="M8 21.2h8"/>',
@@ -166,7 +168,7 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
   <img class="cu-bg" src="${img('curious-bg')}" alt="" aria-hidden="true" loading="lazy" width="1400" height="619">
   <div class="cu-head">
     <div class="cu-copy"><p class="cu-kicker">للي تحب تعرف أكثر</p><h2>فضولك له مساحة</h2><p>اقرئي عن الأبحاث اللي تستكشف علاقة الصوت والتأمل بالاسترخاء والتوتر، وتعرّفي على ما توصلت له الدراسات وحدود نتائجها.</p></div>
-    <div class="cu-act"><a class="btn btn-solid" href="${W.curious.link}" target="_blank" rel="noopener" aria-label="شوفي الأبحاث على موقع PubMed، يفتح في تبويب جديد">شوفي الأبحاث <span aria-hidden="true">↗</span></a><small>النتائج بالإنجليزية</small></div>
+    <div class="cu-act"><a class="btn btn-solid" href="${W.curious.link}">شوفي الأبحاث ${icon('arrow-left')}</a></div>
   </div>
   <div class="cu-cards">${W.curious.topics.map(([ic, t, d]) => `<div class="cu-card"><span class="cu-ico">${icon(ic)}</span><div><strong>${t}</strong><p>${d}</p></div></div>`).join('')}</div>
 </div></div></section>
@@ -266,6 +268,28 @@ function aboutPage() {
 </div></section>
 <section class="sec"><div class="wrap narrow"><h2>كيف تقدّم التجارب؟</h2><p>يمكنك الاختيار بين محتوى مسجل، لقاءات حضورية جماعية، أو جلسات خاصة. تعرّفي على محتوى كل تجربة وآلية تقديمها وشروطها قبل الحجز.</p><div class="button-row"><a class="btn btn-solid" href="#choose">اختاري مساحتك</a><a class="btn btn-ghost" href="#catalog/all">كل التجارب</a></div><p class="fine">تُضاف صورة ولاء الشخصية وسيرتها ومؤهلاتها المعتمدة في النسخة النهائية.</p></div></section>`;
 }
+/* «المصادر العلمية»: Walaa's own sources page, laid out in the site's style (content in data.js → research) */
+function researchPage() {
+  const R = W.research;
+  const link = l => `<a class="rs-link" href="${l[0]}" target="_blank" rel="noopener noreferrer">${l[1]} <span aria-hidden="true">↗</span></a>`;
+  const study = it => `<article class="rs-card"><p>${it.t}</p><div class="rs-meta"><span>${it.c}</span>${link(it.l)}</div></article>`;
+  const grid = (items, fn) => `<div class="rs-grid">${items.map(fn).join('')}</div>`;
+  const qmark = '<svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 6.2C6.2 7.3 4 10 4 13.6V18h5.8v-5.6H6.9c.1-2 1.2-3.5 3.1-4.2L9.4 6.2Zm9.6 0c-3.2 1.1-5.4 3.8-5.4 7.4V18h5.8v-5.6h-2.9c.1-2 1.2-3.5 3.1-4.2L19 6.2Z"/></svg>';
+  const quote = q => `<figure class="quote">${qmark}<blockquote>${q.q}</blockquote><figcaption><b>${q.who}</b><span>${q.role}</span>${link(q.l)}</figcaption></figure>`;
+  const person = p => `<article class="rs-card rs-person"><strong>${p.name}</strong><small>${p.role}</small><p>${p.t}</p><div class="rs-meta"><span>${p.c}</span>${link(p.l)}</div></article>`;
+  const body = s => s.groups ? s.groups.map(g => `<h3 class="rs-sub">${g.title}</h3>${grid(g.items, study)}`).join('')
+    : s.quotes ? `<div class="quotes rs-quotes">${s.quotes.map(quote).join('')}</div>`
+    : s.people ? grid(s.people, person) : grid(s.items, study);
+  const sections = R.sections.map(s => `<section class="rs-sec" id="rs-${s.id}"><div class="rs-head"><span class="rs-ico">${icon(s.icon)}</span><h2>${s.title}</h2></div>${s.note ? `<p class="rs-note">${s.note}</p>` : ''}${body(s)}</section>`).join('');
+  const a = R.advice;
+  return `${pageHead(R.title, R.intro, R.title)}
+<section class="sec"><div class="wrap rs">
+  <div class="rs-nav" aria-label="أقسام الصفحة">${R.sections.map(s => `<button class="chip" type="button" data-goto="rs-${s.id}">${s.short}</button>`).join('')}</div>
+  ${sections}
+  <aside class="rs-advice"><span class="rs-ico">${icon('heart')}</span><div><strong>${a.title}</strong><p>${a.t}</p><div class="rs-meta"><span>${a.c}</span>${link(a.l)}</div></div></aside>
+  <p class="rs-foot">${R.footnote}</p>
+</div></section>`;
+}
 function faqPage() {
   return `${pageHead('الأسئلة الشائعة', 'كل ما يساعدك على فهم الخيارات وطريقة الشراء والوصول.')}<section class="sec"><div class="wrap">${faqGrid()}</div></section>`;
 }
@@ -283,6 +307,7 @@ function route() {
   }
   else if (hash === 'about') { html = aboutPage(); title = 'عن ولاء | ولاء فاضل'; nav = 'about'; }
   else if (hash === 'faq') { html = faqPage(); title = 'الأسئلة الشائعة | ولاء فاضل'; }
+  else if (hash === 'research') { html = researchPage(); title = 'المصادر العلمية | ولاء فاضل'; }
   else html = home();
   document.title = title;
   document.body.classList.toggle('has-buybar', hash.startsWith('product/') && !!byId(hash.split('/')[1]));
@@ -364,6 +389,7 @@ document.addEventListener('click', e => {
   const rem = t.closest('[data-remove]'); if (rem) { cart = cart.filter(x => x.id !== rem.dataset.remove); saveCart(); drawCart(); }
   const qty = t.closest('[data-qty]'); if (qty) { const it = cart.find(x => x.id === qty.dataset.qty); if (it) { it.qty = Math.max(1, Math.min(20, it.qty + Number(qty.dataset.delta))); saveCart(); drawCart(); } }
   if (t.closest('[data-clear-q]')) { state.q = ''; const i = $('#catalog-q'); if (i) i.value = ''; drawCatalog(); }
+  const go = t.closest('[data-goto]'); if (go) document.getElementById(go.dataset.goto)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const link = t.closest('a[href^="#"]');
   if (link && link.hash === location.hash) {
     $$('dialog[open]').forEach(d => d.close()); setMenu(false);

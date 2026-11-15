@@ -1158,3 +1158,36 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
   .ab-text h2 { font-size: 26px; }
   .ab-text p { font-size: 15.5px; line-height: 1.9; }
 }
+
+/* ---------- صفحة «المصادر العلمية» (#research) ---------- */
+.rs { max-width: 1100px; }
+.rs-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.rs-sec { padding-top: 44px; scroll-margin-top: calc(var(--header-h, 72px) + 20px); }
+.rs-head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.rs-head h2 { font-size: clamp(22px, 2.2vw, 28px); font-weight: 600; line-height: 1.4; color: #323232; }
+.rs-ico { display: grid; place-items: center; flex-shrink: 0; width: 50px; height: 50px; border-radius: 50%; background: #502d4e; color: #fff; box-shadow: 0 0 0 5px rgba(207, 172, 205, .4); }
+.rs-ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.rs-note { margin: 6px 0 4px; font-size: 15px; line-height: 1.9; color: #646262; }
+.rs-sub { display: flex; align-items: center; gap: 12px; margin: 26px 0 12px; font-size: 17px; font-weight: 600; color: #502d4e; }
+.rs-sub::after { content: ''; flex: 1; height: 1px; background: rgba(207, 172, 205, .6); }
+.rs-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.rs-sub + .rs-grid { margin-top: 0; }
+.rs-card { display: flex; flex-direction: column; padding: 20px 22px; border-radius: 22px; background: #fff; border: 1px solid rgba(207, 172, 205, .45); }
+.rs-card p { font-size: 15.5px; line-height: 1.9; color: #323232; }
+.rs-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 14px; font-size: 13px; line-height: 1.6; color: #806080; }
+.rs-link { flex-shrink: 0; padding: 5px 14px; border-radius: 9999px; background: rgba(245, 210, 243, .6); font-size: 13px; font-weight: 600; color: #502d4e; white-space: nowrap; transition: background-color .2s ease; }
+.rs-link:hover { background: #cfaccd; }
+.rs-person strong { font-size: 18px; font-weight: 600; color: #323232; }
+.rs-person small { margin: 2px 0 10px; font-size: 13.5px; font-weight: 500; line-height: 1.6; color: #806080; }
+.rs-quotes { margin-top: 16px; }
+.rs-quotes .quote blockquote { font-size: clamp(17px, 1.5vw, 20px); font-weight: 500; line-height: 1.9; }
+.rs-quotes .quote figcaption { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.rs-quotes .quote figcaption b { font-size: 15px; font-weight: 600; color: #323232; }
+.rs-quotes .quote figcaption span { font-size: 13px; color: #806080; }
+.rs-quotes .quote figcaption .rs-link { margin-top: 8px; }
+.rs-advice { display: flex; align-items: flex-start; gap: 16px; margin-top: 48px; padding: 24px 26px; border-radius: 26px; background: rgba(245, 210, 243, .5); border: 1px solid rgba(207, 172, 205, .6); }
+.rs-advice strong { font-size: 18px; font-weight: 600; color: #502d4e; }
+.rs-advice p { margin-top: 6px; font-size: 15.5px; line-height: 1.95; color: #323232; }
+.rs-foot { margin-top: 36px; text-align: center; font-size: 13.5px; line-height: 1.9; color: #646262; }
+@media (max-width: 899px) { .rs-grid { grid-template-columns: 1fr; } }
+@media (max-width: 519px) { .rs-sec { padding-top: 34px; } .rs-card { padding: 18px 18px; border-radius: 18px; } .rs-ico { width: 44px; height: 44px; } .rs-advice { flex-direction: column; padding: 20px 18px; border-radius: 20px; } }
