@@ -25,7 +25,7 @@ const ICONS = {
   heart: '<path d="M12 20.5s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.8a4.2 4.2 0 0 1 7.5 2.5c0 5.6-7.5 10.2-7.5 10.2Z"/>'
 };
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
-const img = name => /^https?:/.test(name) ? name : (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.${name === 'hero-hand' ? 'webp' : 'jpg'}`;
+const img = name => /^https?:/.test(name) ? name : (window.ASSET_MAP && window.ASSET_MAP[name]) || `assets/${name}.jpg`;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmt = v => new Intl.NumberFormat('ar-SA', { maximumFractionDigits: 2, numberingSystem: 'latn' }).format(v);
 const money = v => v === null ? '<span class="price-note">السعر في المتجر</span>' : `${fmt(v)}<span class="currency">ر.س</span>`;
@@ -99,7 +99,7 @@ function home() {
   const picks = W.homePicks.recorded.map(byId).filter(Boolean);
   return `
 <section class="hero">
-  <img class="hero-img" src="${img('hero-hand')}" alt="يد تمسك مطرقة خشبية فوق وعاء صوتي نحاسي في ضوء دافئ" width="1536" height="1024" fetchpriority="high">
+  <img class="hero-img" src="${img('hero')}" alt="يد تمسك عصا كريستالية فوق وعاء صوتي برتقالي" width="2000" height="1025" fetchpriority="high">
   <div class="wrap hero-inner"><div class="hero-copy">
     <p class="hero-kicker">أهلًا أنا ولاء فاضل</p>
     <h1 class="hero-title">وهنا مساحة تقتربي فيها من نفسك أكثر</h1>

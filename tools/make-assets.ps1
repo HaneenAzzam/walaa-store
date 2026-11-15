@@ -3,7 +3,7 @@
 # The originals are not kept in the repo (about 36 MB). Download the folder, then:
 #   powershell -ExecutionPolicy Bypass -File tools\make-assets.ps1 -In "<downloaded folder>"
 # Files are expected with these names: 14.png, Post1-3.png, P1062687/94/96/703/724/769.jpg ("Copy of " prefix removed).
-# The banner (hero-hand.webp) is not touched.
+# hero.jpg is the main banner: a wide band of 14.png (hand with the crystal mallet over the orange bowl).
 param($In = (Join-Path (Split-Path $PSScriptRoot -Parent) 'source\drive'), $Out = (Join-Path (Split-Path $PSScriptRoot -Parent) 'public\assets'))
 Add-Type -AssemblyName System.Drawing
 New-Item -ItemType Directory -Force $Out | Out-Null
@@ -29,7 +29,8 @@ $jobs = @(
   @('cover-private-1','P1062703.jpg',    0,  750, 1584, 1584,  600),
   @('cover-private-2','P1062724.jpg',    0,  650, 1584, 1584,  600),
   @('cover-journal',  'P1062769.jpg',  950,    0, 1584, 1584,  600),
-  @('curious-bg',     'P1062696.jpg',    0,  900, 1584,  700, 1400)
+  @('curious-bg',     'P1062696.jpg',    0,  900, 1584,  700, 1400),
+  @('hero',           '14.png',          0, 1000, 3375, 1730, 2000)
 )
 
 $cache = @{}
