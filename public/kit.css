@@ -537,3 +537,10 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 /* phone (client's edit, Nov 2026): no photo cards under «تعرفي على ولاء» and no topic cards in «فضولك له مساحة» */
 @media (max-width: 767px) {
 }
+
+/* «تعرفي على ولاء»: صورة واحدة بجانب النص */
+.ab { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: clamp(24px, 4vw, 56px); text-align: start; }
+.ab-photo { order: 2; border-radius: 26px; overflow: hidden; aspect-ratio: 4 / 3.4; box-shadow: 0 24px 40px -28px rgba(80, 45, 78, .65); }
+.ab-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 40% 60%; }
+.ab-text p { margin-inline: 0; }
+@media (max-width: 767px) { .ab { grid-template-columns: 1fr; gap: 20px; } .ab-photo { order: 0; aspect-ratio: 4 / 3; border-radius: 20px; } }

@@ -112,6 +112,7 @@ function home() {
 
 <section class="sec" id="about-home"><div class="wrap">
   <div class="ab">
+        <div class="ab-photo"><img src="${img('about-3')}" alt="" loading="lazy"></div>
     <div class="ab-text">
       <h2>تعرفي على ولاء</h2>
       <p>${W.about.text}</p>
