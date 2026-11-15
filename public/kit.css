@@ -539,3 +539,7 @@ dialog[open] { animation: kit-modal .3s var(--ease-out); }
 .rs-foot { margin-top: 36px; text-align: center; font-size: 13.5px; line-height: 1.9; color: #646262; }
 @media (max-width: 899px) { .rs-grid { grid-template-columns: 1fr; } }
 @media (max-width: 519px) { .rs-sec { padding-top: 34px; } .rs-card { padding: 18px 18px; border-radius: 18px; } .rs-ico { width: 44px; height: 44px; } .rs-advice { flex-direction: column; padding: 20px 18px; border-radius: 20px; } }
+
+/* home reviews: two cards per row (four reviews) */
+.quotes-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 767px) { .quotes-2 { grid-template-columns: 1fr; } }

@@ -160,7 +160,7 @@ ${prv.length ? `<section class="sec" id="private-home"><div class="wrap private-
 
 <section class="sec sec-lilac" id="reviews"><div class="wrap">
   <div class="sec-head center"><div><h2>إيش قالوا عن <span class="hl">التجربة؟</span></h2></div></div>
-  <div class="quotes">${W.testimonials.map(t => `<figure class="quote"><svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 6.2C6.2 7.3 4 10 4 13.6V18h5.8v-5.6H6.9c.1-2 1.2-3.5 3.1-4.2L9.4 6.2Zm9.6 0c-3.2 1.1-5.4 3.8-5.4 7.4V18h5.8v-5.6h-2.9c.1-2 1.2-3.5 3.1-4.2L19 6.2Z"/></svg><blockquote>${t.quote}</blockquote><figcaption>${t.source}</figcaption></figure>`).join('')}</div>
+  <div class="quotes quotes-2">${W.testimonials.map(t => `<figure class="quote"><svg class="q-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 6.2C6.2 7.3 4 10 4 13.6V18h5.8v-5.6H6.9c.1-2 1.2-3.5 3.1-4.2L9.4 6.2Zm9.6 0c-3.2 1.1-5.4 3.8-5.4 7.4V18h5.8v-5.6h-2.9c.1-2 1.2-3.5 3.1-4.2L19 6.2Z"/></svg><blockquote>${t.quote}</blockquote><figcaption>${t.source}</figcaption></figure>`).join('')}</div>
   <p class="trust-line"><span><b dir="ltr">5000+</b> عميل</span><i aria-hidden="true"></i><span><b dir="ltr">100+</b> جلسة حضورية</span></p>
 </div></section>
 
